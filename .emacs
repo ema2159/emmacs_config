@@ -376,15 +376,87 @@
 
 ;; Tabbar ruler
 (require 'tabbar-ruler)
-(setq tabbar-ruler-fancy-tab-separator "box")
+;; Hide tabbar in some specific modes
 (add-hook 'dashboard-mode-hook 'tabbar-local-mode)
 (add-hook 'term-mode-hook 'tabbar-local-mode)
 (add-hook 'calendar-mode-hook 'tabbar-local-mode)
 (add-hook 'dired-mode-hook 'tabbar-local-mode)
 (add-hook 'org-agenda-mode-hook 'tabbar-local-mode)
+;; Tabbar groups
+(defun tabbar-buffer-groups ()
+  (list
+   (cond
+    ((or (eq major-mode 'magit-log-mode)
+	 (eq major-mode 'magit-mode)
+	 (eq major-mode 'magit-wip-mode)
+	 (eq major-mode 'magit-blob-mode)
+	 (eq major-mode 'magit-diff-mode)
+	 (eq major-mode 'magit-file-mode)
+	 (eq major-mode 'magit-refs-mode)
+	 (eq major-mode 'magit-blame-mode)
+	 (eq major-mode 'magit-popup-mode)
+	 (eq major-mode 'magit-stash-mode)
+	 (eq major-mode 'magit-cherry-mode)
+	 (eq major-mode 'magit-reflog-mode)
+	 (eq major-mode 'magit-status-mode)
+	 (eq major-mode 'magit-process-mode)
+	 (eq major-mode 'magit-stashes-mode)
+	 (eq major-mode 'magit-repolist-mode)
+	 (eq major-mode 'magit-revision-mode)
+	 (eq major-mode 'magit-log-select-mode)
+	 (eq major-mode 'magit-popup-help-mode)
+	 (eq major-mode 'magit-auto-revert-mode)
+	 (eq major-mode 'magit-merge-preview-mode)
+	 (eq major-mode 'magit-submodule-list-mode)
+	 (eq major-mode 'magit-wip-after-save-mode)
+	 (eq major-mode 'magit-blame-read-only-mode)
+	 (eq major-mode 'magit-wip-after-apply-mode)
+	 (eq major-mode 'magit-wip-before-change-mode)
+	 (eq major-mode 'magit-wip-initial-backup-mode)
+	 (eq major-mode 'magit-wip-after-save-mode))
+     "Magit"
+     )
+    ((eq major-mode 'dired-mode)
+     "Dired"
+     )
+    ((eq major-mode 'dashboard-mode)
+     "Dashboard"
+     )
+    ((eq major-mode 'specman-mode)
+     "Specman"
+     )
+    ((eq major-mode 'term-mode)
+     "Term"
+     )
+    ((eq major-mode 'python-mode)
+     "Python"
+     )
+    ((or (eq major-mode 'emacs-lisp-mode)
+	 (eq major-mode 'org-mode)
+	 (eq major-mode 'org-agenda-clockreport-mode)
+	 (eq major-mode 'org-src-mode)
+	 (eq major-mode 'org-agenda-mode)
+	 (eq major-mode 'org-beamer-mode)
+	 (eq major-mode 'org-indent-mode)
+	 (eq major-mode 'org-bullets-mode)
+	 (eq major-mode 'org-cdlatex-mode)
+	 (eq major-mode 'org-agenda-log-mode))
+     "Emacs lisp and Org mode"
+     )
+    (t
+     "Misc buffers"
+     )
+    ))) 
 
+(setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
+
+;; Tabbar excluded buffers
+(setq tabbar-ruler-excluded-buffers '("*Messages*" "*Completions*" "*ESS*" "*Packages*" "*log-edit-files*" "*helm-mini*" "*helm-mode-describe-variable*" "*scratch*"))
+
+
+;; Theme the tabbar
 (require 'spacemacs-dark-theme)
-
+(setq tabbar-ruler-fancy-tab-separator "box")
 ;; Tab change keybinding
 (global-set-key (kbd "C-<prior>") 'tabbar-backward)
 (global-set-key (kbd "C-<next>") 'tabbar-forward)
@@ -405,7 +477,7 @@ TABSET is the tab set used to choose the appropriate buttons."
     ;; else (optional)
   (load-theme 'atom-one-dark t))
 
-;; Modify initial screen
+;; Dashboard
 (require 'page-break-lines)
 (require 'dashboard)
 (dashboard-setup-startup-hook)
