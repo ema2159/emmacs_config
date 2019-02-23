@@ -1,0 +1,22 @@
+#+TITLE: ML project final phase week 1 agenda
+#+CREATOR: Emmanuel Bustos T.
+#+SEQ_TODO: TODO(t) INPROGRESS(i) | DONE(d)
+
+* Monday
+** TODO Learn to implement Jupyter notebooks using EIN
+   SCHEDULED: <2019-02-25 lun>
+** TODO Start implementig a neural network using keras
+   SCHEDULED: <2019-02-25 lun>
+** TODO Inscribe in the university
+   DEADLINE: <2019-02-25 lun>
+* Tuesday
+No activities for this day
+* Wednesday 
+* Thursday
+* Friday
+No activities for this day
+* Saturday
+No activities for this day
+* Sunday
+No activities for this day
+

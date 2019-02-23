@@ -464,6 +464,7 @@
 (require 'spacemacs-dark-theme)
 (setq tabbar-ruler-fancy-tab-separator "box")
 ;; Tab change keybinding
+(global-set-key (kbd "C-<home>") 'tabbar-press-home)
 (global-set-key (kbd "C-<prior>") 'tabbar-backward)
 (global-set-key (kbd "C-<next>") 'tabbar-forward)
 

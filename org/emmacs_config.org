@@ -1,0 +1,42 @@
+#+TITLE: Emmacs config documentation
+#+CREATOR: Emmanuel Bustos T.
+
+* Intro and description
+** Brief description
+   This is my personal emacs (or Emmacs) configuration, designed to enhance my productivty. It containts several packages that simplify many tasks and improve my workflow.
+** Packages used
+   - evil
+   - color-theme
+   - spacemacs-theme
+   - org
+   - org-bullets
+   - dashboard
+   - tabbar
+   - tabbar-ruler
+   - linum-relative
+   - nlinum
+   - dired-single
+   - shell-pop
+   - load-theme-buffer-local
+   - color-theme-buffer-local
+   - markdown-preview-eww
+   - smex
+   - ranger
+   - all-the-icons-dired
+   - evil-multiedit
+   - page-break-lines
+   - yasnippet-snippets
+   - company-jedi
+   - ein
+   - csv-mode
+   - ivy
+   - ivy-yasnippet
+   - counsel
+   - flycheck
+   - company
+   - which-key
+   - telephone-line
+   - magit
+   - use-package
+   - treemacs
+   - treemacs-evil
