@@ -421,6 +421,8 @@ TABSET is the tab set used to choose the appropriate buttons."
 ;; Magit
 (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
+(add-hook 'magit-process-mode-hook
+	  (lambda () (setq-local linum-active nil)))
 
 ;; Shell-pop
 (require 'shell-pop)
