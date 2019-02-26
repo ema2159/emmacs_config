@@ -1,6 +1,12 @@
 #+TITLE: Emmacs config documentation
 #+CREATOR: Emmanuel Bustos T.
 
+* Table of Content                                                      :TOC:
+  - [[#bootstrap][Bootstrap]]
+    - [[#use-better-defaults][Use better defaults]]
+    - [[#load-customel][Load =.custom.el=]]
+    - [[#load-secretel][Load =.secret.el=]]
+  - [[#theme][Theme]]
 * Intro and description
 ** Brief description
    This is my personal emacs (or Emmacs) configuration, designed to enhance my productivty. It containts several packages that simplify many tasks and improve my workflow.
@@ -40,3 +46,42 @@
    - use-package
    - treemacs
    - treemacs-evil
+* Configuration
+** Package repositories 
+   In this section, repositories are added
+   #+BEGIN_SRC emacs-lisp
+     (require 'package)
+     (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+     (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+     (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
+     (setq package-enable-at-startup nil)
+     (package-initialize) 
+   #+END_SRC
+** General configurations
+   Some general configurations
+*** Kill buffer and window
+    When split, if a buffer is killed, also its window is killed
+    #+BEGIN_SRC emacs-lisp 
+      (global-set-key (kbd "C-x k") 'kill-buffer-and-window)
+    #+END_SRC
+*** Prefer horizontal split
+    When poping a new buffer, split horizontally
+    #+BEGIN_SRC emacs-lisp 
+      (setq split-height-threshold 160)
+      (setq split-width-threshold nil)
+    #+END_SRC
+** Theme 
+   In this section, the theme is loaded
+*** Spacemacs 
+    #+BEGIN_SRC emacs-lisp
+      (require 'spacemacs-dark-theme)	   
+      ;; Theme
+      (if (display-graphic-p)
+	  (progn
+	    ;; if graphic
+	    (load-theme 'spacemacs-dark t))
+	;; else (optional)
+	(load-theme 'atom-one-dark t))
+    #+END_SRC
+    
+    
