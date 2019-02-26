@@ -92,12 +92,15 @@
 	:hook (dired-mode . treemacs-icons-dired-mode)))
   ;; else (optional)
   )
-;; Evil mode for VIM key bindings
-(require 'evil)
-(evil-mode t)
-(evil-ex-define-cmd "q[uit]" 'kill-buffer-and-window)
 
-
+;; Dired Hacks
+(require 'dired-hacks-utils)
+(require 'dired-filter)
+(define-key dired-mode-map (kbd "C-f") dired-filter-mark-map)
+(require 'dired-rainbow)
+(require 'dired-subtree)
+(define-key dired-mode-map (kbd "i") 'dired-subtree-insert)
+(define-key dired-mode-map (kbd "r") 'dired-subtree-remove)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
