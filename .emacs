@@ -336,6 +336,7 @@
 (setq require-final-newline nil)
 
 ;; Ivy configuration
+(require 'ivy-yasnippet)
 (ivy-mode 1)
 (setq ivy-use-virtual-buffers t)
 (setq enable-recursive-minibuffers t)
@@ -356,16 +357,18 @@
 (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
+;; Ivy yasnippet
+(global-set-key (kbd "C-x C-a") 'ivy-yasnippet)
 
-;;  Smex configuration
+;; Smex configuration
 (require 'smex) 
 (smex-initialize) 
 
 ;; Set proxy 
-;; (setq url-proxy-services
-;;       '(("no_proxy" . "^\\(localhost\\|10.*\\)")
-;; 	("http" . "web-proxy.rose.hpecorp.net:8088")
-;; 	("https" . "web-proxy.rose.hpecorp.net:8088")))
+;;(setq url-proxy-services
+;;      '(("no_proxy" . "^\\(localhost\\|10.*\\)")
+;;	("http" . "web-proxy.rose.hpecorp.net:8088")
+;;	("https" . "web-proxy.rose.hpecorp.net:8088")))
 
 ;; Tramp cofiguration
 (setq tramp-default-mode "ssh")
@@ -407,8 +410,10 @@
 
 ;; Tabbar ruler
 (require 'tabbar-ruler)
+(setq dashboard-center-content t)
 ;; Hide tabbar in some specific modes
 (add-hook 'dashboard-mode-hook 'tabbar-local-mode)
+(add-hook 'ivy-mode-hook 'tabbar-local-mode)
 (add-hook 'term-mode-hook 'tabbar-local-mode)
 (add-hook 'calendar-mode-hook 'tabbar-local-mode)
 (add-hook 'dired-mode-hook 'tabbar-local-mode)
