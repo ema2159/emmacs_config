@@ -3,16 +3,14 @@
 #+SEQ_TODO: TODO(t) INPROGRESS(i) | DONE(d)
 
 * Monday
-** TODO Learn to implement Jupyter notebooks using EIN
+** INPROGRESS Learn to implement Jupyter notebooks using EIN
    SCHEDULED: <2019-02-25 lun>
-** TODO Start implementig a neural network using keras
-   SCHEDULED: <2019-02-25 lun>
-** TODO Inscribe in the university
-   DEADLINE: <2019-02-25 lun>
+** INPROGRESS Start implementig a neural network using keras
+   DEADLINE: <2019-03-01 vie> SCHEDULED: <2019-02-25 lun>
 * Tuesday
-No activities for this day
 * Wednesday 
 * Thursday
+No activities for this day
 * Friday
 No activities for this day
 * Saturday
