@@ -109,14 +109,14 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "565aa482e486e2bdb9c3cf5bfb14d1a07c4a42cfc0dc9d6a14069e53b6435b56" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "8aca557e9a17174d8f847fb02870cb2bb67f3b6e808e46c0e54a44e3e18e1020" "6b289bab28a7e511f9c54496be647dc60f5bd8f9917c9495978762b99d8c96a0" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a" "ecba61c2239fbef776a72b65295b88e5534e458dfe3e6d7d9f9cb353448a569e" "151bde695af0b0e69c3846500f58d9a0ca8cb2d447da68d7fbf4154dcf818ebc" "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "cd736a63aa586be066d5a1f0e51179239fe70e16a9f18991f6f5d99732cabb32" "b54826e5d9978d59f9e0a169bbd4739dd927eead3ef65f56786621b53c031a7c" "fe666e5ac37c2dfcf80074e88b9252c71a22b6f5d2f566df9a7aa4f9bea55ef8" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "7e78a1030293619094ea6ae80a7579a562068087080e01c2b8b503b27900165c" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "6d589ac0e52375d311afaa745205abb6ccb3b21f6ba037104d71111e7e76a3fc" "100e7c5956d7bb3fd0eebff57fde6de8f3b9fafa056a2519f169f85199cc1c96" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "bf5bdab33a008333648512df0d2b9d9710bdfba12f6a768c7d2c438e1092b633" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
+    ("732b807b0543855541743429c9979ebfb363e27ec91e82f463c91e68c772f6e3" "10461a3c8ca61c52dfbbdedd974319b7f7fd720b091996481c8fb1dded6c6116" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "565aa482e486e2bdb9c3cf5bfb14d1a07c4a42cfc0dc9d6a14069e53b6435b56" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "8aca557e9a17174d8f847fb02870cb2bb67f3b6e808e46c0e54a44e3e18e1020" "6b289bab28a7e511f9c54496be647dc60f5bd8f9917c9495978762b99d8c96a0" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a" "ecba61c2239fbef776a72b65295b88e5534e458dfe3e6d7d9f9cb353448a569e" "151bde695af0b0e69c3846500f58d9a0ca8cb2d447da68d7fbf4154dcf818ebc" "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "cd736a63aa586be066d5a1f0e51179239fe70e16a9f18991f6f5d99732cabb32" "b54826e5d9978d59f9e0a169bbd4739dd927eead3ef65f56786621b53c031a7c" "fe666e5ac37c2dfcf80074e88b9252c71a22b6f5d2f566df9a7aa4f9bea55ef8" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "7e78a1030293619094ea6ae80a7579a562068087080e01c2b8b503b27900165c" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "6d589ac0e52375d311afaa745205abb6ccb3b21f6ba037104d71111e7e76a3fc" "100e7c5956d7bb3fd0eebff57fde6de8f3b9fafa056a2519f169f85199cc1c96" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "bf5bdab33a008333648512df0d2b9d9710bdfba12f6a768c7d2c438e1092b633" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
  '(fci-rule-color "#62686E" t)
  '(jdee-db-active-breakpoint-face-colors (cons "#1c1f24" "#51afef") t)
  '(jdee-db-requested-breakpoint-face-colors (cons "#1c1f24" "#7bc275") t)
  '(jdee-db-spec-breakpoint-face-colors (cons "#1c1f24" "#484854") t)
  '(package-selected-packages
    (quote
-    (markdown-preview-eww planet-theme material-theme smex sublimity org-bullets org-evil org load-theme-buffer-local color-theme-buffer-local shell-pop ranger all-the-icons-dired dired-single evil-multiedit multiple-cursors page-break-lines dashboard yasnippet-snippets company-jedi ein csv-mode ivy-yasnippet counsel ivy flycheck company which-key telephone-line ## magit projectile use-package treemacs-evil treemacs tabbar-ruler tabbar linum-relative nlinum atom-one-dark-theme spacemacs-theme klere-theme evil color-theme)))
+    (dash dired-hacks-utils drag-stuff solarized-theme markdown-preview-eww planet-theme material-theme smex sublimity org-bullets org-evil org load-theme-buffer-local color-theme-buffer-local shell-pop ranger all-the-icons-dired dired-single evil-multiedit multiple-cursors page-break-lines dashboard yasnippet-snippets company-jedi ein csv-mode ivy-yasnippet counsel ivy flycheck company which-key telephone-line ## magit projectile use-package treemacs-evil treemacs tabbar-ruler tabbar linum-relative nlinum atom-one-dark-theme spacemacs-theme klere-theme evil color-theme)))
  '(shell-pop-default-directory "/Users/kyagi/git")
  '(shell-pop-full-span t)
  '(shell-pop-shell-type
@@ -128,7 +128,6 @@
  '(shell-pop-universal-key "<f5>")
  '(shell-pop-window-position "bottom")
  '(shell-pop-window-size 30)
- '(term-default-bg-color nil)
  '(tetris-x-colors
    [[229 192 123]
     [97 175 239]
@@ -161,12 +160,6 @@
     (cons 340 "#62686E")
     (cons 360 "#62686E")) t)
  '(vc-annotate-very-old-color nil t))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(term ((t (:background "black" :foreground "light slate gray")))))
 
 ;; Line numbers configuration
 ;; Toggle between relative and absolute line numbers between evil normal and insert mode
@@ -322,7 +315,6 @@
         "~/.emacs.d/elpa/yasnippet-snippets-20190202.2145/snippets" ;; the yasmate collection
         ))
 ;; Add yasnippet support for all company backends
-;; https://github.com/syl20bnr/spacemacs/pull/179
 (defvar company-mode/enable-yas t
   "Enable yasnippet for all backends.")
 
@@ -485,6 +477,10 @@
 	 (eq major-mode 'org-agenda-log-mode))
      "Emacs lisp and Org mode"
      )
+    ((or (eq major-mode 'csv-mode)
+	 (eq major-mode 'text-mode))
+     "Text and csv"
+     )
     (t
      "Misc buffers"
      )
@@ -496,9 +492,6 @@
 (setq tabbar-ruler-excluded-buffers '("*Messages*" "*Completions*" "*ESS*" "*Packages*" "*log-edit-files*" "*helm-mini*" "*helm-mode-describe-variable*" "*scratch*"))
 
 
-;; Theme the tabbar
-(require 'spacemacs-dark-theme)
-(setq tabbar-ruler-fancy-tab-separator "box")
 ;; Tab change keybinding
 (global-set-key (kbd "C-<home>") 'tabbar-press-home)
 (global-set-key (kbd "C-<prior>") 'tabbar-backward)
@@ -511,14 +504,6 @@
   "Return a list of propertized strings for tab bar buttons.
 TABSET is the tab set used to choose the appropriate buttons."
  (list (propertize "")))
-
-;; Theme
-(if (display-graphic-p)
-    (progn
-    ;; if graphic
-      (load-theme 'spacemacs-dark t))
-    ;; else (optional)
-  (load-theme 'atom-one-dark t))
 
 ;; Dashboard
 (require 'page-break-lines)
@@ -541,10 +526,17 @@ TABSET is the tab set used to choose the appropriate buttons."
 
 ;; Shell-pop
 (require 'shell-pop)
+
 ;; Change theme in term mode
 (add-hook 'term-mode-hook (lambda() (load-theme-buffer-local 'manoj-dark (current-buffer))))
 ;; Disable evil mode in term mode
 (evil-set-initial-state 'term-mode 'emacs)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(term ((t (:background "black" :foreground "light slate gray")))))
 
 ;; Org mode
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
@@ -567,6 +559,8 @@ TABSET is the tab set used to choose the appropriate buttons."
 (setq org-log-done 'time)
 ;; Org export backends
 (require 'ox-md)
+;; Handle source blocks
+(setq org-src-tab-acts-natively t)
 
 ;; Markdown preview
 (require 'markdown-preview-eww)
@@ -576,3 +570,4 @@ TABSET is the tab set used to choose the appropriate buttons."
   (set-variable 'split-height-threshold nil t)
   (set-variable 'split-width-threshold 40 t)) ; make this as low as needed
 (add-hook 'eww-mode-hook 'prefer-horizontal-split)
+
