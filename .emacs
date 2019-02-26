@@ -17,16 +17,44 @@
 ;; GENERAL CONFIGURATION
 ;; When split, if a buffer is killed, also its window is killed
 (global-set-key (kbd "C-x k") 'kill-buffer-and-window)
+;;Set default mode
+(setq-default major-mode 'text-mode)
+(add-hook 'text-mode-hook 'flyspell-mode)
 ;; When poping a new buffer, split horizontally
 (setq split-height-threshold 160)
 (setq split-width-threshold nil)
+
+;; (require 'spacemacs-dark-theme)	   
+(require 'solarized-dark-theme)	   
+;; (require 'doom-dracula-theme)	   
+
+;; Theme
+(if (display-graphic-p)
+    (progn
+    ;; if graphic
+      (load-theme 'solarized-dark t))
+      ;;(load-theme 'spacemacs-dark t))
+      ;;(load-theme 'doom-dracula t))
+    ;; else (optional)
+  (load-theme 'atom-one-dark t))
 
 ;; GLOBAL VARIABLES
 ;; Define a variable for hooks to turn on/off the relative and absolute number lines
 (defvar linum-active t)
 
+;; Evil mode for VIM key bindings
+(require 'evil)
+(evil-mode t)
+(evil-ex-define-cmd "q[uit]" 'kill-buffer-and-window)
+
+;; Drag stuff
+(drag-stuff-global-mode 1)
+(drag-stuff-define-keys)
+
 ;; Configure Dired
 (require 'dired)
+;; Make emacs mode dired default state
+(add-to-list 'evil-emacs-state-modes 'dired-mode)
 ;; Make Dired less verbose
 (add-hook 'dired-mode-hook
 	  (lambda () (setq-local linum-active nil)))
