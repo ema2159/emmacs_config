@@ -26,6 +26,9 @@
 ;; Highlight matching braces
 (show-paren-mode 1)
 (setq show-paren-style 'parenthesis)
+;; Narrow and widening configuration
+(put 'set-goal-column 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
 
 (require 'spacemacs-dark-theme)	   
 ;; (require 'solarized-dark-theme)	   
@@ -111,6 +114,7 @@
 (define-key dired-mode-map (kbd "C-f") dired-filter-mark-map)
 (require 'dired-rainbow)
 (require 'dired-subtree)
+(setq dired-subtree-use-backgrounds nil)
 (define-key dired-mode-map (kbd "i") 'dired-subtree-insert)
 (define-key dired-mode-map (kbd "r") 'dired-subtree-remove)
 
