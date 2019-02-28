@@ -23,18 +23,21 @@
 ;; When poping a new buffer, split horizontally
 (setq split-height-threshold 160)
 (setq split-width-threshold nil)
+;; Highlight matching braces
+(show-paren-mode 1)
+(setq show-paren-style 'parenthesis)
 
-;; (require 'spacemacs-dark-theme)	   
-(require 'solarized-dark-theme)	   
-;; (require 'doom-dracula-theme)	   
+(require 'spacemacs-dark-theme)	   
+;; (require 'solarized-dark-theme)	   
+;; (require 'doom-city-lights-theme)	   
 
 ;; Theme
 (if (display-graphic-p)
     (progn
     ;; if graphic
-      (load-theme 'solarized-dark t))
-      ;;(load-theme 'spacemacs-dark t))
-      ;;(load-theme 'doom-dracula t))
+      ;;(load-theme 'solarized-dark t))
+      (load-theme 'spacemacs-dark t))
+      ;;(load-theme 'doom-city-lights t))
     ;; else (optional)
   (load-theme 'atom-one-dark t))
 
