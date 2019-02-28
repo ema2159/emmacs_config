@@ -48,7 +48,16 @@
 ;; Evil mode for VIM key bindings
 (require 'evil)
 (evil-mode t)
+;; When evil :q[uit], close buffer and window instead of Emacs
 (evil-ex-define-cmd "q[uit]" 'kill-buffer-and-window)
+;; Function for saving and killing buffer and window
+(defun save-and-kill-buffer-and-window ()
+  (interactive)
+  (save-buffer)
+  (kill-buffer-and-window)
+  )
+;; When evil :wq, save and close buffer and window instead of Emacs
+(evil-ex-define-cmd "wq" 'save-and-kill-buffer-and-window)
 
 ;; Drag stuff
 (drag-stuff-global-mode 1)
