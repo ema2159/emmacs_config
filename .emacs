@@ -38,9 +38,9 @@
 (if (display-graphic-p)
     (progn
     ;; if graphic
-      ;;(load-theme 'solarized-dark t))
+      ;; (load-theme 'solarized-dark t))
       (load-theme 'spacemacs-dark t))
-      ;;(load-theme 'doom-city-lights t))
+      ;; (load-theme 'doom-city-lights t))
     ;; else (optional)
   (load-theme 'atom-one-dark t))
 
@@ -132,7 +132,7 @@
  '(jdee-db-spec-breakpoint-face-colors (cons "#1c1f24" "#484854") t)
  '(package-selected-packages
    (quote
-    (dash dired-hacks-utils drag-stuff solarized-theme markdown-preview-eww planet-theme material-theme smex sublimity org-bullets org-evil org load-theme-buffer-local color-theme-buffer-local shell-pop ranger all-the-icons-dired dired-single evil-multiedit multiple-cursors page-break-lines dashboard yasnippet-snippets company-jedi ein csv-mode ivy-yasnippet counsel ivy flycheck company which-key telephone-line ## magit projectile use-package treemacs-evil treemacs tabbar-ruler tabbar linum-relative nlinum atom-one-dark-theme spacemacs-theme klere-theme evil color-theme)))
+    (dumb-jump beacon smartparens avy highlight-indent-guides dash dired-hacks-utils drag-stuff solarized-theme markdown-preview-eww planet-theme material-theme smex sublimity org-bullets org-evil org load-theme-buffer-local color-theme-buffer-local shell-pop ranger all-the-icons-dired dired-single evil-multiedit multiple-cursors page-break-lines dashboard yasnippet-snippets company-jedi ein csv-mode ivy-yasnippet counsel ivy flycheck company which-key telephone-line ## magit projectile use-package treemacs-evil treemacs tabbar-ruler tabbar linum-relative nlinum atom-one-dark-theme spacemacs-theme klere-theme evil color-theme)))
  '(shell-pop-default-directory "/Users/kyagi/git")
  '(shell-pop-full-span t)
  '(shell-pop-shell-type
@@ -177,10 +177,13 @@
     (cons 360 "#62686E")) t)
  '(vc-annotate-very-old-color nil t))
 
+
 ;; Line numbers configuration
 ;; Toggle between relative and absolute line numbers between evil normal and insert mode
 (require 'linum)
 (require 'linum-relative)
+;; Remove underline (for paren-mode bug)
+(set-face-attribute 'linum-relative-current-face nil :underline nil)
 
 (defun normal-linum ()
   "Activates relative number lines"
@@ -195,7 +198,7 @@
   (linum-on))
 
 (add-hook 'evil-insert-state-entry-hook
-	  (lambda () (when linum-active (insert-linum))))
+(lambda () (when linum-active (insert-linum))))
 
 ;; Disable toolbar
 (tool-bar-mode -1)
@@ -373,10 +376,10 @@
 (smex-initialize) 
 
 ;; Set proxy 
-;;(setq url-proxy-services
-;;      '(("no_proxy" . "^\\(localhost\\|10.*\\)")
-;;	("http" . "web-proxy.rose.hpecorp.net:8088")
-;;	("https" . "web-proxy.rose.hpecorp.net:8088")))
+;; (setq url-proxy-services
+;;       '(("no_proxy" . "^\\(localhost\\|10.*\\)")
+;; 	("http" . "web-proxy.rose.hpecorp.net:8088")
+;; 	("https" . "web-proxy.rose.hpecorp.net:8088")))
 
 ;; Tramp cofiguration
 (setq tramp-default-mode "ssh")
@@ -400,9 +403,9 @@
   "Major mode for editing comma-separated value files." t)
 
 ;; EIN configuration
-(require 'ein)
-(require 'ein-notebook)
-(require 'ein-subpackages)
+;; (require 'ein)
+;; (require 'ein-notebook)
+;; (require 'ein-subpackages)
 
 ;; Evil multiedit
 (require 'evil-multiedit)
@@ -542,7 +545,6 @@ TABSET is the tab set used to choose the appropriate buttons."
 
 ;; Shell-pop
 (require 'shell-pop)
-
 ;; Change theme in term mode
 (add-hook 'term-mode-hook (lambda() (load-theme-buffer-local 'manoj-dark (current-buffer))))
 ;; Disable evil mode in term mode
@@ -586,4 +588,31 @@ TABSET is the tab set used to choose the appropriate buttons."
   (set-variable 'split-height-threshold nil t)
   (set-variable 'split-width-threshold 40 t)) ; make this as low as needed
 (add-hook 'eww-mode-hook 'prefer-horizontal-split)
+
+;; Highlight indent guides
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+(setq highlight-indent-guides-method 'character)
+
+;; Avy
+(require 'avy)
+(global-set-key (kbd "C-'") 'avy-goto-word-1)
+ (setq avy-background t)
+
+;; Smart parens
+(require 'smartparens-config)
+(add-hook 'python-mode-hook #'smartparens-mode)
+(add-hook 'emacs-lisp-mode-hook #'smartparens-mode)
+(add-hook 'c-mode-hook #'smartparens-mode)
+(add-hook 'c++-mode-hook #'smartparens-mode)
+(add-hook 'specman-mode-hook #'smartparens-mode)
+
+;; Beacon
+(beacon-mode 1)
+
+;; Dumb jump
+(dumb-jump-mode)
+;; Enable dumb jump on evil mode
+(eval-after-load 'evil-maps
+  '(progn
+     (define-key evil-motion-state-map "gd" 'dumb-jump-go)))
 
