@@ -30,19 +30,28 @@
 (put 'set-goal-column 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
-(require 'spacemacs-dark-theme)	   
+;; Solaire mode
+(require 'solaire-mode)
+(solaire-global-mode +1)
+;; (require 'spacemacs-dark-theme)	   
 ;; (require 'solarized-dark-theme)	   
 ;; (require 'doom-city-lights-theme)	   
+(require 'doom-dracula-theme)
+;; (require 'atom-one-dark-theme)
 
 ;; Theme
 (if (display-graphic-p)
     (progn
     ;; if graphic
       ;; (load-theme 'solarized-dark t))
-      (load-theme 'spacemacs-dark t))
+      ;; (load-theme 'spacemacs-dark t))
+      (load-theme 'doom-dracula t))
       ;; (load-theme 'doom-city-lights t))
+      ;; (load-theme 'atom-one-dark t))
     ;; else (optional)
   (load-theme 'atom-one-dark t))
+
+(solaire-mode-swap-bg)
 
 ;; GLOBAL VARIABLES
 ;; Define a variable for hooks to turn on/off the relative and absolute number lines
