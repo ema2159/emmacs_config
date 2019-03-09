@@ -635,3 +635,16 @@ TABSET is the tab set used to choose the appropriate buttons."
   '(progn
      (define-key evil-motion-state-map "gd" 'dumb-jump-go)))
 
+;; Improve python-mode syntax highlighting
+(font-lock-add-keywords 'python-mode
+  '(("-?\\b[0-9]+\\.?" . font-lock-constant-face)
+    ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+\@]\\|\\]\\|\\[" . font-lock-keyword-face)
+    ("\\([A-Za-z][A-Za-z0-9_]*\\)[ \t\n]*\\((.*)\\)"
+     (1 font-lock-function-name-face)
+     )
+    ))
+
+;; (font-lock-add-keywords 'python-mode
+;;  '(("\\([A-Za-z][A-Za-z0-9_]*\\)[ \t\n]*\\((.*)\\)"
+;;     (1 font-lock-function-name-face)
+;;     )))
