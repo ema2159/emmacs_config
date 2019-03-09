@@ -29,14 +29,17 @@
 ;; Narrow and widening configuration
 (put 'set-goal-column 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+;; Delete selection mode
+(delete-selection-mode 1)
 
 ;; Solaire mode
 (require 'solaire-mode)
 (solaire-global-mode +1)
-;; (require 'spacemacs-dark-theme)	   
+(require 'spacemacs-dark-theme)	   
+;; (require 'doom-one-theme)	   
 ;; (require 'solarized-dark-theme)	   
 ;; (require 'doom-city-lights-theme)	   
-(require 'doom-dracula-theme)
+;; (require 'doom-dracula-theme)
 ;; (require 'atom-one-dark-theme)
 
 ;; Theme
@@ -354,6 +357,13 @@
 (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
 (yas-global-mode 1)
 (setq require-final-newline nil)
+
+;; Yas auxiliar functions
+(defun if-yas-empty ()
+  (interactive)
+  (if (and yas-moving-away-p (not yas-modified-p))
+      (yas-clear-field))
+  )
 
 ;; Ivy configuration
 (require 'ivy-yasnippet)
