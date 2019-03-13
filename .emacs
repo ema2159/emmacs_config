@@ -31,14 +31,22 @@
 (put 'narrow-to-region 'disabled nil)
 ;; Delete selection mode
 (delete-selection-mode 1)
+;; Disable toolbar
+(tool-bar-mode -1)
+;; Disable scrollbar
+(scroll-bar-mode -1)
+
 
 ;; Solaire mode
-(require 'solaire-mode)
-(solaire-global-mode +1)
-(require 'spacemacs-dark-theme)	   
-;; (require 'doom-one-theme)	   
-;; (require 'solarized-dark-theme)	   
-;; (require 'doom-city-lights-theme)	   
+(use-package solaire-mode
+  :ensure t
+  :config
+  (solaire-global-mode +1))
+
+(require 'spacemacs-dark-theme)
+;; (require 'doom-one-theme)
+;; (require 'solarized-dark-theme)
+;; (require 'doom-city-lights-theme)
 ;; (require 'doom-dracula-theme)
 ;; (require 'atom-one-dark-theme)
 
@@ -46,47 +54,57 @@
 (if (display-graphic-p)
     (progn
     ;; if graphic
+      (load-theme 'spacemacs-dark t))
       ;; (load-theme 'solarized-dark t))
-      ;; (load-theme 'spacemacs-dark t))
-      (load-theme 'doom-dracula t))
+      ;; (load-theme 'doom-one t))
       ;; (load-theme 'doom-city-lights t))
+      ;; (load-theme 'doom-dracula t))
       ;; (load-theme 'atom-one-dark t))
     ;; else (optional)
   (load-theme 'atom-one-dark t))
 
 (solaire-mode-swap-bg)
+(doom-themes-org-config)
 
 ;; GLOBAL VARIABLES
 ;; Define a variable for hooks to turn on/off the relative and absolute number lines
 (defvar linum-active t)
 
-;; Evil mode for VIM key bindings
-(require 'evil)
-(evil-mode t)
-;; When evil :q[uit], close buffer and window instead of Emacs
-(evil-ex-define-cmd "q[uit]" 'kill-buffer-and-window)
 ;; Function for saving and killing buffer and window
 (defun save-and-kill-buffer-and-window ()
   (interactive)
   (save-buffer)
   (kill-buffer-and-window)
   )
-;; When evil :wq, save and close buffer and window instead of Emacs
-(evil-ex-define-cmd "wq" 'save-and-kill-buffer-and-window)
+
+;; Evil mode for VIM key bindings
+(use-package evil
+  :ensure t
+  :init
+  (evil-mode)
+  :config
+  ;; When evil :q[uit], close buffer and window instead of Emacs
+  (evil-ex-define-cmd "q[uit]" 'kill-buffer-and-window)
+  ;; When evil :wq, save and close buffer and window instead of Emacs
+  (evil-ex-define-cmd "wq" 'save-and-kill-buffer-and-window))
+
 
 ;; Drag stuff
-(drag-stuff-global-mode 1)
-(drag-stuff-define-keys)
+(use-package drag-stuff
+  :ensure
+  :config
+  (drag-stuff-global-mode 1)
+  (drag-stuff-define-keys))
 
 ;; Configure Dired
 (require 'dired)
+(defun xah-dired-mode-setup ()
+  (dired-hide-details-mode 1))
 ;; Make emacs mode dired default state
 (add-to-list 'evil-emacs-state-modes 'dired-mode)
 ;; Make Dired less verbose
 (add-hook 'dired-mode-hook
 	  (lambda () (setq-local linum-active nil)))
-(defun xah-dired-mode-setup ()
-  (dired-hide-details-mode 1))
 (add-hook 'dired-mode-hook 'xah-dired-mode-setup)
 
 ;; Dired Single
@@ -110,7 +128,14 @@
 (add-to-list 'load-path "~/.emacs.d/elpa/font-lock-plus")
 (load "font-lock+.el")
 (require 'font-lock)
+;; Improve python-mode syntax highlighting
+(font-lock-add-keywords 'python-mode
+  '(("-?\\b[0-9]+\\.?" . font-lock-constant-face)
+    ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+\@]\\|\\]\\|\\[" . font-lock-keyword-face)
+    ("\\([A-Za-z][A-Za-z0-9_]*\\)[ \t\n]*\\((.*)\\)"
+     (1 font-lock-function-name-face))))
 (require 'font-lock+)
+(font-lock-mode 0)
 (if (display-graphic-p)
     (progn
       ;; if graphic
@@ -121,14 +146,18 @@
   )
 
 ;; Dired Hacks
-(require 'dired-hacks-utils)
-(require 'dired-filter)
-(define-key dired-mode-map (kbd "C-f") dired-filter-mark-map)
-(require 'dired-rainbow)
-(require 'dired-subtree)
-(setq dired-subtree-use-backgrounds nil)
-(define-key dired-mode-map (kbd "i") 'dired-subtree-insert)
-(define-key dired-mode-map (kbd "r") 'dired-subtree-remove)
+(use-package dired-hacks-utils
+  :ensure t)
+(use-package dired-filter
+  :ensure t
+  :config
+  (define-key dired-mode-map (kbd "C-f") dired-filter-mark-map))
+(use-package dired-subtree
+  :ensure t
+  :config
+  (setq dired-subtree-use-backgrounds nil)
+  (define-key dired-mode-map (kbd "i") 'dired-subtree-insert)
+  (define-key dired-mode-map (kbd "r") 'dired-subtree-remove))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -193,30 +222,23 @@
 ;; Line numbers configuration
 ;; Toggle between relative and absolute line numbers between evil normal and insert mode
 (require 'linum)
-(require 'linum-relative)
-;; Remove underline (for paren-mode bug)
-(set-face-attribute 'linum-relative-current-face nil :underline nil)
+(use-package linum-relative
+  :ensure t
+  :config
+  ;; Remove underline (for paren-mode bug)
+  (set-face-attribute 'linum-relative-current-face nil :underline nil)
+  (defun normal-linum ()
+    "Activates relative number lines"
+    (linum-relative-on))
+  (add-hook 'evil-normal-state-entry-hook
+	    (lambda () (when linum-active (normal-linum))))
+  (defun insert-linum ()
+    "Activates absolute number lines"
+    (linum-relative-off)
+    (linum-on))
+  (add-hook 'evil-insert-state-entry-hook
+	    (lambda () (when linum-active (insert-linum)))))
 
-(defun normal-linum ()
-  "Activates relative number lines"
-  (linum-relative-on))
-
-(add-hook 'evil-normal-state-entry-hook
-	  (lambda () (when linum-active (normal-linum))))
-
-(defun insert-linum ()
-  "Activates absolute number lines"
-  (linum-relative-off)
-  (linum-on))
-
-(add-hook 'evil-insert-state-entry-hook
-(lambda () (when linum-active (insert-linum))))
-
-;; Disable toolbar
-(tool-bar-mode -1)
-
-;; Disable scrollbar
-(scroll-bar-mode -1)
 
 ;; Set specman mode
 (add-to-list 'load-path "~/.emacs.d/elpa/specman")
@@ -310,89 +332,109 @@
   :ensure t)
 
 ;; Telephone line
-(require 'telephone-line)
-(setq telephone-line-primary-left-separator 'telephone-line-sin-left
-      telephone-line-secondary-left-separator 'telephone-line-sin-hollow-left
-      telephone-line-primary-right-separator 'telephone-line-sin-right
-      telephone-line-secondary-right-separator 'telephone-line-sin-hollow-right)
-(telephone-line-mode 1)
-
-(set-face-attribute 'telephone-line-evil-normal
-                    nil
-                    :background
-                    "#317DC9")
+(use-package telephone-line
+  :ensure t
+  :config
+  (setq telephone-line-primary-left-separator 'telephone-line-sin-left
+	telephone-line-secondary-left-separator 'telephone-line-sin-hollow-left
+	telephone-line-primary-right-separator 'telephone-line-sin-right
+	telephone-line-secondary-right-separator 'telephone-line-sin-hollow-right)
+  (telephone-line-mode 1)
+  (set-face-attribute 'telephone-line-evil-normal
+		      nil
+		      :background
+		      "#317DC9"))
 
 ;; Recent files
-(require 'recentf)
-(recentf-mode 1)
-(setq recentf-max-menu-items 25)
-(global-set-key "\C-x\ \C-r" 'recentf-open-files)
+(use-package recentf
+  :ensure t
+  :config
+  (recentf-mode 1)
+  (setq recentf-max-menu-items 25)
+  (global-set-key "\C-x\ \C-r" 'recentf-open-files))
 
 ;; Which key
-(require 'which-key)
-(which-key-mode)
-(which-key-setup-side-window-bottom)
-(add-hook 'which-key-init-buffer-hook (lambda () (setq-local linum-active nil)))
+(use-package which-key
+  :defer 5
+  :diminish
+  :commands which-key-mode
+  :config
+  (which-key-mode)
+  (which-key-setup-side-window-bottom)
+  :init
+  (add-hook 'which-key-init-buffer-hook (lambda () (setq-local linum-active nil))))
 
 ;; Company
-(require 'company)
-(company-mode 1)
-(add-hook 'after-init-hook 'global-company-mode)
+(use-package company
+  :ensure t
+  :defer 5
+  :init
+  (company-mode 1)
+  (add-hook 'after-init-hook 'global-company-mode))
 
 ;; Yasnippet
-(require 'yasnippet)
-(setq yas-snippet-dirs
-      '("~/.emacs.d/snippets"                 ;; personal snippets
-        "~/.emacs.d/elpa/yasnippet-snippets-20190202.2145/snippets" ;; the yasmate collection
-        ))
-;; Add yasnippet support for all company backends
-(defvar company-mode/enable-yas t
-  "Enable yasnippet for all backends.")
+(use-package yasnippet
+  :ensure t
+  :init
+  (setq yas-snippet-dirs
+	'("~/.emacs.d/snippets"                 ;; personal snippets
+	 ;; "~/.emacs.d/elpa/yasnippet-snippets-.*/snippets" ;; the yasmate collection
+	  ))
+  ;; Add yasnippet support for all company backends
+  (defvar company-mode/enable-yas t
+    "Enable yasnippet for all backends.")
+  (defun company-mode/backend-with-yas (backend)
+    (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
+	backend
+      (append (if (consp backend) backend (list backend))
+	      '(:with company-yasnippet))))
+  (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
+  (yas-global-mode 1)
+  (setq require-final-newline nil)
 
-(defun company-mode/backend-with-yas (backend)
-  (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
-      backend
-    (append (if (consp backend) backend (list backend))
-            '(:with company-yasnippet))))
-(setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
-(yas-global-mode 1)
-(setq require-final-newline nil)
+  ;; Yas auxiliar functions
+  (defun if-yas-empty ()
+    (interactive)
+    (if (and yas-moving-away-p (not yas-modified-p))
+	(yas-clear-field))))
 
-;; Yas auxiliar functions
-(defun if-yas-empty ()
-  (interactive)
-  (if (and yas-moving-away-p (not yas-modified-p))
-      (yas-clear-field))
-  )
 
 ;; Ivy configuration
-(require 'ivy-yasnippet)
-(ivy-mode 1)
-(setq ivy-use-virtual-buffers t)
-(setq enable-recursive-minibuffers t)
-(global-set-key "\C-s" 'swiper)
-(global-set-key (kbd "C-c C-r") 'ivy-resume)
-(global-set-key (kbd "<f6>") 'ivy-resume)
-(global-set-key (kbd "M-x") 'counsel-M-x)
-(global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key (kbd "<f1> f") 'counsel-describe-function)
-(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-(global-set-key (kbd "<f1> l") 'counsel-find-library)
-(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
-(global-set-key (kbd "C-c g") 'counsel-git)
-(global-set-key (kbd "C-c j") 'counsel-git-grep)
-(global-set-key (kbd "C-c k") 'counsel-ag)
-(global-set-key (kbd "C-x l") 'counsel-locate)
-(global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
-(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+(use-package ivy
+  :ensure t
+  :config
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  :bind (("\C-s" . swiper)
+	 ("C-c C-r" . ivy-resume)
+	 ("<f6>" . ivy-resume)
+	 ("M-x" . counsel-M-x)
+	 ("C-x C-f" . counsel-find-file)
+	 ("<f1> f" . counsel-describe-function)
+	 ("<f1> v" . counsel-describe-variable)
+	 ("<f1> l" . counsel-find-library)
+	 ("<f2> i" . counsel-info-lookup-symbol)
+	 ("<f2> u" . counsel-unicode-char)
+	 ("C-c g" . counsel-git)
+	 ("C-c j" . counsel-git-grep)
+	 ("C-c k" . counsel-ag)
+	 ("C-x l" . counsel-locate)
+	 ("C-S-o" . counsel-rhythmbox))
+  :config
+  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history))
 
 ;; Ivy yasnippet
-(global-set-key (kbd "C-x C-a") 'ivy-yasnippet)
+(use-package ivy-yasnippet
+  :ensure t
+  :bind
+  ("C-x C-a" . ivy-yasnippet))
 
 ;; Smex configuration
-(require 'smex) 
-(smex-initialize) 
+(use-package smex
+  :ensure t
+  :init
+  (smex-initialize)) 
 
 ;; Set proxy 
 ;; (setq url-proxy-services
@@ -427,8 +469,30 @@
 ;; (require 'ein-subpackages)
 
 ;; Evil multiedit
-(require 'evil-multiedit)
-(evil-multiedit-default-keybinds)
+(use-package evil-multiedit
+  :ensure t
+  :bind (:map evil-normal-state-map
+	 ("C-<" . evil-multiedit-match-symbol-and-next)
+	 ("C->" . evil-multiedit-match-symbol-and-prev)
+	 :map evil-visual-state-map
+	 ("C-<" . evil-multiedit-match-and-next)
+	 ("C->" . evil-multiedit-match-and-prev)
+	 ("R" . evil-multiedit-match-all)
+	 ("C-M-D" . evil-multiedit-restore)
+	 :map evil-insert-state-map
+	 ("C-<" . evil-multiedit-match-and-next)
+	 ("C->" . evil-multiedit-match-and-prev)
+	 :map evil-motion-state-map
+	 ("RET" . evil-multiedit-toggle-or-restrict-region)
+	 :map evil-multiedit-state-map
+	 ("RET" . evil-multiedit-toggle-or-restrict-region)
+	 ("C-n" . evil-multiedit-next)
+	 ("C-p" . evil-multiedit-prev)
+	 :map evil-multiedit-insert-state-map
+	 ("C-n" . evil-multiedit-next)
+	 ("C-p" . evil-multiedit-prev))
+  :config
+  (evil-ex-define-cmd "ie[dit]" #'evil-multiedit-ex-match))
 
 ;; Configure backup files
 (setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
@@ -486,23 +550,19 @@
 	 (eq major-mode 'magit-wip-before-change-mode)
 	 (eq major-mode 'magit-wip-initial-backup-mode)
 	 (eq major-mode 'magit-wip-after-save-mode))
-     "Magit"
-     )
+     "Magit")
     ((eq major-mode 'dired-mode)
-     "Dired"
-     )
+     "Dired")
     ((eq major-mode 'dashboard-mode)
-     "Dashboard"
-     )
+     "Dashboard")
     ((eq major-mode 'specman-mode)
-     "Specman"
-     )
+     "Specman")
     ((eq major-mode 'term-mode)
-     "Term"
-     )
-    ((eq major-mode 'python-mode)
-     "Python"
-     )
+     "Term")
+    ((or (eq major-mode 'python-mode)
+     (eq major-mode 'c-mode)
+     (eq major-mode 'c++-mode))
+     "Python, C, C++")
     ((or (eq major-mode 'emacs-lisp-mode)
 	 (eq major-mode 'org-mode)
 	 (eq major-mode 'org-agenda-clockreport-mode)
@@ -513,15 +573,12 @@
 	 (eq major-mode 'org-bullets-mode)
 	 (eq major-mode 'org-cdlatex-mode)
 	 (eq major-mode 'org-agenda-log-mode))
-     "Emacs lisp and Org mode"
-     )
+     "Emacs lisp and Org mode")
     ((or (eq major-mode 'csv-mode)
 	 (eq major-mode 'text-mode))
-     "Text and csv"
-     )
+     "Text and csv")
     (t
-     "Misc buffers"
-     )
+     "Misc buffers")
     ))) 
 
 (setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
@@ -557,10 +614,12 @@ TABSET is the tab set used to choose the appropriate buttons."
                         (bookmarks . 5)))
 
 ;; Magit
-(require 'magit)
-(global-set-key (kbd "C-x g") 'magit-status)
-(add-hook 'magit-process-mode-hook
-	  (lambda () (setq-local linum-active nil)))
+;; (require 'magit)
+(use-package magit
+  :bind ("C-x g" . magit-status)
+  :init
+  (add-hook 'magit-process-mode-hook
+	    (lambda () (setq-local linum-active nil))))
 
 ;; Shell-pop
 (require 'shell-pop)
@@ -586,6 +645,7 @@ TABSET is the tab set used to choose the appropriate buttons."
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
+(setq org-support-shift-select 'always)
 ;; Org bullets
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
@@ -602,6 +662,8 @@ TABSET is the tab set used to choose the appropriate buttons."
 (require 'ox-md)
 ;; Handle source blocks
 (setq org-src-tab-acts-natively t)
+;; Enable word wrap
+(add-hook 'org-mode-hook #'toggle-word-wrap)
 
 ;; Markdown preview
 (require 'markdown-preview-eww)
@@ -617,9 +679,11 @@ TABSET is the tab set used to choose the appropriate buttons."
 (setq highlight-indent-guides-method 'character)
 
 ;; Avy
-(require 'avy)
-(global-set-key (kbd "C-'") 'avy-goto-word-1)
- (setq avy-background t)
+(use-package avy
+  :bind* ("C-'" . avy-goto-word-1)
+  :config
+  (avy-setup-default)
+  (setq avy-background t))
 
 ;; Smart parens
 (require 'smartparens-config)
@@ -630,7 +694,10 @@ TABSET is the tab set used to choose the appropriate buttons."
 (add-hook 'specman-mode-hook #'smartparens-mode)
 
 ;; Beacon
-(beacon-mode 1)
+(use-package beacon
+  :ensure t
+  :config
+  (beacon-mode 1))
 
 ;; Dumb jump
 (dumb-jump-mode)
@@ -639,16 +706,14 @@ TABSET is the tab set used to choose the appropriate buttons."
   '(progn
      (define-key evil-motion-state-map "gd" 'dumb-jump-go)))
 
-;; Improve python-mode syntax highlighting
-(font-lock-add-keywords 'python-mode
-  '(("-?\\b[0-9]+\\.?" . font-lock-constant-face)
-    ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+\@]\\|\\]\\|\\[" . font-lock-keyword-face)
-    ("\\([A-Za-z][A-Za-z0-9_]*\\)[ \t\n]*\\((.*)\\)"
-     (1 font-lock-function-name-face)
-     )
-    ))
 
-;; (font-lock-add-keywords 'python-mode
-;;  '(("\\([A-Za-z][A-Za-z0-9_]*\\)[ \t\n]*\\((.*)\\)"
-;;     (1 font-lock-function-name-face)
-;;     )))
+;; ESS
+(use-package ess-r-mode)
+
+;; Windmove
+(use-package windmove
+  :bind
+  ("C-x C-<left>"  . windmove-left)
+  ("C-x C-<right>" . windmove-right)
+  ("C-x C-<up>"    . windmove-up)
+  ("C-x C-<down>"  . windmove-down))
