@@ -11,7 +11,7 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
 (setq package-enable-at-startup nil)
-(package-initialize) 
+(package-initialize)
 
 
 ;; GENERAL CONFIGURATION
@@ -35,6 +35,8 @@
 (tool-bar-mode -1)
 ;; Disable scrollbar
 (scroll-bar-mode -1)
+;; Disable menubar
+;; (menu-bar-mode -1)
 
 
 ;; Solaire mode
@@ -72,6 +74,7 @@
 
 ;; Function for saving and killing buffer and window
 (defun save-and-kill-buffer-and-window ()
+  "Function for saving buffer and closing it with its window, used for evil mode :wq command."
   (interactive)
   (save-buffer)
   (kill-buffer-and-window)
@@ -166,14 +169,13 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("732b807b0543855541743429c9979ebfb363e27ec91e82f463c91e68c772f6e3" "10461a3c8ca61c52dfbbdedd974319b7f7fd720b091996481c8fb1dded6c6116" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "565aa482e486e2bdb9c3cf5bfb14d1a07c4a42cfc0dc9d6a14069e53b6435b56" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "8aca557e9a17174d8f847fb02870cb2bb67f3b6e808e46c0e54a44e3e18e1020" "6b289bab28a7e511f9c54496be647dc60f5bd8f9917c9495978762b99d8c96a0" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a" "ecba61c2239fbef776a72b65295b88e5534e458dfe3e6d7d9f9cb353448a569e" "151bde695af0b0e69c3846500f58d9a0ca8cb2d447da68d7fbf4154dcf818ebc" "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "cd736a63aa586be066d5a1f0e51179239fe70e16a9f18991f6f5d99732cabb32" "b54826e5d9978d59f9e0a169bbd4739dd927eead3ef65f56786621b53c031a7c" "fe666e5ac37c2dfcf80074e88b9252c71a22b6f5d2f566df9a7aa4f9bea55ef8" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "7e78a1030293619094ea6ae80a7579a562068087080e01c2b8b503b27900165c" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "6d589ac0e52375d311afaa745205abb6ccb3b21f6ba037104d71111e7e76a3fc" "100e7c5956d7bb3fd0eebff57fde6de8f3b9fafa056a2519f169f85199cc1c96" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "bf5bdab33a008333648512df0d2b9d9710bdfba12f6a768c7d2c438e1092b633" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
- '(fci-rule-color "#62686E" t)
+    ("59e82a683db7129c0142b4b5a35dbbeaf8e01a4b81588f8c163bd255b76f4d21" "732b807b0543855541743429c9979ebfb363e27ec91e82f463c91e68c772f6e3" "10461a3c8ca61c52dfbbdedd974319b7f7fd720b091996481c8fb1dded6c6116" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "565aa482e486e2bdb9c3cf5bfb14d1a07c4a42cfc0dc9d6a14069e53b6435b56" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "8aca557e9a17174d8f847fb02870cb2bb67f3b6e808e46c0e54a44e3e18e1020" "6b289bab28a7e511f9c54496be647dc60f5bd8f9917c9495978762b99d8c96a0" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a" "ecba61c2239fbef776a72b65295b88e5534e458dfe3e6d7d9f9cb353448a569e" "151bde695af0b0e69c3846500f58d9a0ca8cb2d447da68d7fbf4154dcf818ebc" "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "cd736a63aa586be066d5a1f0e51179239fe70e16a9f18991f6f5d99732cabb32" "b54826e5d9978d59f9e0a169bbd4739dd927eead3ef65f56786621b53c031a7c" "fe666e5ac37c2dfcf80074e88b9252c71a22b6f5d2f566df9a7aa4f9bea55ef8" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "7e78a1030293619094ea6ae80a7579a562068087080e01c2b8b503b27900165c" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "6d589ac0e52375d311afaa745205abb6ccb3b21f6ba037104d71111e7e76a3fc" "100e7c5956d7bb3fd0eebff57fde6de8f3b9fafa056a2519f169f85199cc1c96" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "bf5bdab33a008333648512df0d2b9d9710bdfba12f6a768c7d2c438e1092b633" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
  '(jdee-db-active-breakpoint-face-colors (cons "#1c1f24" "#51afef") t)
  '(jdee-db-requested-breakpoint-face-colors (cons "#1c1f24" "#7bc275") t)
  '(jdee-db-spec-breakpoint-face-colors (cons "#1c1f24" "#484854") t)
  '(package-selected-packages
    (quote
-    (dumb-jump beacon smartparens avy highlight-indent-guides dash dired-hacks-utils drag-stuff solarized-theme markdown-preview-eww planet-theme material-theme smex sublimity org-bullets org-evil org load-theme-buffer-local color-theme-buffer-local shell-pop ranger all-the-icons-dired dired-single evil-multiedit multiple-cursors page-break-lines dashboard yasnippet-snippets company-jedi ein csv-mode ivy-yasnippet counsel ivy flycheck company which-key telephone-line ## magit projectile use-package treemacs-evil treemacs tabbar-ruler tabbar linum-relative nlinum atom-one-dark-theme spacemacs-theme klere-theme evil color-theme)))
+    (transpose-frame company-c-headers company-box company-irony moe-theme ess rainbow-mode cyberpunk-theme solaire-mode dumb-jump beacon smartparens avy highlight-indent-guides dash dired-hacks-utils drag-stuff solarized-theme markdown-preview-eww planet-theme material-theme smex sublimity org-bullets org-evil org load-theme-buffer-local color-theme-buffer-local shell-pop ranger all-the-icons-dired dired-single evil-multiedit multiple-cursors page-break-lines dashboard yasnippet-snippets company-jedi ein csv-mode ivy-yasnippet counsel ivy flycheck company which-key telephone-line ## magit projectile use-package treemacs-evil treemacs tabbar linum-relative nlinum atom-one-dark-theme spacemacs-theme klere-theme evil color-theme)))
  '(shell-pop-default-directory "/Users/kyagi/git")
  '(shell-pop-full-span t)
  '(shell-pop-shell-type
@@ -344,6 +346,104 @@
 		      nil
 		      :background
 		      "#317DC9"))
+
+;; Tabbar ruler
+(require 'tabbar-ruler)
+(setq dashboard-center-content t)
+;; Hide tabbar in some specific modes
+(add-hook 'dashboard-mode-hook 'tabbar-local-mode)
+(add-hook 'ivy-mode-hook 'tabbar-local-mode)
+(add-hook 'term-mode-hook 'tabbar-local-mode)
+(add-hook 'calendar-mode-hook 'tabbar-local-mode)
+(add-hook 'dired-mode-hook 'tabbar-local-mode)
+(add-hook 'org-agenda-mode-hook 'tabbar-local-mode)
+(add-hook 'magit-log-mode-hook 'tabbar-local-mode)
+(add-hook 'magit-diff-mode-hook 'tabbar-local-mode)
+(add-hook 'magit-status-mode-hook 'tabbar-local-mode)
+(add-hook 'magit-process-mode-hook 'tabbar-local-mode)
+(add-hook 'magit-stashes-mode-hook 'tabbar-local-mode)
+
+;; Tabbar groups
+(defun tabbar-buffer-groups ()
+  (list
+   (cond
+    ((or (eq major-mode 'magit-log-mode)
+	 (eq major-mode 'magit-mode)
+	 (eq major-mode 'magit-wip-mode)
+	 (eq major-mode 'magit-blob-mode)
+	 (eq major-mode 'magit-diff-mode)
+	 (eq major-mode 'magit-file-mode)
+	 (eq major-mode 'magit-refs-mode)
+	 (eq major-mode 'magit-blame-mode)
+	 (eq major-mode 'magit-popup-mode)
+	 (eq major-mode 'magit-stash-mode)
+	 (eq major-mode 'magit-cherry-mode)
+	 (eq major-mode 'magit-reflog-mode)
+	 (eq major-mode 'magit-status-mode)
+	 (eq major-mode 'magit-process-mode)
+	 (eq major-mode 'magit-stashes-mode)
+	 (eq major-mode 'magit-repolist-mode)
+	 (eq major-mode 'magit-revision-mode)
+	 (eq major-mode 'magit-log-select-mode)
+	 (eq major-mode 'magit-popup-help-mode)
+	 (eq major-mode 'magit-auto-revert-mode)
+	 (eq major-mode 'magit-merge-preview-mode)
+	 (eq major-mode 'magit-submodule-list-mode)
+	 (eq major-mode 'magit-wip-after-save-mode)
+	 (eq major-mode 'magit-blame-read-only-mode)
+	 (eq major-mode 'magit-wip-after-apply-mode)
+	 (eq major-mode 'magit-wip-before-change-mode)
+	 (eq major-mode 'magit-wip-initial-backup-mode)
+	 (eq major-mode 'magit-wip-after-save-mode))
+     "Magit")
+    ((eq major-mode 'dired-mode)
+     "Dired")
+    ((eq major-mode 'dashboard-mode)
+     "Dashboard")
+    ((eq major-mode 'specman-mode)
+     "Specman")
+    ((eq major-mode 'term-mode)
+     "Term")
+    ((or (eq major-mode 'python-mode)
+     (eq major-mode 'c-mode)
+     (eq major-mode 'c++-mode))
+     "Python, C, C++")
+    ((or (eq major-mode 'emacs-lisp-mode)
+	 (eq major-mode 'org-mode)
+	 (eq major-mode 'org-agenda-clockreport-mode)
+	 (eq major-mode 'org-src-mode)
+	 (eq major-mode 'org-agenda-mode)
+	 (eq major-mode 'org-beamer-mode)
+	 (eq major-mode 'org-indent-mode)
+	 (eq major-mode 'org-bullets-mode)
+	 (eq major-mode 'org-cdlatex-mode)
+	 (eq major-mode 'org-agenda-log-mode))
+     "Emacs lisp and Org mode")
+    ((or (eq major-mode 'csv-mode)
+	 (eq major-mode 'text-mode))
+     "Text and csv")
+    (t
+     "Misc buffers")
+    ))) 
+
+(setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
+
+;; Tabbar excluded buffers
+(setq tabbar-ruler-excluded-buffers '("*Messages*" "*Completions*" "*ESS*" "*Packages*" "*log-edit-files*" "*helm-mini*" "*helm-mode-describe-variable*" "*scratch*"))
+
+
+;; Tab change keybinding
+(global-set-key (kbd "C-<home>") 'tabbar-press-home)
+(global-set-key (kbd "C-<prior>") 'tabbar-backward)
+(global-set-key (kbd "C-<next>") 'tabbar-forward)
+
+;; Hide tabbar buttons
+(setq tabbar-hide-header-button t)
+(setq tabbar-use-images nil)
+(defsubst tabbar-line-buttons (tabset)
+  "Return a list of propertized strings for tab bar buttons.
+TABSET is the tab set used to choose the appropriate buttons."
+ (list (propertize "")))
 
 ;; Recent files
 (use-package recentf
@@ -533,104 +633,6 @@
   kept-new-versions 6
   kept-old-versions 2
   version-control t)
-
-;; Tabbar ruler
-(require 'tabbar-ruler)
-(setq dashboard-center-content t)
-;; Hide tabbar in some specific modes
-(add-hook 'dashboard-mode-hook 'tabbar-local-mode)
-(add-hook 'ivy-mode-hook 'tabbar-local-mode)
-(add-hook 'term-mode-hook 'tabbar-local-mode)
-(add-hook 'calendar-mode-hook 'tabbar-local-mode)
-(add-hook 'dired-mode-hook 'tabbar-local-mode)
-(add-hook 'org-agenda-mode-hook 'tabbar-local-mode)
-(add-hook 'magit-log-mode-hook 'tabbar-local-mode)
-(add-hook 'magit-diff-mode-hook 'tabbar-local-mode)
-(add-hook 'magit-status-mode-hook 'tabbar-local-mode)
-(add-hook 'magit-process-mode-hook 'tabbar-local-mode)
-(add-hook 'magit-stashes-mode-hook 'tabbar-local-mode)
-
-;; Tabbar groups
-(defun tabbar-buffer-groups ()
-  (list
-   (cond
-    ((or (eq major-mode 'magit-log-mode)
-	 (eq major-mode 'magit-mode)
-	 (eq major-mode 'magit-wip-mode)
-	 (eq major-mode 'magit-blob-mode)
-	 (eq major-mode 'magit-diff-mode)
-	 (eq major-mode 'magit-file-mode)
-	 (eq major-mode 'magit-refs-mode)
-	 (eq major-mode 'magit-blame-mode)
-	 (eq major-mode 'magit-popup-mode)
-	 (eq major-mode 'magit-stash-mode)
-	 (eq major-mode 'magit-cherry-mode)
-	 (eq major-mode 'magit-reflog-mode)
-	 (eq major-mode 'magit-status-mode)
-	 (eq major-mode 'magit-process-mode)
-	 (eq major-mode 'magit-stashes-mode)
-	 (eq major-mode 'magit-repolist-mode)
-	 (eq major-mode 'magit-revision-mode)
-	 (eq major-mode 'magit-log-select-mode)
-	 (eq major-mode 'magit-popup-help-mode)
-	 (eq major-mode 'magit-auto-revert-mode)
-	 (eq major-mode 'magit-merge-preview-mode)
-	 (eq major-mode 'magit-submodule-list-mode)
-	 (eq major-mode 'magit-wip-after-save-mode)
-	 (eq major-mode 'magit-blame-read-only-mode)
-	 (eq major-mode 'magit-wip-after-apply-mode)
-	 (eq major-mode 'magit-wip-before-change-mode)
-	 (eq major-mode 'magit-wip-initial-backup-mode)
-	 (eq major-mode 'magit-wip-after-save-mode))
-     "Magit")
-    ((eq major-mode 'dired-mode)
-     "Dired")
-    ((eq major-mode 'dashboard-mode)
-     "Dashboard")
-    ((eq major-mode 'specman-mode)
-     "Specman")
-    ((eq major-mode 'term-mode)
-     "Term")
-    ((or (eq major-mode 'python-mode)
-     (eq major-mode 'c-mode)
-     (eq major-mode 'c++-mode))
-     "Python, C, C++")
-    ((or (eq major-mode 'emacs-lisp-mode)
-	 (eq major-mode 'org-mode)
-	 (eq major-mode 'org-agenda-clockreport-mode)
-	 (eq major-mode 'org-src-mode)
-	 (eq major-mode 'org-agenda-mode)
-	 (eq major-mode 'org-beamer-mode)
-	 (eq major-mode 'org-indent-mode)
-	 (eq major-mode 'org-bullets-mode)
-	 (eq major-mode 'org-cdlatex-mode)
-	 (eq major-mode 'org-agenda-log-mode))
-     "Emacs lisp and Org mode")
-    ((or (eq major-mode 'csv-mode)
-	 (eq major-mode 'text-mode))
-     "Text and csv")
-    (t
-     "Misc buffers")
-    ))) 
-
-(setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
-
-;; Tabbar excluded buffers
-(setq tabbar-ruler-excluded-buffers '("*Messages*" "*Completions*" "*ESS*" "*Packages*" "*log-edit-files*" "*helm-mini*" "*helm-mode-describe-variable*" "*scratch*"))
-
-
-;; Tab change keybinding
-(global-set-key (kbd "C-<home>") 'tabbar-press-home)
-(global-set-key (kbd "C-<prior>") 'tabbar-backward)
-(global-set-key (kbd "C-<next>") 'tabbar-forward)
-
-;; Hide tabbar buttons
-(setq tabbar-hide-header-button t)
-(setq tabbar-use-images nil)
-(defsubst tabbar-line-buttons (tabset)
-  "Return a list of propertized strings for tab bar buttons.
-TABSET is the tab set used to choose the appropriate buttons."
- (list (propertize "")))
 
 ;; Dashboard
 (require 'page-break-lines)
