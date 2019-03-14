@@ -362,7 +362,28 @@
   (which-key-mode)
   (which-key-setup-side-window-bottom)
   :init
-  (add-hook 'which-key-init-buffer-hook (lambda () (setq-local linum-active nil))))
+  (add-hook 'which-key-init-buffer-hook
+	    (lambda () (setq-local linum-active nil))))
+
+;; Flycheck
+(use-package flycheck
+  :ensure t
+  :hook
+  (
+   (flycheck-error-list-mode . tabbar-local-mode)
+   (flycheck-error-list-mode . (lambda () (setq-local linum-active nil))))
+  :init
+  (global-flycheck-mode))
+
+
+
+;; Irnony
+(use-package irony
+  :ensure t
+  :hook
+  ((c-mode . irony-mode)
+   (c++-mode . irony-mode)
+   (irony-mode . irony-cdb-autosetup-compile-options)))
 
 ;; Company
 (use-package company
@@ -370,7 +391,18 @@
   :defer 5
   :init
   (company-mode 1)
-  (add-hook 'after-init-hook 'global-company-mode))
+  (add-hook 'after-init-hook 'global-company-mode)
+  (eval-after-load 'company
+    '(add-to-list 'company-backends 'company-irony))
+  (eval-after-load 'company
+    '(add-to-list 'company-backends 'company-c-headers)))
+
+;; Company box
+;; (use-package company-box
+;;   :hook
+;;   (company-mode . company-box-mode)
+;;   :config
+;;   (company-box-mode . (lambda () (setq-local linum-active nil))))
 
 ;; Yasnippet
 (use-package yasnippet
@@ -717,3 +749,11 @@ TABSET is the tab set used to choose the appropriate buttons."
   ("C-x C-<right>" . windmove-right)
   ("C-x C-<up>"    . windmove-up)
   ("C-x C-<down>"  . windmove-down))
+
+;; Undo Tree
+(use-package undo-tree
+  :ensure t
+  :init
+  (global-undo-tree-mode)
+  :hook
+  (undo-tree-visualizer-mode . transpose-frame))
