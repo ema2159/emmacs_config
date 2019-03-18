@@ -759,3 +759,15 @@ TABSET is the tab set used to choose the appropriate buttons."
   (global-undo-tree-mode)
   :hook
   (undo-tree-visualizer-mode . transpose-frame))
+
+(use-package fill-column-indicator
+  :ensure t
+  :hook
+  (prog-mode . fci-mode)
+  :init
+  (setq fci-rule-column 80))
+
+(use-package column-enforce-mode
+  :ensure t
+  :hook
+  (prog-mode . column-enforce-mode))
