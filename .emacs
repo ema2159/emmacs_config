@@ -7,9 +7,12 @@
 
 ;; Package repos
 (require 'package)
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
+(add-to-list 'package-archives
+	     '("org" . "http://orgmode.org/elpa/"))
+(add-to-list 'package-archives
+	     '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives
+	     '("melpa-stable" . "http://stable.melpa.org/packages/"))
 (setq package-enable-at-startup nil)
 (package-initialize)
 
@@ -45,9 +48,9 @@
   :config
   (solaire-global-mode +1))
 
-(require 'spacemacs-dark-theme)
+;; (require 'spacemacs-dark-theme)
+(require 'solarized-dark-theme)
 ;; (require 'doom-one-theme)
-;; (require 'solarized-dark-theme)
 ;; (require 'doom-city-lights-theme)
 ;; (require 'doom-dracula-theme)
 ;; (require 'atom-one-dark-theme)
@@ -56,8 +59,8 @@
 (if (display-graphic-p)
     (progn
     ;; if graphic
-      (load-theme 'spacemacs-dark t))
-      ;; (load-theme 'solarized-dark t))
+      ;; (load-theme 'spacemacs-dark t))
+      (load-theme 'solarized-dark t))
       ;; (load-theme 'doom-one t))
       ;; (load-theme 'doom-city-lights t))
       ;; (load-theme 'doom-dracula t))
@@ -116,7 +119,7 @@
   ;; <add other stuff here>
   (define-key dired-mode-map [return] 'dired-single-buffer)
   (define-key dired-mode-map [remap dired-mouse-find-file-other-window] 'dired-single-buffer-mouse) 
-  (define-key dired-mode-map [tab] 'ranger-mode) 
+  ;; (define-key dired-mode-map [tab] 'ranger-mode) 
   (define-key dired-mode-map "^"
     (function
      (lambda nil (interactive) (dired-single-buffer "..")))))
@@ -131,12 +134,17 @@
 (add-to-list 'load-path "~/.emacs.d/elpa/font-lock-plus")
 (load "font-lock+.el")
 (require 'font-lock)
+(set-face-attribute 'font-lock-keyword-face nil :weight 'normal)
 ;; Improve python-mode syntax highlighting
 (font-lock-add-keywords 'python-mode
   '(("-?\\b[0-9]+\\.?" . font-lock-constant-face)
-    ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+\@]\\|\\]\\|\\[" . font-lock-keyword-face)
+    ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+]\\|\\]\\|\\[" . font-lock-keyword-face)
     ("\\([A-Za-z][A-Za-z0-9_]*\\)[ \t\n]*\\((.*)\\)"
      (1 font-lock-function-name-face))))
+;; Improve c-mode syntax highlighting
+(font-lock-add-keywords 'c-mode
+  '(("-?\\b[0-9]+\\.?" . font-lock-constant-face)
+    ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+\@]\\|\\]\\|\\[" . font-lock-keyword-face)))
 (require 'font-lock+)
 (font-lock-mode 0)
 (if (display-graphic-p)
@@ -175,7 +183,7 @@
  '(jdee-db-spec-breakpoint-face-colors (cons "#1c1f24" "#484854") t)
  '(package-selected-packages
    (quote
-    (transpose-frame company-c-headers company-box company-irony moe-theme ess rainbow-mode cyberpunk-theme solaire-mode dumb-jump beacon smartparens avy highlight-indent-guides dash dired-hacks-utils drag-stuff solarized-theme markdown-preview-eww planet-theme material-theme smex sublimity org-bullets org-evil org load-theme-buffer-local color-theme-buffer-local shell-pop ranger all-the-icons-dired dired-single evil-multiedit multiple-cursors page-break-lines dashboard yasnippet-snippets company-jedi ein csv-mode ivy-yasnippet counsel ivy flycheck company which-key telephone-line ## magit projectile use-package treemacs-evil treemacs tabbar linum-relative nlinum atom-one-dark-theme spacemacs-theme klere-theme evil color-theme)))
+    (column-enforce-mode fill-column-indicator exec-path-from-shell transpose-frame company-c-headers company-box company-irony moe-theme ess rainbow-mode cyberpunk-theme solaire-mode dumb-jump beacon smartparens avy highlight-indent-guides dash dired-hacks-utils drag-stuff solarized-theme markdown-preview-eww planet-theme material-theme smex sublimity org-bullets org-evil org load-theme-buffer-local color-theme-buffer-local shell-pop ranger all-the-icons-dired dired-single evil-multiedit multiple-cursors page-break-lines dashboard yasnippet-snippets company-jedi ein csv-mode ivy-yasnippet counsel ivy flycheck company which-key telephone-line ## magit projectile use-package treemacs-evil treemacs tabbar linum-relative nlinum atom-one-dark-theme spacemacs-theme klere-theme evil color-theme)))
  '(shell-pop-default-directory "/Users/kyagi/git")
  '(shell-pop-full-span t)
  '(shell-pop-shell-type
@@ -429,7 +437,7 @@
 (setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
 
 ;; Tabbar excluded buffers
-(setq tabbar-ruler-excluded-buffers '("*Messages*" "*Completions*" "*ESS*" "*Packages*" "*log-edit-files*" "*helm-mini*" "*helm-mode-describe-variable*" "*scratch*"))
+(setq tabbar-ruler-excluded-buffers '("*Messages*" "*Completions*" "*ESS*" "*Packages*" "*log-edit-files*" "*helm-mini*" "*helm-mode-describe-variable*" "*scratch*" "*Flycheck error messages*"))
 
 
 ;; Tab change keybinding
@@ -636,6 +644,7 @@ TABSET is the tab set used to choose the appropriate buttons."
 
 ;; Dashboard
 (require 'page-break-lines)
+(turn-on-page-break-lines-mode)
 (require 'dashboard)
 (dashboard-setup-startup-hook)
 ;; Disable Evil mode on dashboard
@@ -679,7 +688,7 @@ TABSET is the tab set used to choose the appropriate buttons."
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
-(setq org-support-shift-select 'always)
+(setq org-support-shift-select t)
 ;; Org bullets
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
