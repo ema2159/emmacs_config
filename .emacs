@@ -20,6 +20,8 @@
 ;; GENERAL CONFIGURATION
 ;; When split, if a buffer is killed, also its window is killed
 (global-set-key (kbd "C-x k") 'kill-buffer-and-window)
+;; Configure C-/ as comment keybinding
+(global-set-key (kbd "C-7") 'comment-line)
 ;;Set default mode
 (setq-default major-mode 'text-mode)
 (add-hook 'text-mode-hook 'flyspell-mode)
@@ -40,6 +42,27 @@
 (scroll-bar-mode -1)
 ;; Disable menubar
 ;; (menu-bar-mode -1)
+;; Remove warning bell sound
+(setq ring-bell-function 'ignore)
+;; Modify word wrap arrows
+(define-fringe-bitmap 'right-curly-arrow
+  [#b00000000
+   #b00000000
+   #b00010000
+   #b00001000
+   #b11111100
+   #b00001000
+   #b00010000
+   #b00000000])
+(define-fringe-bitmap 'left-curly-arrow
+  [#b00000000
+   #b00010000
+   #b00001000
+   #b11111100
+   #b00001000
+   #b00010000
+   #b00000000
+   #b00000000])
 
 
 ;; Solaire mode
@@ -48,8 +71,8 @@
   :config
   (solaire-global-mode +1))
 
-;; (require 'spacemacs-dark-theme)
-(require 'solarized-dark-theme)
+(require 'spacemacs-dark-theme)
+;; (require 'solarized-dark-theme)
 ;; (require 'doom-one-theme)
 ;; (require 'doom-city-lights-theme)
 ;; (require 'doom-dracula-theme)
@@ -59,8 +82,8 @@
 (if (display-graphic-p)
     (progn
     ;; if graphic
-      ;; (load-theme 'spacemacs-dark t))
-      (load-theme 'solarized-dark t))
+      (load-theme 'spacemacs-dark t))
+      ;; (load-theme 'solarized-dark t))
       ;; (load-theme 'doom-one t))
       ;; (load-theme 'doom-city-lights t))
       ;; (load-theme 'doom-dracula t))
@@ -92,7 +115,9 @@
   ;; When evil :q[uit], close buffer and window instead of Emacs
   (evil-ex-define-cmd "q[uit]" 'kill-buffer-and-window)
   ;; When evil :wq, save and close buffer and window instead of Emacs
-  (evil-ex-define-cmd "wq" 'save-and-kill-buffer-and-window))
+  (evil-ex-define-cmd "wq" 'save-and-kill-buffer-and-window)
+  ;; Remap "," to repeat last macro (@@)
+  (define-key evil-normal-state-map "," (kbd "@@")))
 
 
 ;; Drag stuff
@@ -183,7 +208,7 @@
  '(jdee-db-spec-breakpoint-face-colors (cons "#1c1f24" "#484854") t)
  '(package-selected-packages
    (quote
-    (column-enforce-mode fill-column-indicator exec-path-from-shell transpose-frame company-c-headers company-box company-irony moe-theme ess rainbow-mode cyberpunk-theme solaire-mode dumb-jump beacon smartparens avy highlight-indent-guides dash dired-hacks-utils drag-stuff solarized-theme markdown-preview-eww planet-theme material-theme smex sublimity org-bullets org-evil org load-theme-buffer-local color-theme-buffer-local shell-pop ranger all-the-icons-dired dired-single evil-multiedit multiple-cursors page-break-lines dashboard yasnippet-snippets company-jedi ein csv-mode ivy-yasnippet counsel ivy flycheck company which-key telephone-line ## magit projectile use-package treemacs-evil treemacs tabbar linum-relative nlinum atom-one-dark-theme spacemacs-theme klere-theme evil color-theme)))
+    (column-enforce-mode fill-column-indicator exec-path-from-shell transpose-frame company-c-headers company-box company-irony moe-theme ess rainbow-mode cyberpunk-theme solaire-mode dumb-jump beacon smartparens avy highlight-indent-guides dash dired-hacks-utils drag-stuff solarized-theme markdown-preview-eww planet-theme material-theme smex sublimity org-bullets org-evil org load-theme-buffer-local color-theme-buffer-local shell-pop ranger all-the-icons-dired dired-single evil-multiedit multiple-cursors page-break-lines dashboard yasnippet-snippets ein csv-mode ivy-yasnippet counsel ivy flycheck company which-key telephone-line ## magit projectile use-package treemacs-evil treemacs tabbar linum-relative nlinum atom-one-dark-theme spacemacs-theme klere-theme evil color-theme)))
  '(shell-pop-default-directory "/Users/kyagi/git")
  '(shell-pop-full-span t)
  '(shell-pop-shell-type
@@ -576,11 +601,11 @@ TABSET is the tab set used to choose the appropriate buttons."
   :init
   (smex-initialize)) 
 
-;; Set proxy 
+;; Set proxy
 ;; (setq url-proxy-services
-;;       '(("no_proxy" . "^\\(localhost\\|10.*\\)")
-;; 	("http" . "web-proxy.rose.hpecorp.net:8088")
-;; 	("https" . "web-proxy.rose.hpecorp.net:8088")))
+;;        '(("no_proxy" . "^\\(localhost\\|10.*\\)")
+;;  	("http" . "web-proxy.rose.hpecorp.net:8088")
+;;  	("https" . "web-proxy.rose.hpecorp.net:8088")))
 
 ;; Tramp cofiguration
 (setq tramp-default-mode "ssh")
@@ -652,6 +677,7 @@ TABSET is the tab set used to choose the appropriate buttons."
 ;; Set the title
 (setq dashboard-banner-logo-title "Welcome to Emmacs, boi")
 (setq dashboard-startup-banner "~/.emacs.d/banners/Emmacs.png")
+;; (setq dashboard-startup-banner "~/.emacs.d/elpa/dashboard-20190318.644/banners/logo.png")
 (setq dashboard-items '((recents  . 10)
 			(agenda . 5)
                         (bookmarks . 5)))
@@ -707,6 +733,7 @@ TABSET is the tab set used to choose the appropriate buttons."
 (setq org-src-tab-acts-natively t)
 ;; Enable word wrap
 (add-hook 'org-mode-hook #'toggle-word-wrap)
+(add-hook 'org-mode-hook #'toggle-truncate-lines)
 
 ;; Markdown preview
 (require 'markdown-preview-eww)
@@ -720,6 +747,7 @@ TABSET is the tab set used to choose the appropriate buttons."
 ;; Highlight indent guides
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 (setq highlight-indent-guides-method 'character)
+(setq highlight-indent-guides-responsive 'stack)
 
 ;; Avy
 (use-package avy
@@ -766,15 +794,9 @@ TABSET is the tab set used to choose the appropriate buttons."
   :ensure t
   :init
   (global-undo-tree-mode)
+  (setq undo-tree-enable-undo-in-region nil)
   :hook
   (undo-tree-visualizer-mode . transpose-frame))
-
-(use-package fill-column-indicator
-  :ensure t
-  :hook
-  (prog-mode . fci-mode)
-  :init
-  (setq fci-rule-column 80))
 
 (use-package column-enforce-mode
   :ensure t
