@@ -117,8 +117,11 @@
   ;; When evil :wq, save and close buffer and window instead of Emacs
   (evil-ex-define-cmd "wq" 'save-and-kill-buffer-and-window)
   ;; Remap "," to repeat last macro (@@)
-  (define-key evil-normal-state-map "," (kbd "@@")))
-
+  (define-key evil-normal-state-map "," (kbd "@@"))
+  (setq isearch-forward t)
+  :bind (:map evil-normal-state-map
+	      ("/" . swiper)
+	      ("?" . swiper)))
 
 ;; Drag stuff
 (use-package drag-stuff
@@ -587,7 +590,8 @@ TABSET is the tab set used to choose the appropriate buttons."
 	 ("C-x l" . counsel-locate)
 	 ("C-S-o" . counsel-rhythmbox))
   :config
-  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history))
+  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+  (setq swiper-goto-start-of-match t))
 
 ;; Ivy yasnippet
 (use-package ivy-yasnippet
