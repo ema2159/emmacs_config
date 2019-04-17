@@ -162,17 +162,23 @@
 (add-to-list 'load-path "~/.emacs.d/elpa/font-lock-plus")
 (load "font-lock+.el")
 (require 'font-lock)
-(set-face-attribute 'font-lock-keyword-face nil :weight 'normal)
+;; Create a font lock face for punctuation signs
+(defvar font-lock-punctuation-face 'font-lock-punctuation-face)
+(defface font-lock-punctuation-face
+  '((t :inherit font-lock-keyword-face))
+  "Face for highlighting punctuation signs.")
+(set-face-attribute 'font-lock-punctuation-face nil :weight 'normal)
+
 ;; Improve python-mode syntax highlighting
 (font-lock-add-keywords 'python-mode
   '(("-?\\b[0-9]+\\.?" . font-lock-constant-face)
-    ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+]\\|\\]\\|\\[" . font-lock-keyword-face)
+    ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+]\\|\\]\\|\\[" . font-lock-punctuation-face)
     ("\\([A-Za-z][A-Za-z0-9_]*\\)[ \t\n]*\\((.*)\\)"
      (1 font-lock-function-name-face))))
 ;; Improve c-mode syntax highlighting
 (font-lock-add-keywords 'c-mode
   '(("-?\\b[0-9]+\\.?" . font-lock-constant-face)
-    ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+\@]\\|\\]\\|\\[" . font-lock-keyword-face)))
+    ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+\@]\\|\\]\\|\\[" . font-lock-punctuation-face)))
 (require 'font-lock+)
 (font-lock-mode 0)
 (if (display-graphic-p)
@@ -806,3 +812,9 @@ TABSET is the tab set used to choose the appropriate buttons."
   :ensure t
   :hook
   (prog-mode . column-enforce-mode))
+
+(use-package expand-region
+  :ensure t
+  :bind
+  ("C-0"  . 'er/expand-region)
+  ("C-="  . 'er/contract-region))
