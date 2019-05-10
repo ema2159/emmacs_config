@@ -64,7 +64,6 @@
    #b00000000
    #b00000000])
 
-
 ;; Solaire mode
 (use-package solaire-mode
   :ensure t
@@ -123,9 +122,16 @@
 	      ("/" . swiper)
 	      ("?" . swiper)))
 
+;; Elpy
+(use-package elpy
+  :ensure t
+  :defer t
+  :init
+  (advice-add 'python-mode :before 'elpy-enable))
+
 ;; Drag stuff
 (use-package drag-stuff
-  :ensure
+  :ensure t
   :config
   (drag-stuff-global-mode 1)
   (drag-stuff-define-keys))
@@ -217,7 +223,7 @@
  '(jdee-db-spec-breakpoint-face-colors (cons "#1c1f24" "#484854") t)
  '(package-selected-packages
    (quote
-    (column-enforce-mode fill-column-indicator exec-path-from-shell transpose-frame company-c-headers company-box company-irony moe-theme ess rainbow-mode cyberpunk-theme solaire-mode dumb-jump beacon smartparens avy highlight-indent-guides dash dired-hacks-utils drag-stuff solarized-theme markdown-preview-eww planet-theme material-theme smex sublimity org-bullets org-evil org load-theme-buffer-local color-theme-buffer-local shell-pop ranger all-the-icons-dired dired-single evil-multiedit multiple-cursors page-break-lines dashboard yasnippet-snippets ein csv-mode ivy-yasnippet counsel ivy flycheck company which-key telephone-line ## magit projectile use-package treemacs-evil treemacs tabbar linum-relative nlinum atom-one-dark-theme spacemacs-theme klere-theme evil color-theme)))
+    (highlight-thing idle-highlight csharp-mode elpy expand-region doom-themes column-enforce-mode fill-column-indicator exec-path-from-shell transpose-frame company-c-headers company-box company-irony moe-theme ess rainbow-mode cyberpunk-theme solaire-mode dumb-jump beacon smartparens avy highlight-indent-guides dash dired-hacks-utils drag-stuff solarized-theme markdown-preview-eww planet-theme material-theme smex sublimity org-bullets org-evil org load-theme-buffer-local color-theme-buffer-local shell-pop ranger all-the-icons-dired dired-single evil-multiedit multiple-cursors page-break-lines dashboard yasnippet-snippets ein csv-mode ivy-yasnippet counsel ivy flycheck company which-key telephone-line ## magit projectile use-package treemacs-evil treemacs tabbar linum-relative nlinum atom-one-dark-theme spacemacs-theme klere-theme evil color-theme)))
  '(shell-pop-default-directory "/Users/kyagi/git")
  '(shell-pop-full-span t)
  '(shell-pop-shell-type
@@ -464,6 +470,8 @@
     ((or (eq major-mode 'csv-mode)
 	 (eq major-mode 'text-mode))
      "Text and csv")
+    ((or (eq major-mode 'sh-mode))
+     "Bash")
     (t
      "Misc buffers")
     ))) 
@@ -472,7 +480,6 @@
 
 ;; Tabbar excluded buffers
 (setq tabbar-ruler-excluded-buffers '("*Messages*" "*Completions*" "*ESS*" "*Packages*" "*log-edit-files*" "*helm-mini*" "*helm-mode-describe-variable*" "*scratch*" "*Flycheck error messages*"))
-
 
 ;; Tab change keybinding
 (global-set-key (kbd "C-<home>") 'tabbar-press-home)
@@ -512,7 +519,6 @@ TABSET is the tab set used to choose the appropriate buttons."
   :ensure t
   :hook
   (
-   (flycheck-error-list-mode . tabbar-local-mode)
    (flycheck-error-list-mode . (lambda () (setq-local linum-active nil))))
   :init
   (global-flycheck-mode))
@@ -669,6 +675,7 @@ TABSET is the tab set used to choose the appropriate buttons."
   :config
   (evil-ex-define-cmd "ie[dit]" #'evil-multiedit-ex-match))
 
+
 ;; Configure backup files
 (setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
 (setq backup-by-copying t)
@@ -744,6 +751,13 @@ TABSET is the tab set used to choose the appropriate buttons."
 ;; Enable word wrap
 (add-hook 'org-mode-hook #'toggle-word-wrap)
 (add-hook 'org-mode-hook #'toggle-truncate-lines)
+;; Make LaTex use minted when exporting
+(setq org-latex-listings 'minted)
+(setq org-latex-pdf-process
+      '("pdflatex --shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex --shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex --shell-escape -interaction nonstopmode -output-directory %o %f"))
+
 
 ;; Markdown preview
 (require 'markdown-preview-eww)
@@ -781,18 +795,24 @@ TABSET is the tab set used to choose the appropriate buttons."
   (beacon-mode 1))
 
 ;; Dumb jump
-(dumb-jump-mode)
-;; Enable dumb jump on evil mode
-(eval-after-load 'evil-maps
-  '(progn
-     (define-key evil-motion-state-map "gd" 'dumb-jump-go)))
-
+(use-package dumb-jump
+  :ensure t
+  :config
+  (dumb-jump-mode)
+  ;; Enable dumb jump on evil mode
+  (eval-after-load 'evil-maps
+    '(progn
+       (define-key evil-motion-state-map "gd" 'dumb-jump-go)
+       (define-key evil-motion-state-map "gb" 'dumb-jump-back)
+       (define-key evil-motion-state-map "go" 'dumb-jump-go-other-window)
+       (define-key evil-motion-state-map "gl" 'dumb-jump-quick-look))))
 
 ;; ESS
 (use-package ess-r-mode)
 
 ;; Windmove
 (use-package windmove
+  :ensure t
   :bind
   ("C-x C-<left>"  . windmove-left)
   ("C-x C-<right>" . windmove-right)
