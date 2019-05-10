@@ -808,13 +808,32 @@ TABSET is the tab set used to choose the appropriate buttons."
   :hook
   (undo-tree-visualizer-mode . transpose-frame))
 
+;; Column enforce mode
 (use-package column-enforce-mode
   :ensure t
   :hook
   (prog-mode . column-enforce-mode))
 
+;; Expand Region
 (use-package expand-region
   :ensure t
   :bind
-  ("C-0"  . 'er/expand-region)
-  ("C-="  . 'er/contract-region))
+  ("C-0"  . 'er/expand-region))
+
+;; highlight thing
+(use-package highlight-thing
+  :ensure t
+  :config
+  (set-face-attribute 'highlight-thing nil :inherit 'highlight :background "#494949")
+  (add-hook 'iedit-mode-hook (lambda()
+			       (highlight-thing-mode -1)))
+
+  (add-hook 'iedit-mode-end-hook (lambda()
+				   (highlight-thing-mode 1)))
+  :init
+  (setq highlight-thing-what-thing 'symbol)
+  (setq highlight-thing-delay-seconds 0.5)
+  (setq highlight-thing-all-visible-buffers-p t)
+  :hook
+  (prog-mode . highlight-thing-mode))
+
