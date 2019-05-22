@@ -1,0 +1,8 @@
+# -*- mode: specman -*-
+# name: method(arg1: type1, arg2: type2...) [:return-type] is [also|first|only] {...};
+# key: method extend
+# group: definitions
+# --
+${1:method-name}(${2:[arg1: type1, arg2: type2...]$(if-yas-empty)})${3: [:return-type$(if-yas-empty)]} is ${5:[also|first|only]$(if-yas-empty)} {
+    $0
+};

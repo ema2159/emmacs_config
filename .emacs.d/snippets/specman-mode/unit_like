@@ -1,0 +1,8 @@
+# -*- mode: specman -*-
+# name: unit unit-type like base-unit-type {...};
+# key: unit like
+# group: definitions
+# --
+unit ${1:unit-type} like ${2:base-unit-type} {
+    $0
+}; // $1 unit

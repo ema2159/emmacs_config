@@ -1,0 +1,8 @@
+# -*- mode: specman -*-
+# name: keep is all of expr is all of {...};
+# key: keep is all of
+# group: constraints, coverage and checks
+# --
+keep ${1:expr} is all of {
+    $0
+}; 

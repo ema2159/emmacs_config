@@ -1,0 +1,8 @@
+# -*- mode: specman -*-
+# name: while boolean-expression do {...};
+# key: while
+# group: loops and conditionals
+# --
+while ${1:boolean-expression} do {
+    $0
+}; 

@@ -1,0 +1,6 @@
+# -*- mode: specman -*-
+# name: expect [rule-name is [only]] TE [else dut_error(...)];
+# key: expect
+# group: definitions
+# --
+expect${1: [rule-name is [only]]$(if-yas-empty)} ${2:TE}${3: [else dut_error(...)]$(if-yas-empty)};

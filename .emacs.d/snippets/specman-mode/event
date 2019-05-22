@@ -1,0 +1,6 @@
+# -*- mode: specman -*-
+# name: event event-name [is [only]] TE;
+# key: event
+# group: definitions
+# --
+event ${1:event-name}${2: [is [only]]$(if-yas-empty)} ${3:TE};$0

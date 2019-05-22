@@ -1,0 +1,8 @@
+# -*- mode: specman -*-
+# name: repeat {...} until bool-exp;
+# key: repeat
+# group: loops and conditionals
+# --
+repeat {
+    $0
+} until ${1:bool-exp}; 

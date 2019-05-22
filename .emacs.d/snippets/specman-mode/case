@@ -1,0 +1,10 @@
+# -*- mode: specman -*-
+# name: case {bool-exp: {action};...};
+# key: case
+# group: loops and conditionals
+# --
+case {
+    ${1:bool-exp}: {${2:action}};
+    $0
+    default: {};
+}; 

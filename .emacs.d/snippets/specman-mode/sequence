@@ -1,0 +1,12 @@
+# -*- mode: specman -*-
+# name: sequence sequence-name using ... ;
+# key: sequence
+# group: definitions
+# --
+sequence ${1:sequence-name} using
+    ${2:item = name1,$(if-yas-empty)}
+    ${3:created_kind = name2,$(if-yas-empty)}
+    ${4:created_driver = name3,$(if-yas-empty)}
+    ${5:sequence_type = name4,$(if-yas-empty)}
+    ${6:sequence_driver_type = name5$(if-yas-empty)};
+$0

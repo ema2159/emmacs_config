@@ -1,0 +1,6 @@
+# -*- mode: specman -*-
+# name: assume [rule-name is [only]] TE [else dut_error(...)];
+# key: assume
+# group: definitions
+# --
+assume ${1:[rule-name is [only]]} ${2:TE} ${3:[else dut_error(...)]};

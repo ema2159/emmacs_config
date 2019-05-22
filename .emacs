@@ -3,7 +3,25 @@
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
+
+;; GC threshold to 1GB
+(setq gc-cons-threshold 1000000000
+      gc-cons-percentage 0.6)
+
+(add-hook 'after-init-hook
+	  (lambda ()
+	    (setq gc-cons-threshold 800000
+		  gc-cons-percentage 0.1)))
+
 (package-initialize)
+
+;; Bootstrap 'use-package
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(eval-when-compile
+  (require 'use-package))
 
 ;; Package repos
 (require 'package)
@@ -14,8 +32,6 @@
 (add-to-list 'package-archives
 	     '("melpa-stable" . "http://stable.melpa.org/packages/"))
 (setq package-enable-at-startup nil)
-(package-initialize)
-
 
 ;; GENERAL CONFIGURATION
 ;; When split, if a buffer is killed, also its window is killed
@@ -64,35 +80,17 @@
    #b00000000
    #b00000000])
 
-;; Solaire mode
-(use-package solaire-mode
-  :ensure t
-  :config
-  (solaire-global-mode +1))
+(defvar emacs-dir (expand-file-name user-emacs-directory)
+  "The path to this emacs.d directory.")
 
-(require 'spacemacs-dark-theme)
-;; (require 'solarized-dark-theme)
-;; (require 'doom-one-theme)
-;; (require 'doom-city-lights-theme)
-;; (require 'doom-dracula-theme)
-;; (require 'atom-one-dark-theme)
+(defvar core-dir  "core/"
+  "Where essential files are stored.")
 
-;; Theme
-(if (display-graphic-p)
-    (progn
-    ;; if graphic
-      (load-theme 'spacemacs-dark t))
-      ;; (load-theme 'solarized-dark t))
-      ;; (load-theme 'doom-one t))
-      ;; (load-theme 'doom-city-lights t))
-      ;; (load-theme 'doom-dracula t))
-      ;; (load-theme 'atom-one-dark t))
-    ;; else (optional)
-  (load-theme 'atom-one-dark t))
+;; Configuraion loading
+(use-package el-init)
 
-(solaire-mode-swap-bg)
-(doom-themes-org-config)
-
+(el-init-load emacs-dir
+  :subdirectories (list core-dir))
 ;; GLOBAL VARIABLES
 ;; Define a variable for hooks to turn on/off the relative and absolute number lines
 (defvar linum-active t)
@@ -148,7 +146,8 @@
 (add-hook 'dired-mode-hook 'xah-dired-mode-setup)
 
 ;; Dired Single
-(require 'dired-single)
+(use-package dired-single
+  :ensure t)
 (defun my-dired-init ()
   ;; <add other stuff here>
   (define-key dired-mode-map [return] 'dired-single-buffer)
@@ -164,10 +163,6 @@
   ;; it's not loaded yet, so add our bindings to the load-hook
   (add-hook 'dired-load-hook 'my-dired-init))
 
-;; Load all the icons for Dired
-(add-to-list 'load-path "~/.emacs.d/elpa/font-lock-plus")
-(load "font-lock+.el")
-(require 'font-lock)
 ;; Create a font lock face for punctuation signs
 (defvar font-lock-punctuation-face 'font-lock-punctuation-face)
 (defface font-lock-punctuation-face
@@ -185,8 +180,6 @@
 (font-lock-add-keywords 'c-mode
   '(("-?\\b[0-9]+\\.?" . font-lock-constant-face)
     ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+\@]\\|\\]\\|\\[" . font-lock-punctuation-face)))
-(require 'font-lock+)
-(font-lock-mode 0)
 (if (display-graphic-p)
     (progn
       ;; if graphic
@@ -210,65 +203,6 @@
   (define-key dired-mode-map (kbd "i") 'dired-subtree-insert)
   (define-key dired-mode-map (kbd "r") 'dired-subtree-remove))
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("59e82a683db7129c0142b4b5a35dbbeaf8e01a4b81588f8c163bd255b76f4d21" "732b807b0543855541743429c9979ebfb363e27ec91e82f463c91e68c772f6e3" "10461a3c8ca61c52dfbbdedd974319b7f7fd720b091996481c8fb1dded6c6116" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "565aa482e486e2bdb9c3cf5bfb14d1a07c4a42cfc0dc9d6a14069e53b6435b56" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "8aca557e9a17174d8f847fb02870cb2bb67f3b6e808e46c0e54a44e3e18e1020" "6b289bab28a7e511f9c54496be647dc60f5bd8f9917c9495978762b99d8c96a0" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a" "ecba61c2239fbef776a72b65295b88e5534e458dfe3e6d7d9f9cb353448a569e" "151bde695af0b0e69c3846500f58d9a0ca8cb2d447da68d7fbf4154dcf818ebc" "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "cd736a63aa586be066d5a1f0e51179239fe70e16a9f18991f6f5d99732cabb32" "b54826e5d9978d59f9e0a169bbd4739dd927eead3ef65f56786621b53c031a7c" "fe666e5ac37c2dfcf80074e88b9252c71a22b6f5d2f566df9a7aa4f9bea55ef8" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "7e78a1030293619094ea6ae80a7579a562068087080e01c2b8b503b27900165c" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "6d589ac0e52375d311afaa745205abb6ccb3b21f6ba037104d71111e7e76a3fc" "100e7c5956d7bb3fd0eebff57fde6de8f3b9fafa056a2519f169f85199cc1c96" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "bf5bdab33a008333648512df0d2b9d9710bdfba12f6a768c7d2c438e1092b633" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
- '(jdee-db-active-breakpoint-face-colors (cons "#1c1f24" "#51afef") t)
- '(jdee-db-requested-breakpoint-face-colors (cons "#1c1f24" "#7bc275") t)
- '(jdee-db-spec-breakpoint-face-colors (cons "#1c1f24" "#484854") t)
- '(package-selected-packages
-   (quote
-    (highlight-thing idle-highlight csharp-mode elpy expand-region doom-themes column-enforce-mode fill-column-indicator exec-path-from-shell transpose-frame company-c-headers company-box company-irony moe-theme ess rainbow-mode cyberpunk-theme solaire-mode dumb-jump beacon smartparens avy highlight-indent-guides dash dired-hacks-utils drag-stuff solarized-theme markdown-preview-eww planet-theme material-theme smex sublimity org-bullets org-evil org load-theme-buffer-local color-theme-buffer-local shell-pop ranger all-the-icons-dired dired-single evil-multiedit multiple-cursors page-break-lines dashboard yasnippet-snippets ein csv-mode ivy-yasnippet counsel ivy flycheck company which-key telephone-line ## magit projectile use-package treemacs-evil treemacs tabbar linum-relative nlinum atom-one-dark-theme spacemacs-theme klere-theme evil color-theme)))
- '(shell-pop-default-directory "/Users/kyagi/git")
- '(shell-pop-full-span t)
- '(shell-pop-shell-type
-   (quote
-    ("ansi-term" "*ansi-term*"
-     (lambda nil
-       (ansi-term shell-pop-term-shell)))))
- '(shell-pop-term-shell "/bin/bash")
- '(shell-pop-universal-key "<f5>")
- '(shell-pop-window-position "bottom")
- '(shell-pop-window-size 30)
- '(tetris-x-colors
-   [[229 192 123]
-    [97 175 239]
-    [209 154 102]
-    [224 108 117]
-    [152 195 121]
-    [198 120 221]
-    [86 182 194]] t)
- '(tramp-ssh-controlmaster-options
-   "-o ControlPath=/tmp/ssh-ControlPath-%%r@%%h:%%p -o ControlMaster=auto -o ControlPersist=yes" t)
- '(vc-annotate-background "#242730" t)
- '(vc-annotate-color-map
-   (list
-    (cons 20 "#7bc275")
-    (cons 40 "#a6c677")
-    (cons 60 "#d1ca79")
-    (cons 80 "#FCCE7B")
-    (cons 100 "#f4b96e")
-    (cons 120 "#eda461")
-    (cons 140 "#e69055")
-    (cons 160 "#db8981")
-    (cons 180 "#d082ae")
-    (cons 200 "#C57BDB")
-    (cons 220 "#d874b0")
-    (cons 240 "#eb6d86")
-    (cons 260 "#ff665c")
-    (cons 280 "#d15e59")
-    (cons 300 "#a35758")
-    (cons 320 "#754f56")
-    (cons 340 "#62686E")
-    (cons 360 "#62686E")) t)
- '(vc-annotate-very-old-color nil t))
-
-
 ;; Line numbers configuration
 ;; Toggle between relative and absolute line numbers between evil normal and insert mode
 (require 'linum)
@@ -291,7 +225,7 @@
 
 
 ;; Set specman mode
-(add-to-list 'load-path "~/.emacs.d/elpa/specman")
+(add-to-list 'load-path "~/.emacs.d/specman")
 (load "specman-mode")
 (put 'specman-mode 'derived-mode-parent 'prog-mode)
 (add-to-list 'auto-mode-alist '("\\.e\\'" . specman-mode))
@@ -299,6 +233,20 @@
 (add-hook 'specman-mode-hook (lambda () (use-local-map nil)))
 (add-hook 'specman-mode-hook 'yas-minor-mode)
 
+;; (use-package projectile
+;;     :ensure t
+;;     :init
+;;     (progn
+;;         (setq projectile-file-exists-remote-cache-expire nil)
+;;         (setq projectile-mode-line '(:eval (format " Projectile[%s]" (projectile-project-name))))
+;;         (setq projectile-globally-ignored-directories
+;;             (quote
+;;                 (".idea" ".eunit" ".git" ".hg" ".svn" ".fslckout" ".bzr" "_darcs" ".tox" "build" "target"))))
+;;     :config
+;;     (progn
+;;         (projectile-mode 1)
+;;         (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+;; ))
 
 ;; Treemacs configuration
 (use-package treemacs
@@ -368,9 +316,9 @@
   :after treemacs evil
   :ensure t)
 
-(use-package treemacs-projectile
-  :after treemacs projectile
-  :ensure t)
+;; (use-package treemacs-projectile
+;;   :after treemacs projectile
+;;   :ensure t)
 
 (use-package treemacs-icons-dired
   :after treemacs dired
@@ -381,6 +329,11 @@
   :after treemacs magit
   :ensure t)
 
+
+(use-package mode-icons
+  :ensure t)
+
+(require 'mode-icons)
 ;; Telephone line
 (use-package telephone-line
   :ensure t
@@ -395,12 +348,108 @@
 		      :background
 		      "#317DC9"))
 
+;; Tabbar groups
+(defun tabbar-buffer-groups ()
+  (list
+   (cond
+    ((or (eq major-mode 'magit-log-mode)
+	 (eq major-mode 'magit-mode)
+	 (eq major-mode 'magit-wip-mode)
+	 (eq major-mode 'magit-blob-mode)
+	 (eq major-mode 'magit-diff-mode)
+	 (eq major-mode 'magit-file-mode)
+	 (eq major-mode 'magit-refs-mode)
+	 (eq major-mode 'magit-blame-mode)
+	 (eq major-mode 'magit-popup-mode)
+	 (eq major-mode 'magit-stash-mode)
+	 (eq major-mode 'magit-cherry-mode)
+	 (eq major-mode 'magit-reflog-mode)
+	 (eq major-mode 'magit-status-mode)
+	 (eq major-mode 'magit-process-mode)
+	 (eq major-mode 'magit-stashes-mode)
+	 (eq major-mode 'magit-repolist-mode)
+	 (eq major-mode 'magit-revision-mode)
+	 (eq major-mode 'magit-log-select-mode)
+	 (eq major-mode 'magit-popup-help-mode)
+	 (eq major-mode 'magit-auto-revert-mode)
+	 (eq major-mode 'magit-merge-preview-mode)
+	 (eq major-mode 'magit-submodule-list-mode)
+	 (eq major-mode 'magit-wip-after-save-mode)
+	 (eq major-mode 'magit-blame-read-only-mode)
+	 (eq major-mode 'magit-wip-after-apply-mode)
+	 (eq major-mode 'magit-wip-before-change-mode)
+	 (eq major-mode 'magit-wip-initial-backup-mode)
+	 (eq major-mode 'magit-wip-after-save-mode))
+     "Magit")
+    ((eq major-mode 'dired-mode)
+     "Dired")
+    ((eq major-mode 'dashboard-mode)
+     "Dashboard")
+    ((eq major-mode 'specman-mode)
+     "Specman")
+    ((eq major-mode 'term-mode)
+     "Term")
+    ((or (eq major-mode 'python-mode)
+     (eq major-mode 'c-mode)
+     (eq major-mode 'c++-mode))
+     "Python, C, C++")
+    ((or (eq major-mode 'emacs-lisp-mode)
+	 (eq major-mode 'org-mode)
+	 (eq major-mode 'org-agenda-clockreport-mode)
+	 (eq major-mode 'org-src-mode)
+	 (eq major-mode 'org-agenda-mode)
+	 (eq major-mode 'org-beamer-mode)
+	 (eq major-mode 'org-indent-mode)
+	 (eq major-mode 'org-bullets-mode)
+	 (eq major-mode 'org-cdlatex-mode)
+	 (eq major-mode 'org-agenda-log-mode))
+     "Emacs lisp and Org mode")
+    ((or (eq major-mode 'csv-mode)
+	 (eq major-mode 'text-mode))
+     "Text and csv")
+    ((or (eq major-mode 'sh-mode))
+     "Bash")
+    (t
+     "Misc buffers")
+    ))) 
+
+;; Tabbar ruler
+;; (use-package tabbar-ruler
+;;   :ensure t
+;;   :init
+;;   :config
+;;   ;; Hide tabbar in some specific modes
+;;   (add-hook 'dashboard-mode-hook 'tabbar-local-mode)
+;;   (add-hook 'term-mode-hook 'tabbar-local-mode)
+;;   (add-hook 'calendar-mode-hook 'tabbar-local-mode)
+;;   (add-hook 'dired-mode-hook 'tabbar-local-mode)
+;;   (add-hook 'org-agenda-mode-hook 'tabbar-local-mode)
+;;   (add-hook 'magit-log-mode-hook 'tabbar-local-mode)
+;;   (add-hook 'magit-diff-mode-hook 'tabbar-local-mode)
+;;   (add-hook 'magit-status-mode-hook 'tabbar-local-mode)
+;;   (add-hook 'magit-process-mode-hook 'tabbar-local-mode)
+;;   (add-hook 'magit-stashes-mode-hook 'tabbar-local-mode)
+
+;;   (setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
+;;   ;; Tabbar excluded buffers
+;;   (setq tabbar-ruler-excluded-buffers '("*Messages*" "*Completions*" "*ESS*" "*Packages*" "*log-edit-files*" "*helm-mini*" "*helm-mode-describe-variable*" "*scratch*" "*Flycheck error messages*"))
+;;   ;; Hide tabbar buttons
+;;   (setq tabbar-hide-header-button t)
+;;   (setq tabbar-use-images nil)
+;;   (defsubst tabbar-line-buttons (tabset)
+;;     "Return a list of propertized strings for tab bar buttons.
+;; TABSET is the tab set used to choose the appropriate buttons."
+;;     (list (propertize "")))
+;;   :bind (("C-<home>" . tabbar-press-home)
+;; 	 ("C-<prior>" . tabbar-backward)
+;; 	 ("C-<next>" . tabbar-forward))
+;;   )
+;; (setq tabbar-ruler-global-tabbar t)  
+
 ;; Tabbar ruler
 (require 'tabbar-ruler)
-(setq dashboard-center-content t)
 ;; Hide tabbar in some specific modes
 (add-hook 'dashboard-mode-hook 'tabbar-local-mode)
-(add-hook 'ivy-mode-hook 'tabbar-local-mode)
 (add-hook 'term-mode-hook 'tabbar-local-mode)
 (add-hook 'calendar-mode-hook 'tabbar-local-mode)
 (add-hook 'dired-mode-hook 'tabbar-local-mode)
@@ -492,7 +541,7 @@
 (defsubst tabbar-line-buttons (tabset)
   "Return a list of propertized strings for tab bar buttons.
 TABSET is the tab set used to choose the appropriate buttons."
- (list (propertize "")))
+(list (propertize "")))
 
 ;; Recent files
 (use-package recentf
@@ -504,6 +553,7 @@ TABSET is the tab set used to choose the appropriate buttons."
 
 ;; Which key
 (use-package which-key
+  :ensure t
   :defer 5
   :diminish
   :commands which-key-mode
@@ -578,7 +628,12 @@ TABSET is the tab set used to choose the appropriate buttons."
     (if (and yas-moving-away-p (not yas-modified-p))
 	(yas-clear-field))))
 
-
+;; Swiper
+(use-package swiper
+  :ensure t)
+;; Counsel
+(use-package counsel
+  :ensure t)
 ;; Ivy configuration
 (use-package ivy
   :ensure t
@@ -636,7 +691,7 @@ TABSET is the tab set used to choose the appropriate buttons."
                     vc-ignore-dir-regexp
                     tramp-file-name-regexp))
 (setq tramp-auto-save-directory "~/emacs/tramp-autosave")
-(setq tramp-verbose 1)
+(setq tramp-verbose 3)
 
 
 ;; Csv-mode configuration
@@ -685,19 +740,42 @@ TABSET is the tab set used to choose the appropriate buttons."
   version-control t)
 
 ;; Dashboard
-(require 'page-break-lines)
-(turn-on-page-break-lines-mode)
-(require 'dashboard)
-(dashboard-setup-startup-hook)
-;; Disable Evil mode on dashboard
-(add-to-list 'evil-emacs-state-modes 'dashboard-mode)
-;; Set the title
-(setq dashboard-banner-logo-title "Welcome to Emmacs, boi")
-(setq dashboard-startup-banner "~/.emacs.d/banners/Emmacs.png")
-;; (setq dashboard-startup-banner "~/.emacs.d/elpa/dashboard-20190318.644/banners/logo.png")
-(setq dashboard-items '((recents  . 10)
-			(agenda . 5)
-                        (bookmarks . 5)))
+(use-package dashboard
+  :ensure t
+  :diminish (dashboard-mode page-break-lines-mode)
+  :defines (persp-save-dir persp-special-last-buffer)
+  :functions (all-the-icons-faicon
+	      all-the-icons-material
+	      open-custom-file
+	      persp-get-buffer-or-null
+	      persp-load-state-from-file
+	      persp-switch-to-buffer
+	      winner-undo
+	      widget-forward)
+  ;; :custom-face (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
+  :hook (dashboard-mode . (lambda ()
+			    (setq-local frame-title-format "")
+			    (setq-local tab-width 1)))
+  :init (dashboard-setup-startup-hook)
+  :config
+  ;; Configure init info
+  (setq dashboard-set-init-info t)
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+  ;; Disable Evil mode on dashboard
+  (add-to-list 'evil-emacs-state-modes 'dashboard-mode)
+  ;; Set the title
+  (setq dashboard-banner-logo-title "Welcome to Emmacs, boi")
+  ;; (setq dashboard-startup-banner "~/.emacs.d/banners/Emmacs2.png")
+  (setq dashboard-startup-banner "~/.emacs.d/banners/logo.png")
+  (setq dashboard-center-content t)
+  (setq dashboard-items '(
+			  (recents  . 10)
+			  (bookmarks . 5)
+			  (agenda . 5)
+			  ;; (projects . 0)
+			  ;; (registers . 1)
+			  )))
 
 ;; Magit
 ;; (require 'magit)
@@ -708,7 +786,8 @@ TABSET is the tab set used to choose the appropriate buttons."
 	    (lambda () (setq-local linum-active nil))))
 
 ;; Shell-pop
-(require 'shell-pop)
+(use-package shell-pop
+  :ensure t)
 ;; Change theme in term mode
 (add-hook 'term-mode-hook (lambda() (load-theme-buffer-local 'cyberpunk (current-buffer))))
 ;; Disable evil mode in term mode
@@ -733,8 +812,10 @@ TABSET is the tab set used to choose the appropriate buttons."
 (global-set-key (kbd "C-c c") 'org-capture)
 (setq org-support-shift-select t)
 ;; Org bullets
-(require 'org-bullets)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+(use-package org-bullets
+  :ensure t
+  :hook
+  (org-mode . (lambda () (org-bullets-mode 1))))
 ;; Turn off line numbers in org mode
 (add-hook 'org-mode-hook
 	  (lambda () (setq-local linum-active nil)))
@@ -759,19 +840,14 @@ TABSET is the tab set used to choose the appropriate buttons."
         "pdflatex --shell-escape -interaction nonstopmode -output-directory %o %f"))
 
 
-;; Markdown preview
-(require 'markdown-preview-eww)
-(add-hook 'eww-mode-hook
-	  (lambda () (setq-local linum-active nil)))
-(defun prefer-horizontal-split ()
-  (set-variable 'split-height-threshold nil t)
-  (set-variable 'split-width-threshold 40 t)) ; make this as low as needed
-(add-hook 'eww-mode-hook 'prefer-horizontal-split)
-
 ;; Highlight indent guides
-(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-(setq highlight-indent-guides-method 'character)
-(setq highlight-indent-guides-responsive 'stack)
+(use-package highlight-indent-guides
+  :ensure t
+  :config
+  (setq highlight-indent-guides-method 'character)
+  (setq highlight-indent-guides-responsive 'stack)
+  :hook
+  (prog-mode-hook . highlight-indent-guides-mode))
 
 ;; Avy
 (use-package avy
@@ -781,12 +857,14 @@ TABSET is the tab set used to choose the appropriate buttons."
   (setq avy-background t))
 
 ;; Smart parens
-(require 'smartparens-config)
-(add-hook 'python-mode-hook #'smartparens-mode)
-(add-hook 'emacs-lisp-mode-hook #'smartparens-mode)
-(add-hook 'c-mode-hook #'smartparens-mode)
-(add-hook 'c++-mode-hook #'smartparens-mode)
-(add-hook 'specman-mode-hook #'smartparens-mode)
+(use-package smartparens
+  :ensure t
+  :hook
+  (python-mode . smartparens-mode)
+  (emacs-lisp-mode . smartparens-mode)
+  (c-mode . smartparens-mode)
+  (c++-mode . smartparens-mode)
+  (specman-mode . smartparens-mode))
 
 ;; Beacon
 (use-package beacon
@@ -808,7 +886,8 @@ TABSET is the tab set used to choose the appropriate buttons."
        (define-key evil-motion-state-map "gl" 'dumb-jump-quick-look))))
 
 ;; ESS
-(use-package ess-r-mode)
+;; (use-package ess
+;;   :ensure t)
 
 ;; Windmove
 (use-package windmove
@@ -855,5 +934,14 @@ TABSET is the tab set used to choose the appropriate buttons."
   (setq highlight-thing-delay-seconds 0.5)
   (setq highlight-thing-all-visible-buffers-p t)
   :hook
-  (prog-mode . highlight-thing-mode))
+  (prog-mode . highlight-thing-mode)
+  (specman-mode . highlight-thing-mode))
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (highlight-thing expand-region column-enforce-mode dumb-jump smartparens-config which-key use-package treemacs-magit treemacs-icons-dired treemacs-evil telephone-line tabbar-ruler solarized-theme solaire-mode smex shell-pop org-bullets linum-relative ivy-yasnippet irony flycheck evil-multiedit elpy drag-stuff doom-themes dired-subtree dired-single dired-filter dashboard counsel beacon))))

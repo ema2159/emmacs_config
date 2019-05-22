@@ -1,0 +1,6 @@
+# -*- mode: specman -*-
+# name: extend type-name: [name1, name2...];
+# key: extend type
+# group: definitions
+# --
+extend ${1:type-name}: [${2:name1, name2...}];$0

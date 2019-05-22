@@ -1,0 +1,8 @@
+# -*- mode: specman -*-
+# name: keeping {...};
+# key: keeping
+# group: constraints, coverage and checks
+# --
+keeping {
+    $0
+}; 

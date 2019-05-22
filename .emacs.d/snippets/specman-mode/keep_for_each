@@ -1,0 +1,8 @@
+# -*- mode: specman -*-
+# name: keep for each (item) in list {...};
+# key: keep for each
+# group: constraints, coverage and checks
+# --
+keep for each (${1:item}) in ${3:list} {
+    $0
+}; 

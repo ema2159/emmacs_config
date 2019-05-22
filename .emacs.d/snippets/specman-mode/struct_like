@@ -1,0 +1,8 @@
+# -*- mode: specman -*-
+# name: struct struct-type like base-struct-type {...};
+# key: struct like
+# group: definitions
+# --
+struct ${1:struct-type} like ${2:base-struct-type} {
+    $0
+}; // $1 struct
