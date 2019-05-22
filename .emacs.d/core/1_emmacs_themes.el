@@ -1,25 +1,18 @@
-;;; emmacs-ui.el --- User Insterface
+;;; 1_emmacs_themes.el --- Themes
 
 ;;; Commentary:
 ;; In this section the following packages are loaded:
-;; - All The Icons Ivy
 ;; - Atom One Dark Theme
 ;; - Doom Themes
-;; - Solaire Mode
 ;; - Solarized Theme
 ;; - Spacemacs Theme
 
 ;;; Code:
-;; Solaire mode
-(use-package solaire-mode
-  :ensure t
-  :config
-  (solaire-mode-swap-bg)
-  (solaire-global-mode +1))
-
 ;; Doom themes
 (use-package doom-themes
-  :ensure t)
+  :ensure t
+  :config
+  (doom-themes-org-config))
 
 ;; Solarized theme
 (use-package solarized-theme
@@ -49,13 +42,5 @@
     ;; else (optional)
   (load-theme 'atom-one-dark t))
 
-(solaire-mode-swap-bg)
-(doom-themes-org-config)
-
-(use-package all-the-icons-ivy
-  :ensure t
-  :config
-  (all-the-icons-ivy-setup))
-
-(provide 'emmacs_ui)
-;;; emmacs-ui.el ends here
+(provide '1_emmacs_themes)
+;;; 1_emmacs_themes.el ends here
