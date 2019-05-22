@@ -1,0 +1,15 @@
+;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8-emacs -*- 
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("Emacs config"
+ (filename . "~/.emacs")
+ (front-context-string . " \n;; Added by Pa")
+ (rear-context-string)
+ (position . 1))
+("Remote dir"
+ (filename . "/ssh:bustosem@16.101.209.162:/v/062/ws1/bustosem/")
+ (front-context-string)
+ (rear-context-string . "9 20:52   tools\n")
+ (position . 1))
+)
