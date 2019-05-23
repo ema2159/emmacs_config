@@ -23,62 +23,18 @@
 (eval-when-compile
   (require 'use-package))
 
+(setq use-package-always-defer t
+      use-package-always-ensure t
+      use-package-compute-statistics t)
+
 ;; Package repos
 (require 'package)
 (add-to-list 'package-archives
 	     '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives
 	     '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives
-	     '("melpa-stable" . "http://stable.melpa.org/packages/"))
-(setq package-enable-at-startup nil)
 
-;; GENERAL CONFIGURATION
-;; When split, if a buffer is killed, also its window is killed
-(global-set-key (kbd "C-x k") 'kill-buffer-and-window)
-;; Configure C-/ as comment keybinding
-(global-set-key (kbd "C-7") 'comment-line)
-;;Set default mode
-(setq-default major-mode 'text-mode)
-(add-hook 'text-mode-hook 'flyspell-mode)
-;; When poping a new buffer, split horizontally
-(setq split-height-threshold 160)
-(setq split-width-threshold nil)
-;; Highlight matching braces
-(show-paren-mode 1)
-(setq show-paren-style 'parenthesis)
-;; Narrow and widening configuration
-(put 'set-goal-column 'disabled nil)
-(put 'narrow-to-region 'disabled nil)
-;; Delete selection mode
-(delete-selection-mode 1)
-;; Disable toolbar
-(tool-bar-mode -1)
-;; Disable scrollbar
-(scroll-bar-mode -1)
-;; Disable menubar
-;; (menu-bar-mode -1)
-;; Remove warning bell sound
-(setq ring-bell-function 'ignore)
-;; Modify word wrap arrows
-(define-fringe-bitmap 'right-curly-arrow
-  [#b00000000
-   #b00000000
-   #b00010000
-   #b00001000
-   #b11111100
-   #b00001000
-   #b00010000
-   #b00000000])
-(define-fringe-bitmap 'left-curly-arrow
-  [#b00000000
-   #b00010000
-   #b00001000
-   #b11111100
-   #b00001000
-   #b00010000
-   #b00000000
-   #b00000000])
+(setq package-enable-at-startup nil)
 
 (defvar emacs-dir (expand-file-name user-emacs-directory)
   "The path to this emacs.d directory.")
@@ -86,39 +42,11 @@
 (defvar core-dir  "core/"
   "Where essential files are stored.")
 
-;; Configuraion loading
+;; Configuration loading
 (use-package el-init)
 
 (el-init-load emacs-dir
   :subdirectories (list core-dir))
-;; GLOBAL VARIABLES
-;; Define a variable for hooks to turn on/off the relative and absolute number lines
-(defvar linum-active t)
-
-;; Function for saving and killing buffer and window
-(defun save-and-kill-buffer-and-window ()
-  "Function for saving buffer and closing it with its window, used for evil mode :wq command."
-  (interactive)
-  (save-buffer)
-  (kill-buffer-and-window)
-  )
-
-;; Evil mode for VIM key bindings
-(use-package evil
-  :ensure t
-  :init
-  (evil-mode)
-  :config
-  ;; When evil :q[uit], close buffer and window instead of Emacs
-  (evil-ex-define-cmd "q[uit]" 'kill-buffer-and-window)
-  ;; When evil :wq, save and close buffer and window instead of Emacs
-  (evil-ex-define-cmd "wq" 'save-and-kill-buffer-and-window)
-  ;; Remap "," to repeat last macro (@@)
-  (define-key evil-normal-state-map "," (kbd "@@"))
-  (setq isearch-forward t)
-  :bind (:map evil-normal-state-map
-	      ("/" . swiper)
-	      ("?" . swiper)))
 
 ;; Elpy
 (use-package elpy
@@ -126,13 +54,6 @@
   :defer t
   :init
   (advice-add 'python-mode :before 'elpy-enable))
-
-;; Drag stuff
-(use-package drag-stuff
-  :ensure t
-  :config
-  (drag-stuff-global-mode 1)
-  (drag-stuff-define-keys))
 
 ;; Configure Dired
 (require 'dired)
@@ -574,7 +495,6 @@ TABSET is the tab set used to choose the appropriate buttons."
   (global-flycheck-mode))
 
 
-
 ;; Irnony
 (use-package irony
   :ensure t
@@ -704,33 +624,6 @@ TABSET is the tab set used to choose the appropriate buttons."
 ;; (require 'ein-notebook)
 ;; (require 'ein-subpackages)
 
-;; Evil multiedit
-(use-package evil-multiedit
-  :ensure t
-  :bind (:map evil-normal-state-map
-	 ("C-<" . evil-multiedit-match-symbol-and-next)
-	 ("C->" . evil-multiedit-match-symbol-and-prev)
-	 :map evil-visual-state-map
-	 ("C-<" . evil-multiedit-match-and-next)
-	 ("C->" . evil-multiedit-match-and-prev)
-	 ("R" . evil-multiedit-match-all)
-	 ("C-M-D" . evil-multiedit-restore)
-	 :map evil-insert-state-map
-	 ("C-<" . evil-multiedit-match-and-next)
-	 ("C->" . evil-multiedit-match-and-prev)
-	 :map evil-motion-state-map
-	 ("RET" . evil-multiedit-toggle-or-restrict-region)
-	 :map evil-multiedit-state-map
-	 ("RET" . evil-multiedit-toggle-or-restrict-region)
-	 ("C-n" . evil-multiedit-next)
-	 ("C-p" . evil-multiedit-prev)
-	 :map evil-multiedit-insert-state-map
-	 ("C-n" . evil-multiedit-next)
-	 ("C-p" . evil-multiedit-prev))
-  :config
-  (evil-ex-define-cmd "ie[dit]" #'evil-multiedit-ex-match))
-
-
 ;; Configure backup files
 (setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
 (setq backup-by-copying t)
@@ -775,7 +668,10 @@ TABSET is the tab set used to choose the appropriate buttons."
 			  (agenda . 5)
 			  ;; (projects . 0)
 			  ;; (registers . 1)
-			  )))
+			  ))
+  ;; (dashboard-modify-heading-icons '((recents . "alert")
+  ;; 				    (bookmarks . "bug")))
+  )
 
 ;; Magit
 ;; (require 'magit)
@@ -872,19 +768,6 @@ TABSET is the tab set used to choose the appropriate buttons."
   :config
   (beacon-mode 1))
 
-;; Dumb jump
-(use-package dumb-jump
-  :ensure t
-  :config
-  (dumb-jump-mode)
-  ;; Enable dumb jump on evil mode
-  (eval-after-load 'evil-maps
-    '(progn
-       (define-key evil-motion-state-map "gd" 'dumb-jump-go)
-       (define-key evil-motion-state-map "gb" 'dumb-jump-back)
-       (define-key evil-motion-state-map "go" 'dumb-jump-go-other-window)
-       (define-key evil-motion-state-map "gl" 'dumb-jump-quick-look))))
-
 ;; ESS
 ;; (use-package ess
 ;;   :ensure t)
@@ -919,7 +802,7 @@ TABSET is the tab set used to choose the appropriate buttons."
   :bind
   ("C-0"  . 'er/expand-region))
 
-;; highlight thing
+;; Highlight thing
 (use-package highlight-thing
   :ensure t
   :config
