@@ -23,9 +23,9 @@
 (eval-when-compile
   (require 'use-package))
 
-(setq use-package-always-defer t
-      use-package-always-ensure t
-      use-package-compute-statistics t)
+;; (setq use-package-always-defer t
+;;       use-package-always-ensure t
+;;       use-package-compute-statistics t)
 
 ;; Package repos
 (require 'package)
@@ -54,61 +54,6 @@
   :defer t
   :init
   (advice-add 'python-mode :before 'elpy-enable))
-
-;; Configure Dired
-(require 'dired)
-(defun xah-dired-mode-setup ()
-  (dired-hide-details-mode 1))
-;; Make emacs mode dired default state
-(add-to-list 'evil-emacs-state-modes 'dired-mode)
-;; Make Dired less verbose
-(add-hook 'dired-mode-hook
-	  (lambda () (setq-local linum-active nil)))
-(add-hook 'dired-mode-hook 'xah-dired-mode-setup)
-
-;; Dired Single
-(use-package dired-single
-  :ensure t)
-(defun my-dired-init ()
-  ;; <add other stuff here>
-  (define-key dired-mode-map [return] 'dired-single-buffer)
-  (define-key dired-mode-map [remap dired-mouse-find-file-other-window] 'dired-single-buffer-mouse) 
-  ;; (define-key dired-mode-map [tab] 'ranger-mode) 
-  (define-key dired-mode-map "^"
-    (function
-     (lambda nil (interactive) (dired-single-buffer "..")))))
-;; if dired's already loaded, then the keymap will be bound
-(if (boundp 'dired-mode-map)
-    ;; we're good to go; just add our bindings
-    (my-dired-init)
-  ;; it's not loaded yet, so add our bindings to the load-hook
-  (add-hook 'dired-load-hook 'my-dired-init))
-
-;; Create a font lock face for punctuation signs
-(defvar font-lock-punctuation-face 'font-lock-punctuation-face)
-(defface font-lock-punctuation-face
-  '((t :inherit font-lock-keyword-face))
-  "Face for highlighting punctuation signs.")
-(set-face-attribute 'font-lock-punctuation-face nil :weight 'normal)
-
-;; Improve python-mode syntax highlighting
-(font-lock-add-keywords 'python-mode
-  '(("-?\\b[0-9]+\\.?" . font-lock-constant-face)
-    ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+]\\|\\]\\|\\[" . font-lock-punctuation-face)
-    ("\\([A-Za-z][A-Za-z0-9_]*\\)[ \t\n]*\\((.*)\\)"
-     (1 font-lock-function-name-face))))
-;; Improve c-mode syntax highlighting
-(font-lock-add-keywords 'c-mode
-  '(("-?\\b[0-9]+\\.?" . font-lock-constant-face)
-    ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+\@]\\|\\]\\|\\[" . font-lock-punctuation-face)))
-(if (display-graphic-p)
-    (progn
-      ;; if graphic
-      (use-package all-the-icons)
-      (use-package all-the-icons-dired
-	:hook (dired-mode . treemacs-icons-dired-mode)))
-  ;; else (optional)
-  )
 
 ;; Dired Hacks
 (use-package dired-hacks-utils
@@ -144,7 +89,6 @@
   (add-hook 'evil-insert-state-entry-hook
 	    (lambda () (when linum-active (insert-linum)))))
 
-
 ;; Set specman mode
 (add-to-list 'load-path "~/.emacs.d/specman")
 (load "specman-mode")
@@ -169,105 +113,9 @@
 ;;         (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 ;; ))
 
-;; Treemacs configuration
-(use-package treemacs
-  :ensure t
-  :defer t
-  :init
-  (with-eval-after-load 'winum
-    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
-  :config
-  (progn
-    (setq treemacs-collapse-dirs              (if (executable-find "python") 3 0)
-          treemacs-deferred-git-apply-delay   0.5
-          treemacs-display-in-side-window     t
-          treemacs-file-event-delay           5000
-          treemacs-file-follow-delay          0.2
-          treemacs-follow-after-init          t
-          treemacs-follow-recenter-distance   0.1
-          treemacs-git-command-pipe           ""
-          treemacs-goto-tag-strategy          'refetch-index
-          treemacs-indentation                2
-          treemacs-indentation-string         " "
-          treemacs-is-never-other-window      nil
-          treemacs-max-git-entries            5000
-          treemacs-no-png-images              nil
-          treemacs-no-delete-other-windows    t
-          treemacs-project-follow-cleanup     nil
-          treemacs-persist-file               (expand-file-name ".cache/treemacs-persist" user-emacs-directory)
-          treemacs-recenter-after-file-follow nil
-          treemacs-recenter-after-tag-follow  nil
-          treemacs-show-cursor                nil
-          treemacs-show-hidden-files          t
-          treemacs-silent-filewatch           nil
-          treemacs-silent-refresh             nil
-          treemacs-sorting                    'alphabetic-desc
-          treemacs-space-between-root-nodes   t
-          treemacs-tag-follow-cleanup         t
-          treemacs-tag-follow-delay           1.5
-          treemacs-width                      35)
-
-    ;; The default width and height of the icons is 22 pixels. If you are
-    ;; using a Hi-DPI display, uncomment this to double the icon size.
-    ;;(treemacs-resize-icons 44)
-
-    (treemacs-follow-mode t)
-    (treemacs-filewatch-mode t)
-    (treemacs-fringe-indicator-mode t)
-    (pcase (cons (not (null (executable-find "git")))
-                 (not (null (executable-find "python3"))))
-      (`(t . t)
-       (treemacs-git-mode 'deferred))
-      (`(t . _)
-       (treemacs-git-mode 'simple))))
-  :bind
-  (:map global-map
-	([f8]        . treemacs)
-        ("C-x t ?"   . treemacs-helpful-hydra)
-        ("C-x t d"   . treemacs-root-down)
-        ("C-x t u"   . treemacs-root-up)
-        ("M-0"       . treemacs-select-window)
-        ("C-x t 1"   . treemacs-delete-other-windows)
-        ("C-x t t"   . treemacs)
-        ("C-x t B"   . treemacs-bookmark)
-        ("C-x t f" . treemacs-find-file)
-        ("C-x t M-t" . treemacs-find-tag)))
-
-(use-package treemacs-evil
-  :after treemacs evil
-  :ensure t)
-
-;; (use-package treemacs-projectile
-;;   :after treemacs projectile
-;;   :ensure t)
-
-(use-package treemacs-icons-dired
-  :after treemacs dired
-  :ensure t
-  :config (treemacs-icons-dired-mode))
-
-(use-package treemacs-magit
-  :after treemacs magit
-  :ensure t)
-
 
 (use-package mode-icons
   :ensure t)
-
-(require 'mode-icons)
-;; Telephone line
-(use-package telephone-line
-  :ensure t
-  :config
-  (setq telephone-line-primary-left-separator 'telephone-line-sin-left
-	telephone-line-secondary-left-separator 'telephone-line-sin-hollow-left
-	telephone-line-primary-right-separator 'telephone-line-sin-right
-	telephone-line-secondary-right-separator 'telephone-line-sin-hollow-right)
-  (telephone-line-mode 1)
-  (set-face-attribute 'telephone-line-evil-normal
-		      nil
-		      :background
-		      "#317DC9"))
 
 ;; Tabbar groups
 (defun tabbar-buffer-groups ()
@@ -381,71 +229,6 @@
 (add-hook 'magit-process-mode-hook 'tabbar-local-mode)
 (add-hook 'magit-stashes-mode-hook 'tabbar-local-mode)
 
-;; Tabbar groups
-(defun tabbar-buffer-groups ()
-  (list
-   (cond
-    ((or (eq major-mode 'magit-log-mode)
-	 (eq major-mode 'magit-mode)
-	 (eq major-mode 'magit-wip-mode)
-	 (eq major-mode 'magit-blob-mode)
-	 (eq major-mode 'magit-diff-mode)
-	 (eq major-mode 'magit-file-mode)
-	 (eq major-mode 'magit-refs-mode)
-	 (eq major-mode 'magit-blame-mode)
-	 (eq major-mode 'magit-popup-mode)
-	 (eq major-mode 'magit-stash-mode)
-	 (eq major-mode 'magit-cherry-mode)
-	 (eq major-mode 'magit-reflog-mode)
-	 (eq major-mode 'magit-status-mode)
-	 (eq major-mode 'magit-process-mode)
-	 (eq major-mode 'magit-stashes-mode)
-	 (eq major-mode 'magit-repolist-mode)
-	 (eq major-mode 'magit-revision-mode)
-	 (eq major-mode 'magit-log-select-mode)
-	 (eq major-mode 'magit-popup-help-mode)
-	 (eq major-mode 'magit-auto-revert-mode)
-	 (eq major-mode 'magit-merge-preview-mode)
-	 (eq major-mode 'magit-submodule-list-mode)
-	 (eq major-mode 'magit-wip-after-save-mode)
-	 (eq major-mode 'magit-blame-read-only-mode)
-	 (eq major-mode 'magit-wip-after-apply-mode)
-	 (eq major-mode 'magit-wip-before-change-mode)
-	 (eq major-mode 'magit-wip-initial-backup-mode)
-	 (eq major-mode 'magit-wip-after-save-mode))
-     "Magit")
-    ((eq major-mode 'dired-mode)
-     "Dired")
-    ((eq major-mode 'dashboard-mode)
-     "Dashboard")
-    ((eq major-mode 'specman-mode)
-     "Specman")
-    ((eq major-mode 'term-mode)
-     "Term")
-    ((or (eq major-mode 'python-mode)
-     (eq major-mode 'c-mode)
-     (eq major-mode 'c++-mode))
-     "Python, C, C++")
-    ((or (eq major-mode 'emacs-lisp-mode)
-	 (eq major-mode 'org-mode)
-	 (eq major-mode 'org-agenda-clockreport-mode)
-	 (eq major-mode 'org-src-mode)
-	 (eq major-mode 'org-agenda-mode)
-	 (eq major-mode 'org-beamer-mode)
-	 (eq major-mode 'org-indent-mode)
-	 (eq major-mode 'org-bullets-mode)
-	 (eq major-mode 'org-cdlatex-mode)
-	 (eq major-mode 'org-agenda-log-mode))
-     "Emacs lisp and Org mode")
-    ((or (eq major-mode 'csv-mode)
-	 (eq major-mode 'text-mode))
-     "Text and csv")
-    ((or (eq major-mode 'sh-mode))
-     "Bash")
-    (t
-     "Misc buffers")
-    ))) 
-
 (setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
 
 ;; Tabbar excluded buffers
@@ -470,7 +253,7 @@ TABSET is the tab set used to choose the appropriate buttons."
   :config
   (recentf-mode 1)
   (setq recentf-max-menu-items 25)
-  (global-set-key "\C-x\ \C-r" 'recentf-open-files))
+  :bind (("\C-x\ \C-r" . recentf-open-files)))
 
 ;; Which key
 (use-package which-key
@@ -493,7 +276,6 @@ TABSET is the tab set used to choose the appropriate buttons."
    (flycheck-error-list-mode . (lambda () (setq-local linum-active nil))))
   :init
   (global-flycheck-mode))
-
 
 ;; Irnony
 (use-package irony
@@ -734,7 +516,6 @@ TABSET is the tab set used to choose the appropriate buttons."
       '("pdflatex --shell-escape -interaction nonstopmode -output-directory %o %f"
         "pdflatex --shell-escape -interaction nonstopmode -output-directory %o %f"
         "pdflatex --shell-escape -interaction nonstopmode -output-directory %o %f"))
-
 
 ;; Highlight indent guides
 (use-package highlight-indent-guides

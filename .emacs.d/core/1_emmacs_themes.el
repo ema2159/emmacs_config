@@ -11,16 +11,19 @@
 ;; Doom themes
 (use-package doom-themes
   :ensure t
+  :defer t
   :config
   (doom-themes-org-config))
 
 ;; Solarized theme
 (use-package solarized-theme
-  :ensure t)
+  :ensure t
+  :defer t)
 
 ;; Atom One Dark theme
 (use-package atom-one-dark-theme
-  :ensure t)
+  :ensure t
+  :defer t)
 
 ;; (require 'spacemacs-dark-theme)
 ;; (require 'solarized-dark-theme)

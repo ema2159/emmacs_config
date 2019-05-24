@@ -8,26 +8,6 @@
 ;; - Dumb Jump
 
 ;;; Code:
-;; Dumb jump
-(use-package dumb-jump
-  :ensure t
-  :config
-  (dumb-jump-mode)
-  ;; Enable dumb jump on evil mode
-  (eval-after-load 'evil-maps
-    '(progn
-       (define-key evil-motion-state-map "gd" 'dumb-jump-go)
-       (define-key evil-motion-state-map "gb" 'dumb-jump-back)
-       (define-key evil-motion-state-map "go" 'dumb-jump-go-other-window)
-       (define-key evil-motion-state-map "gl" 'dumb-jump-quick-look))))
-
-;; Drag stuff
-(use-package drag-stuff
-  :ensure t
-  :config
-  (drag-stuff-global-mode 1)
-  (drag-stuff-define-keys))
-
 ;; Evil
 (use-package evil
   :ensure t
@@ -44,6 +24,24 @@
   :bind (:map evil-normal-state-map
 	      ("/" . swiper)
 	      ("?" . swiper)))
+
+;; Dumb jump
+(use-package dumb-jump
+  :ensure t
+  :config
+  (dumb-jump-mode)
+  :bind (:map evil-motion-state-map
+	      ("gd" . dumb-jump-go)
+	      ("gb" . dumb-jump-back)
+	      ("go" . dumb-jump-go-other-window)
+	      ("gl" . dumb-jump-quick-look)))
+
+;; Drag stuff
+(use-package drag-stuff
+  :ensure t
+  :config
+  (drag-stuff-global-mode 1)
+  (drag-stuff-define-keys))
 
 ;; Evil multiedit
 (use-package evil-multiedit
