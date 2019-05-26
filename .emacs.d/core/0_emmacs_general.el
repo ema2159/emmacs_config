@@ -68,7 +68,7 @@
   (save-buffer)
   (kill-buffer-and-window))
 
-
+;; Custom syntax highlighting
 ;; Create a font lock face for punctuation signs
 (defvar font-lock-punctuation-face 'font-lock-punctuation-face)
 (defface font-lock-punctuation-face
@@ -86,6 +86,35 @@
 (font-lock-add-keywords 'c-mode
   '(("-?\\b[0-9]+\\.?" . font-lock-constant-face)
     ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+\@]\\|\\]\\|\\[" . font-lock-punctuation-face)))
+
+;; Configure backup files
+(setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
+(setq backup-by-copying t)
+(setq delete-old-versions t
+  kept-new-versions 6
+  kept-old-versions 2
+  version-control t)
+
+;; Set proxy
+;; (setq url-proxy-services
+;;        '(("no_proxy" . "^\\(localhost\\|10.*\\)")
+;;  	("http" . "web-proxy.rose.hpecorp.net:8088")
+;;  	("https" . "web-proxy.rose.hpecorp.net:8088")))
+
+;; Tramp cofiguration
+(setq tramp-default-mode "ssh")
+(customize-set-variable
+ 'tramp-ssh-controlmaster-options
+ (concat
+  "-o ControlPath=/tmp/ssh-ControlPath-%%r@%%h:%%p "
+  "-o ControlMaster=auto -o ControlPersist=yes"))
+(setq remote-file-name-inhibit-cache nil)
+(setq vc-ignore-dir-regexp
+      (format "%s\\|%s"
+	      vc-ignore-dir-regexp
+	      tramp-file-name-regexp))
+(setq tramp-auto-save-directory "~/emacs/tramp-autosave")
+(setq tramp-verbose 3)
 
 (provide '0_emmacs_general)
 ;;; 0_emmacs_general.el ends here
