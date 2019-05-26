@@ -225,11 +225,15 @@
   (defvar company-mode/enable-yas t
     "Enable yasnippet for all backends.")
   (defun company-mode/backend-with-yas (backend)
-    (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
+    (if (or
+	 (not company-mode/enable-yas)
+	 (and (listp backend)
+	      (member 'company-yasnippet backend)))
 	backend
       (append (if (consp backend) backend (list backend))
 	      '(:with company-yasnippet))))
-  (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
+  (setq company-backends
+	(mapcar #'company-mode/backend-with-yas company-backends))
   (yas-global-mode 1)
   (setq require-final-newline nil)
 
@@ -237,15 +241,28 @@
   (defun if-yas-empty ()
     (interactive)
     (if (and yas-moving-away-p (not yas-modified-p))
-	(yas-clear-field)))
-
-  )
+	(yas-clear-field))))
 
 ;; Ivy yasnippet
 (use-package ivy-yasnippet
   :ensure t
   :bind
   ("C-x C-a" . ivy-yasnippet))
+
+;; (use-package projectile
+;;     :ensure t
+;;     :init
+;;     (progn
+;;         (setq projectile-file-exists-remote-cache-expire nil)
+;;         (setq projectile-mode-line '(:eval (format " Projectile[%s]" (projectile-project-name))))
+;;         (setq projectile-globally-ignored-directories
+;;             (quote
+;;                 (".idea" ".eunit" ".git" ".hg" ".svn" ".fslckout" ".bzr" "_darcs" ".tox" "build" "target"))))
+;;     :config
+;;     (progn
+;;         (projectile-mode 1)
+;;         (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+;; ))
 
 (provide '3_emmacs_tools)
 ;;; 3_emmacs_tools.el ends here

@@ -59,7 +59,7 @@
    #b00000000])
 
 ;; Define a variable for hooks to turn on/off the relative and absolute number lines
-(defvar linum-active t)
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 ;; Function for saving and killing buffer and window
 (defun save-and-kill-buffer-and-window ()

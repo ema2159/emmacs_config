@@ -37,5 +37,9 @@
 (autoload 'csv-mode "csv-mode"
   "Major mode for editing comma-separated value files." t)
 
+;; ESS
+;; (use-package ess
+;;   :ensure t)
+
 (provide '4_emmacs_modes)
 ;;; 4_emmacs_modes.el ends here

@@ -48,7 +48,6 @@
   :hook
   (dired-mode .
 	      (lambda ()
-		(setq-local linum-active nil)
 		(dired-hide-details-mode 1))))
 
 ;; Dired Single
@@ -279,15 +278,12 @@ TABSET is the tab set used to choose the appropriate buttons."
 ;; Which key
 (use-package which-key
   :ensure t
-  :defer 5
+  :defer 1
   :diminish
   :commands which-key-mode
   :config
   (which-key-mode)
-  (which-key-setup-side-window-bottom)
-  :init
-  (add-hook 'which-key-init-buffer-hook
-	    (lambda () (setq-local linum-active nil))))
+  (which-key-setup-side-window-bottom))
 
 ;; Swiper
 (use-package swiper

@@ -1,4 +1,4 @@
- 
+
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
@@ -47,45 +47,6 @@
 
 (el-init-load emacs-dir
   :subdirectories (list core-dir))
-
-;; Line numbers configuration
-;; Toggle between relative and absolute line numbers between evil normal and insert mode
-(require 'linum)
-(use-package linum-relative
-  :ensure t
-  :config
-  ;; Remove underline (for paren-mode bug)
-  (set-face-attribute 'linum-relative-current-face nil :underline nil)
-  (defun normal-linum ()
-    "Activates relative number lines"
-    (linum-relative-on))
-  (add-hook 'evil-normal-state-entry-hook
-	    (lambda () (when linum-active (normal-linum))))
-  (defun insert-linum ()
-    "Activates absolute number lines"
-    (linum-relative-off)
-    (linum-on))
-  (add-hook 'evil-insert-state-entry-hook
-	    (lambda () (when linum-active (insert-linum)))))
-
-;; (use-package projectile
-;;     :ensure t
-;;     :init
-;;     (progn
-;;         (setq projectile-file-exists-remote-cache-expire nil)
-;;         (setq projectile-mode-line '(:eval (format " Projectile[%s]" (projectile-project-name))))
-;;         (setq projectile-globally-ignored-directories
-;;             (quote
-;;                 (".idea" ".eunit" ".git" ".hg" ".svn" ".fslckout" ".bzr" "_darcs" ".tox" "build" "target"))))
-;;     :config
-;;     (progn
-;;         (projectile-mode 1)
-;;         (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-;; ))
-
-;; ESS
-;; (use-package ess
-;;   :ensure t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
