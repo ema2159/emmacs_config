@@ -26,6 +26,7 @@
   ;; :defer t)
 
 (require 'spacemacs-dark-theme)
+(setq spacemacs-theme-comment-bg nil)
 ;; (require 'solarized-dark-theme)
 ;; (require 'doom-one-theme)
 ;; (require 'doom-city-lights-theme)

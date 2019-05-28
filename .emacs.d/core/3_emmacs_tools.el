@@ -10,6 +10,7 @@
 ;; - Dumb Jump
 ;; - Evil
 ;; - Evil Multiedit
+;; - Evil Snipe
 ;; - Expand Region
 ;; - Flycheck
 ;; - Hydra
@@ -209,6 +210,13 @@
   :hook
   (term-mode . (lambda()
 		 (load-theme-buffer-local 'cyberpunk (current-buffer)))))
+
+;; Evil Snipe
+(use-package evil-snipe
+  :ensure t
+  :hook
+  (prog-mode . evil-snipe-mode)
+  (magit-mode . turn-off-evil-snipe-override-mode))
 
 ;; Company
 (use-package company

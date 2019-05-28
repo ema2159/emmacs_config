@@ -8,11 +8,11 @@
 ;; - Dashboard
 ;; - Dired Hacks
 ;; - Dired Single
+;; - Doom Modeline
 ;; - Ivy
 ;; - Solaire Mode
 ;; - Swiper
 ;; - Tabbar
-;; - Telephone Line
 ;; - Treemacs
 ;; - Which key
 
@@ -170,18 +170,30 @@
   :ensure t)
 
 ;; Telephone line
-(use-package telephone-line
-  :ensure t
-  :config
-  (setq telephone-line-primary-left-separator 'telephone-line-sin-left
-	telephone-line-secondary-left-separator 'telephone-line-sin-hollow-left
-	telephone-line-primary-right-separator 'telephone-line-sin-right
-	telephone-line-secondary-right-separator 'telephone-line-sin-hollow-right)
-  (telephone-line-mode 1)
-  (set-face-attribute 'telephone-line-evil-normal
-		      nil
-		      :background
-		      "#317DC9"))
+;; (use-package telephone-line
+;;   :ensure t
+;;   :config
+;;   (setq telephone-line-primary-left-separator 'telephone-line-sin-left
+;; 	telephone-line-secondary-left-separator 'telephone-line-sin-hollow-left
+;; 	telephone-line-primary-right-separator 'telephone-line-sin-right
+;; 	telephone-line-secondary-right-separator 'telephone-line-sin-hollow-right)
+;;   (telephone-line-mode 1)
+;;   (set-face-attribute 'telephone-line-evil-normal
+;; 		      nil
+;; 		      :background
+;; 		      "#317DC9"))
+
+(use-package doom-modeline
+      :ensure t
+      :config
+      (column-number-mode)
+      (size-indication-mode)
+      (setq doom-modeline-buffer-file-name-style 'file-name)
+      (set-face-attribute 'doom-modeline-evil-insert-state
+			   		      nil
+			   		      :foreground
+			   		      "#317DC9")
+      (doom-modeline-mode 1))
 
 ;; Tabbar ruler
 (defun tabbar-buffer-groups ()
