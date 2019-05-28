@@ -1,6 +1,7 @@
 # -*- mode: specman-mode -*-
 # name: message(verbosity, body_text, ...);
 # key: message
+# group: prints and messages
 # --
 
 message(${1:verbosity}, ${2:body_text, ...});$0

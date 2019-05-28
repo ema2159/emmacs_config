@@ -1,14 +1,14 @@
-;;; 2_emmacs-ui.el --- User Insterface
+;; 2_emmacs-ui.el --- User Insterface
 
 ;;; Commentary:
 ;; In this section the following packages are loaded:
 ;; - All The Icons Ivy
+;; - Amx
 ;; - Counsel
 ;; - Dashboard
 ;; - Dired Hacks
 ;; - Dired Single
 ;; - Ivy
-;; - Smex
 ;; - Solaire Mode
 ;; - Swiper
 ;; - Tabbar
@@ -29,6 +29,7 @@
 ;; All The Icons Ivy
 (use-package all-the-icons-ivy
   :ensure t
+  :defer 3
   :config
   (all-the-icons-ivy-setup))
 
@@ -48,7 +49,10 @@
   :hook
   (dired-mode .
 	      (lambda ()
-		(dired-hide-details-mode 1))))
+		(dired-hide-details-mode 1)))
+  :bind (:map dired-mode-map
+	      ("C-i" . dired-maybe-insert-subdir)
+	      ("C-r" . dired-kill-subdir)))
 
 ;; Dired Single
 (use-package dired-single
@@ -67,19 +71,22 @@
 ;; Dired Hacks
 (use-package dired-hacks-utils
   :ensure t
-  :defer t )
+  :after dired)
 (use-package dired-filter
   :ensure t
-  :defer t
+  :after dired
   :config
-  (define-key dired-mode-map (kbd "C-f") dired-filter-mark-map))
+  (define-key dired-mode-map (kbd "C-f") dired-filter-map))
+  
 (use-package dired-subtree
   :ensure t
-  :defer t
+  :after dired-hacks-utils
   :config
   (setq dired-subtree-use-backgrounds nil)
-  (define-key dired-mode-map (kbd "i") 'dired-subtree-insert)
-  (define-key dired-mode-map (kbd "r") 'dired-subtree-remove))
+  :bind
+  (:map dired-mode-map
+   ("i" . dired-subtree-insert)
+   ("r" . dired-subtree-remove)))
 
 ;; Treemacs configuration
 (use-package treemacs
@@ -274,6 +281,100 @@
   "Return a list of propertized strings for tab bar buttons.
 TABSET is the tab set used to choose the appropriate buttons."
 (list (propertize "")))
+;; Tabbar ruler
+;; (use-package tabbar-ruler
+;;   :ensure t
+;;   :config
+;;   (require 'tabbar-ruler)
+;;   (defun tabbar-buffer-groups ()
+;;     (list
+;;      (cond
+;;       ((or (eq major-mode 'magit-log-mode)
+;; 	   (eq major-mode 'magit-mode)
+;; 	   (eq major-mode 'magit-wip-mode)
+;; 	   (eq major-mode 'magit-blob-mode)
+;; 	   (eq major-mode 'magit-diff-mode)
+;; 	   (eq major-mode 'magit-file-mode)
+;; 	   (eq major-mode 'magit-refs-mode)
+;; 	   (eq major-mode 'magit-blame-mode)
+;; 	   (eq major-mode 'magit-popup-mode)
+;; 	   (eq major-mode 'magit-stash-mode)
+;; 	   (eq major-mode 'magit-cherry-mode)
+;; 	   (eq major-mode 'magit-reflog-mode)
+;; 	   (eq major-mode 'magit-status-mode)
+;; 	   (eq major-mode 'magit-process-mode)
+;; 	   (eq major-mode 'magit-stashes-mode)
+;; 	   (eq major-mode 'magit-repolist-mode)
+;; 	   (eq major-mode 'magit-revision-mode)
+;; 	   (eq major-mode 'magit-log-select-mode)
+;; 	   (eq major-mode 'magit-popup-help-mode)
+;; 	   (eq major-mode 'magit-auto-revert-mode)
+;; 	   (eq major-mode 'magit-merge-preview-mode)
+;; 	   (eq major-mode 'magit-submodule-list-mode)
+;; 	   (eq major-mode 'magit-wip-after-save-mode)
+;; 	   (eq major-mode 'magit-blame-read-only-mode)
+;; 	   (eq major-mode 'magit-wip-after-apply-mode)
+;; 	   (eq major-mode 'magit-wip-before-change-mode)
+;; 	   (eq major-mode 'magit-wip-initial-backup-mode)
+;; 	   (eq major-mode 'magit-wip-after-save-mode))
+;;        "Magit")
+;;       ((eq major-mode 'dired-mode)
+;;        "Dired")
+;;       ((eq major-mode 'dashboard-mode)
+;;        "Dashboard")
+;;       ((eq major-mode 'specman-mode)
+;;        "Specman")
+;;       ((eq major-mode 'term-mode)
+;;        "Term")
+;;       ((or (eq major-mode 'python-mode)
+;; 	   (eq major-mode 'c-mode)
+;; 	   (eq major-mode 'c++-mode))
+;;        "Python, C, C++")
+;;       ((or (eq major-mode 'emacs-lisp-mode)
+;; 	   (eq major-mode 'org-mode)
+;; 	   (eq major-mode 'org-agenda-clockreport-mode)
+;; 	   (eq major-mode 'org-src-mode)
+;; 	   (eq major-mode 'org-agenda-mode)
+;; 	   (eq major-mode 'org-beamer-mode)
+;; 	   (eq major-mode 'org-indent-mode)
+;; 	   (eq major-mode 'org-bullets-mode)
+;; 	   (eq major-mode 'org-cdlatex-mode)
+;; 	   (eq major-mode 'org-agenda-log-mode))
+;;        "Emacs lisp and Org mode")
+;;       ((or (eq major-mode 'csv-mode)
+;; 	   (eq major-mode 'text-mode))
+;;        "Text and csv")
+;;       ((or (eq major-mode 'sh-mode))
+;;        "Bash")
+;;       (t
+;;        "Misc buffers")
+;;       )))
+;;   (setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
+;;   ;; Hide tabbar buttons
+;;   (setq tabbar-hide-header-button t)
+;;   (setq tabbar-use-images nil)
+;;   (defsubst tabbar-line-buttons (tabset)
+;;     "Return a list of propertized strings for tab bar buttons.
+;; TABSET is the tab set used to choose the appropriate buttons."
+;;     (list (propertize "")))
+;;   ;; Tabbar excluded buffers
+;;   (setq tabbar-ruler-excluded-buffers '("*Messages*" "*Completions*" "*ESS*" "*Packages*" "*log-edit-files*" "*helm-mini*" "*helm-mode-describe-variable*" "*scratch*" "*Flycheck error messages*"))
+;;   :hook
+;;   (prog-mode . tabbar-ruler-init)
+;;   (dashboard-mode . tabbar-local-mode)
+;;   (term-mode . tabbar-local-mode)
+;;   (calendar-mode . tabbar-local-mode)
+;;   (dired-mode . tabbar-local-mode)
+;;   (org-agenda-mode . tabbar-local-mode)
+;;   (magit-log-mode . tabbar-local-mode)
+;;   (magit-diff-mode . tabbar-local-mode)
+;;   (magit-status-mode . tabbar-local-mode)
+;;   (magit-process-mode . tabbar-local-mode)
+;;   (magit-stashes-mode . tabbar-local-mode)
+;;   :bind (("C-<home>" . tabbar-press-home)
+;; 	 ("C-<prior>" . tabbar-backward)
+;; 	 ("C-<next>" . tabbar-forward))
+;;   )
 
 ;; Which key
 (use-package which-key
@@ -334,9 +435,6 @@ TABSET is the tab set used to choose the appropriate buttons."
 	      winner-undo
 	      widget-forward)
   ;; :custom-face (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
-  :hook (dashboard-mode . (lambda ()
-			    (setq-local frame-title-format "")
-			    (setq-local tab-width 1)))
   :init (dashboard-setup-startup-hook)
   :config
   ;; Configure init info
@@ -356,16 +454,12 @@ TABSET is the tab set used to choose the appropriate buttons."
 			  (agenda . 5)
 			  ;; (projects . 0)
 			  ;; (registers . 1)
-			  ))
-  ;; (dashboard-modify-heading-icons '((recents . "alert")
-  ;; 				    (bookmarks . "bug")))
-  )
+			  )))
 
 ;; Smex configuration
-(use-package smex
+(use-package amx
   :ensure t
-  :init
-  (smex-initialize)) 
+  :defer t) 
 
 (provide '2_emmacs_ui)
 ;;; 2_emmacs-ui.el ends here

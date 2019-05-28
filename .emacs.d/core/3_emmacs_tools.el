@@ -12,6 +12,7 @@
 ;; - Evil Multiedit
 ;; - Expand Region
 ;; - Flycheck
+;; - Hydra
 ;; - Highlight Thing
 ;; - Magit
 ;; - Recentf
@@ -43,6 +44,8 @@
 (use-package dumb-jump
   :ensure t
   :config
+  (setq dumb-jump-selector 'ivy)
+  (setq dumb-jump-prefer-searcher 'rg)
   (dumb-jump-mode)
   :bind (:map evil-motion-state-map
 	      ("gd" . dumb-jump-go)
@@ -114,11 +117,18 @@
 ;; Windmove
 (use-package windmove
   :ensure t
-  :bind
-  ("C-x C-<left>"  . windmove-left)
-  ("C-x C-<right>" . windmove-right)
-  ("C-x C-<up>"    . windmove-up)
-  ("C-x C-<down>"  . windmove-down))
+  :after hydra
+  :config
+  (defhydra hydra-window (global-map "C-x"
+				     :color red
+				     :hint nil)
+    ("<left>"  windmove-left)
+    ("<right>" windmove-right)
+    ("<up>"    windmove-up)
+    ("<down>"  windmove-down)
+    ("2" split-window-below)
+    ("3" split-window-right)
+    ("1" delete-other-windows)))
 
 ;; Undo Tree
 (use-package undo-tree
@@ -151,8 +161,7 @@
 ;; Flycheck
 (use-package flycheck
   :ensure t
-  :hook
-  ((flycheck-error-list-mode . (lambda () (setq-local linum-active nil))))
+  :defer 3
   :init
   (global-flycheck-mode))
 
@@ -167,7 +176,7 @@
   :ensure t
   :config
   (set-face-attribute 'highlight-thing nil
-		      :inherit 'highlight :background "#494949")
+		      :inherit 'highlight)
   (add-hook 'iedit-mode-hook (lambda()
 			       (highlight-thing-mode -1)))
 
@@ -248,6 +257,13 @@
   :ensure t
   :bind
   ("C-x C-a" . ivy-yasnippet))
+
+(use-package hydra
+  :ensure t
+  :defer 2
+  :config
+  (hydra-add-font-lock)
+  )
 
 ;; (use-package projectile
 ;;     :ensure t
