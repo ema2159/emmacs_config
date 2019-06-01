@@ -22,10 +22,6 @@
 (show-paren-mode 1)
 (setq show-paren-style 'parenthesis)
 
-;; Narrow and widening configuration
-(put 'set-goal-column 'disabled nil)
-(put 'narrow-to-region 'disabled nil)
-
 ;; Delete selection mode
 (delete-selection-mode 1)
 

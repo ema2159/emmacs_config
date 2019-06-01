@@ -5,6 +5,7 @@
 ;; - CSV Mode
 ;; - Elpy
 ;; - Irony
+;; - Js2-mode
 ;; - Specman mode
 
 ;;; Code:
@@ -32,10 +33,19 @@
    (c++-mode . irony-mode)
    (irony-mode . irony-cdb-autosetup-compile-options)))
 
-;; Csv-mode configuration
-(add-to-list 'auto-mode-alist '("\\.[Cc][Ss][Vv]\\'" . csv-mode))
-(autoload 'csv-mode "csv-mode"
-  "Major mode for editing comma-separated value files." t)
+;; Csv-mode
+(use-package csv-mode
+  :ensure t
+  :mode
+  ("\\.[Cc][Ss][Vv]\\'" . csv-mode))
+
+;; Js2-mode
+(use-package csv-mode
+  :ensure t
+  :mode
+  ("\\.js\\'" . js2-mode)
+  ("node" . js2-mode))
+
 
 ;; ESS
 ;; (use-package ess

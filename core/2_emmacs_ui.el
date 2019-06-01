@@ -10,9 +10,10 @@
 ;; - Dired Single
 ;; - Doom Modeline
 ;; - Ivy
+;; - Page Break Lines
 ;; - Solaire Mode
 ;; - Swiper
-;; - Tabbar
+;; - Tabbar Ruler
 ;; - Treemacs
 ;; - Which key
 
@@ -21,7 +22,7 @@
 (defun my-dired-init ()
   (define-key dired-mode-map [return] 'dired-single-buffer)
   (define-key dired-mode-map [remap dired-mouse-find-file-other-window]
-    'dired-single-buffer-mouse) 
+    'dired-single-buffer-mouse)
   (define-key dired-mode-map "^"
     (function
      (lambda nil (interactive) (dired-single-buffer "..")))))
@@ -77,7 +78,7 @@
   :after dired
   :config
   (define-key dired-mode-map (kbd "C-f") dired-filter-map))
-  
+
 (use-package dired-subtree
   :ensure t
   :after dired-hacks-utils
@@ -156,9 +157,9 @@
   :after treemacs evil
   :ensure t)
 
-;; (use-package treemacs-projectile
-;;   :after treemacs projectile
-;;   :ensure t)
+(use-package treemacs-projectile
+  :after treemacs projectile
+  :ensure t)
 
 (use-package treemacs-icons-dired
   :after treemacs dired
@@ -183,8 +184,15 @@
 ;; 		      :background
 ;; 		      "#317DC9"))
 
+(use-package page-break-lines
+  :ensure t
+  :hook
+  (help-mode . page-break-lines-mode))
+
+
 (use-package doom-modeline
       :ensure t
+      :defer 2
       :config
       (column-number-mode)
       (size-indication-mode)
@@ -193,7 +201,10 @@
 			   		      nil
 			   		      :foreground
 			   		      "#317DC9")
-      (doom-modeline-mode 1))
+      :init
+      (doom-modeline-mode)
+      :hook
+      (after-init . doom-modeline-mode))
 
 ;; Tabbar ruler
 (defun tabbar-buffer-groups ()
@@ -232,16 +243,24 @@
      "Dired")
     ((eq major-mode 'dashboard-mode)
      "Dashboard")
-    ((eq major-mode 'specman-mode)
-     "Specman")
     ((eq major-mode 'term-mode)
      "Term")
     ((or (eq major-mode 'python-mode)
-     (eq major-mode 'c-mode)
-     (eq major-mode 'c++-mode))
-     "Python, C, C++")
-    ((or (eq major-mode 'emacs-lisp-mode)
-	 (eq major-mode 'org-mode)
+	 (eq major-mode 'c-mode)
+	 (eq major-mode 'c++-mode)
+	 (eq major-mode 'sh-mode)
+	 (eq major-mode 'csv-mode)
+	 (eq major-mode 'text-mode)
+	 (eq major-mode 'specman-mode)
+	 (eq major-mode 'emacs-lisp-mode)
+	 (eq major-mode 'html-mode)
+	 (eq major-mode 'js2-mode)
+	 (eq major-mode 'java-mode)
+	 (eq major-mode 'javascript-mode)
+	 (eq major-mode 'css-mode)
+	 (eq major-mode 'lisp-mode))
+     "Editing")
+    ((or (eq major-mode 'org-mode)
 	 (eq major-mode 'org-agenda-clockreport-mode)
 	 (eq major-mode 'org-src-mode)
 	 (eq major-mode 'org-agenda-mode)
@@ -250,18 +269,12 @@
 	 (eq major-mode 'org-bullets-mode)
 	 (eq major-mode 'org-cdlatex-mode)
 	 (eq major-mode 'org-agenda-log-mode))
-     "Emacs lisp and Org mode")
-    ((or (eq major-mode 'csv-mode)
-	 (eq major-mode 'text-mode))
-     "Text and csv")
-    ((or (eq major-mode 'sh-mode))
-     "Bash")
+     "Org mode")
     (t
      "Misc buffers")
-    ))) 
+    )))
 
-(setq tabbar-ruler-global-tabbar t)  
-
+(setq tabbar-ruler-global-tabbar t)
 ;; Tabbar ruler
 (require 'tabbar-ruler)
 ;; Hide tabbar in some specific modes
@@ -277,6 +290,7 @@
 (add-hook 'magit-stashes-mode-hook 'tabbar-local-mode)
 
 (setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
+(tabbar-ruler-group-by-projectile-project)
 
 ;; Tabbar excluded buffers
 (setq tabbar-ruler-excluded-buffers '("*Messages*" "*Completions*" "*ESS*" "*Packages*" "*log-edit-files*" "*helm-mini*" "*helm-mode-describe-variable*" "*scratch*" "*Flycheck error messages*"))
@@ -293,11 +307,12 @@
   "Return a list of propertized strings for tab bar buttons.
 TABSET is the tab set used to choose the appropriate buttons."
 (list (propertize "")))
+
 ;; Tabbar ruler
 ;; (use-package tabbar-ruler
 ;;   :ensure t
+;;   :defer 1
 ;;   :config
-;;   (require 'tabbar-ruler)
 ;;   (defun tabbar-buffer-groups ()
 ;;     (list
 ;;      (cond
@@ -372,7 +387,6 @@ TABSET is the tab set used to choose the appropriate buttons."
 ;;   ;; Tabbar excluded buffers
 ;;   (setq tabbar-ruler-excluded-buffers '("*Messages*" "*Completions*" "*ESS*" "*Packages*" "*log-edit-files*" "*helm-mini*" "*helm-mode-describe-variable*" "*scratch*" "*Flycheck error messages*"))
 ;;   :hook
-;;   (prog-mode . tabbar-ruler-init)
 ;;   (dashboard-mode . tabbar-local-mode)
 ;;   (term-mode . tabbar-local-mode)
 ;;   (calendar-mode . tabbar-local-mode)
@@ -385,8 +399,7 @@ TABSET is the tab set used to choose the appropriate buttons."
 ;;   (magit-stashes-mode . tabbar-local-mode)
 ;;   :bind (("C-<home>" . tabbar-press-home)
 ;; 	 ("C-<prior>" . tabbar-backward)
-;; 	 ("C-<next>" . tabbar-forward))
-;;   )
+;; 	 ("C-<next>" . tabbar-forward)))
 
 ;; Which key
 (use-package which-key
@@ -402,10 +415,12 @@ TABSET is the tab set used to choose the appropriate buttons."
 (use-package swiper
   :ensure t
   :defer t)
+
 ;; Counsel
 (use-package counsel
   :ensure t
   :defer t)
+
 ;; Ivy configuration
 (use-package ivy
   :ensure t
@@ -450,23 +465,22 @@ TABSET is the tab set used to choose the appropriate buttons."
   :init (dashboard-setup-startup-hook)
   :config
   ;; Configure init info
-  (setq dashboard-set-init-info t)
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
+  (setq dashboard-set-footer t)
   ;; Disable Evil mode on dashboard
   (add-to-list 'evil-emacs-state-modes 'dashboard-mode)
   ;; Set the title
   (setq dashboard-banner-logo-title "Welcome to Emmacs, boi")
-  ;; (setq dashboard-startup-banner "~/.emacs.d/banners/Emmacs2.png")
   (setq dashboard-startup-banner "~/.emacs.d/banners/logo.png")
+  ;; (setq dashboard-startup-banner 3)
   (setq dashboard-center-content t)
   (setq dashboard-items '(
 			  (recents  . 10)
 			  (bookmarks . 5)
 			  (agenda . 5)
-			  ;; (projects . 0)
-			  ;; (registers . 1)
-			  )))
+			  (projects . 3)
+			  (registers . 1))))
 
 ;; Smex configuration
 (use-package amx

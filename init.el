@@ -55,7 +55,12 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (dashboard esup highlight-thing expand-region column-enforce-mode dumb-jump smartparens-config which-key use-package treemacs-magit treemacs-icons-dired treemacs-evil tabbar-ruler solarized-theme solaire-mode shell-pop org-bullets linum-relative ivy-yasnippet irony flycheck evil-multiedit elpy drag-stuff doom-themes dired-subtree dired-single dired-filter counsel beacon)))
+    (skewer-mode dashboard esup highlight-thing expand-region column-enforce-mode dumb-jump smartparens-config which-key use-package treemacs-magit treemacs-icons-dired treemacs-evil tabbar-ruler solarized-theme solaire-mode shell-pop org-bullets linum-relative ivy-yasnippet irony flycheck evil-multiedit elpy drag-stuff doom-themes dired-subtree dired-single dired-filter counsel beacon)))
+ '(shell-pop-shell-type
+   (quote
+    ("ansi-term" "*ansi-term*"
+     (lambda nil
+       (ansi-term shell-pop-term-shell)))))
  '(tramp-ssh-controlmaster-options
    "-o ControlPath=/tmp/ssh-ControlPath-%%r@%%h:%%p -o ControlMaster=auto -o ControlPersist=yes" t))
 (custom-set-faces

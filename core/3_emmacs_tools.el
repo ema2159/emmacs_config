@@ -6,6 +6,7 @@
 ;; - Beacon
 ;; - Column Enforce Mode
 ;; - Company
+;; - Company Tern
 ;; - Drag Stuff
 ;; - Dumb Jump
 ;; - Evil
@@ -16,6 +17,7 @@
 ;; - Hydra
 ;; - Highlight Thing
 ;; - Magit
+;; - Projectile
 ;; - Recentf
 ;; - Undo Tree
 ;; - Shell Pop
@@ -58,8 +60,9 @@
 (use-package drag-stuff
   :ensure t
   :config
-  (drag-stuff-global-mode 1)
-  (drag-stuff-define-keys))
+  (drag-stuff-define-keys)
+  :hook
+  (prog-mode . drag-stuff-mode))
 
 ;; Evil Multiedit
 (use-package evil-multiedit
@@ -205,11 +208,9 @@
 (use-package shell-pop
   :ensure t
   :config
-  ;; Disable evil mode in term mode
+  (setq shell-pop-window-size 30)
   (evil-set-initial-state 'term-mode 'emacs)
-  :hook
-  (term-mode . (lambda()
-		 (load-theme-buffer-local 'cyberpunk (current-buffer)))))
+  :bind ("<f5>" . shell-pop))
 
 ;; Evil Snipe
 (use-package evil-snipe
@@ -218,17 +219,22 @@
   (prog-mode . evil-snipe-mode)
   (magit-mode . turn-off-evil-snipe-override-mode))
 
+;; Company Tern
+(use-package company-tern
+  :ensure t)
+
 ;; Company
 (use-package company
   :ensure t
   :defer 5
+  :hook
+  (after-init . global-company-mode)
   :init
   (company-mode 1)
-  (add-hook 'after-init-hook 'global-company-mode)
-  (eval-after-load 'company
-    '(add-to-list 'company-backends 'company-irony))
-  (eval-after-load 'company
-    '(add-to-list 'company-backends 'company-c-headers)))
+  :config
+  (add-to-list 'company-backends 'company-irony)
+  (add-to-list 'company-backends 'company-c-headers)
+  (add-to-list 'company-backends 'company-tern))
 
 ;; Yasnippet
 (use-package yasnippet
@@ -270,23 +276,38 @@
   :ensure t
   :defer 2
   :config
-  (hydra-add-font-lock)
-  )
+  (hydra-add-font-lock))
 
-;; (use-package projectile
-;;     :ensure t
-;;     :init
-;;     (progn
-;;         (setq projectile-file-exists-remote-cache-expire nil)
-;;         (setq projectile-mode-line '(:eval (format " Projectile[%s]" (projectile-project-name))))
-;;         (setq projectile-globally-ignored-directories
-;;             (quote
-;;                 (".idea" ".eunit" ".git" ".hg" ".svn" ".fslckout" ".bzr" "_darcs" ".tox" "build" "target"))))
-;;     :config
-;;     (progn
-;;         (projectile-mode 1)
-;;         (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-;; ))
+(use-package evil-easymotion
+  :ensure t
+  :after evil
+  :config
+  (evilem-default-keybindings "SPC")
+  (evilem-define (kbd "SPC <up>") 'evil-previous-line)
+  (evilem-define (kbd "SPC <down>") 'evil-next-line))
+
+(use-package projectile
+  :ensure t
+  :config
+  (defadvice projectile-on (around exlude-tramp activate)
+    "This should disable projectile when visiting a remote file"
+    (unless  (--any? (and it (file-remote-p it))
+		     (list
+		      (buffer-file-name)
+		      list-buffers-directory
+		      default-directory
+		      dired-directory))
+      ad-do-it))
+  (progn
+    (setq projectile-file-exists-remote-cache-expire nil)
+    (setq projectile-completion-system 'ivy)
+    ;; (setq projectile-mode-line '(:eval (format " Projectile[%s]" (projectile-project-name))))
+    (setq projectile-globally-ignored-directories
+	  (quote
+	   (".idea" ".eunit" ".git" ".hg" ".svn" ".fslckout" ".bzr" "_darcs" ".tox" "build" "target"))))
+  (progn
+    (projectile-mode 1)
+    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)))
 
 (provide '3_emmacs_tools)
 ;;; 3_emmacs_tools.el ends here
