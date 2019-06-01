@@ -24,24 +24,25 @@
   ;; :defer t)
 
 ;; Atom One Dark theme
-(use-package atom-one-dark-theme
-  :ensure t
-  :defer t)
+;; (use-package atom-one-dark-theme
+  ;; :ensure t
+  ;; :defer t)
 
-;; (require 'spacemacs-dark-theme)
-(require 'atom-one-dark-theme)
-;; (setq spacemacs-theme-comment-bg nil)
+(require 'spacemacs-dark-theme)
+;; (require 'atom-one-dark-theme)
+;; (require 'solarized-dark-theme)
+(setq spacemacs-theme-comment-bg nil)
 
 ;; Theme
 (if (display-graphic-p)
     (progn
     ;; if graphic
-      ;; (load-theme 'spacemacs-dark t))
+      (load-theme 'spacemacs-dark t))
       ;; (load-theme 'solarized-dark t))
       ;; (load-theme 'doom-one t))
       ;; (load-theme 'doom-city-lights t))
       ;; (load-theme 'doom-dracula t))
-      (load-theme 'atom-one-dark t))
+      ;; (load-theme 'atom-one-dark t))
     ;; else (optional)
   (load-theme 'atom-one-dark t))
 

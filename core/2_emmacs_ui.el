@@ -46,7 +46,8 @@
   :ensure t
   :config
   (solaire-global-mode +1)
-  (solaire-mode-swap-bg))
+  (solaire-mode-swap-bg)
+  )
 
 ;; Dired
 (use-package dired
@@ -196,6 +197,40 @@
   :hook
   (help-mode . page-break-lines-mode))
 
+;; Dashboard
+(use-package dashboard
+  :ensure t
+  :after evil
+  :diminish (dashboard-mode page-break-lines-mode)
+  :defines (persp-save-dir persp-special-last-buffer)
+  :functions (all-the-icons-faicon
+	      all-the-icons-material
+	      open-custom-file
+	      persp-get-buffer-or-null
+	      persp-load-state-from-file
+	      persp-switch-to-buffer
+	      winner-undo
+	      widget-forward)
+  ;; :custom-face (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
+  :init (dashboard-setup-startup-hook)
+  :config
+  ;; Configure init info
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+  (setq dashboard-set-footer t)
+  ;; Disable Evil mode on dashboard
+  (add-to-list 'evil-emacs-state-modes 'dashboard-mode)
+  ;; Set the title
+  (setq dashboard-banner-logo-title "Welcome to Emmacs, boi")
+  (setq dashboard-startup-banner "~/.emacs.d/banners/logo.png")
+  ;; (setq dashboard-startup-banner 3)
+  (setq dashboard-center-content t)
+  (setq dashboard-items '(
+			  (recents  . 10)
+			  (bookmarks . 5)
+			  (agenda . 5)
+			  (projects . 3)
+			  (registers . 1))))
 
 (use-package doom-modeline
       :ensure t
@@ -447,41 +482,6 @@ TABSET is the tab set used to choose the appropriate buttons."
   :config
   (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
   (setq swiper-goto-start-of-match t))
-
-;; Dashboard
-(use-package dashboard
-  :ensure t
-  :after evil
-  :diminish (dashboard-mode page-break-lines-mode)
-  :defines (persp-save-dir persp-special-last-buffer)
-  :functions (all-the-icons-faicon
-	      all-the-icons-material
-	      open-custom-file
-	      persp-get-buffer-or-null
-	      persp-load-state-from-file
-	      persp-switch-to-buffer
-	      winner-undo
-	      widget-forward)
-  ;; :custom-face (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
-  :init (dashboard-setup-startup-hook)
-  :config
-  ;; Configure init info
-  (setq dashboard-set-heading-icons t)
-  (setq dashboard-set-file-icons t)
-  (setq dashboard-set-footer t)
-  ;; Disable Evil mode on dashboard
-  (add-to-list 'evil-emacs-state-modes 'dashboard-mode)
-  ;; Set the title
-  (setq dashboard-banner-logo-title "Welcome to Emmacs, boi")
-  (setq dashboard-startup-banner "~/.emacs.d/banners/logo.png")
-  ;; (setq dashboard-startup-banner 3)
-  (setq dashboard-center-content t)
-  (setq dashboard-items '(
-			  (recents  . 10)
-			  (bookmarks . 5)
-			  (agenda . 5)
-			  (projects . 3)
-			  (registers . 1))))
 
 ;; Smex configuration
 (use-package amx

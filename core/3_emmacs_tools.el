@@ -6,10 +6,13 @@
 ;; - Beacon
 ;; - Column Enforce Mode
 ;; - Company
+;; - Company C Headers
+;; - Company Irony
 ;; - Company Tern
 ;; - Drag Stuff
 ;; - Dumb Jump
 ;; - Evil
+;; - Evil Matchit
 ;; - Evil Multiedit
 ;; - Evil Snipe
 ;; - Expand Region
@@ -122,10 +125,10 @@
   (defhydra hydra-window (global-map "C-x"
 				     :color red
 				     :hint nil)
-    ("<left>"  windmove-left)
-    ("<right>" windmove-right)
-    ("<up>"    windmove-up)
-    ("<down>"  windmove-down)
+    ("C-<left>"  windmove-left)
+    ("C-<right>" windmove-right)
+    ("C-<up>"    windmove-up)
+    ("C-<down>"  windmove-down)
     ("2" split-window-below)
     ("3" split-window-right)
     ("1" delete-other-windows)))
@@ -242,12 +245,8 @@
   :defer 5
   :hook
   (after-init . global-company-mode)
-  :init
-  (company-mode 1)
   :config
-  (add-to-list 'company-backends 'company-irony)
-  (add-to-list 'company-backends 'company-c-headers)
-  (add-to-list 'company-backends 'company-tern))
+  (company-mode 1))
 
 ;; Yasnippet
 (use-package yasnippet
