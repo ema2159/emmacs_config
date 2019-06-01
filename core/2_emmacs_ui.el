@@ -214,6 +214,7 @@
       (after-init . doom-modeline-mode))
 
 ;; Tabbar ruler
+(require 'tabbar-ruler)
 (defun tabbar-buffer-groups ()
   (list
    (cond
@@ -252,21 +253,6 @@
      "Dashboard")
     ((eq major-mode 'term-mode)
      "Term")
-    ((or (eq major-mode 'python-mode)
-	 (eq major-mode 'c-mode)
-	 (eq major-mode 'c++-mode)
-	 (eq major-mode 'sh-mode)
-	 (eq major-mode 'csv-mode)
-	 (eq major-mode 'text-mode)
-	 (eq major-mode 'specman-mode)
-	 (eq major-mode 'emacs-lisp-mode)
-	 (eq major-mode 'html-mode)
-	 (eq major-mode 'js2-mode)
-	 (eq major-mode 'java-mode)
-	 (eq major-mode 'javascript-mode)
-	 (eq major-mode 'css-mode)
-	 (eq major-mode 'lisp-mode))
-     "Editing")
     ((or (eq major-mode 'org-mode)
 	 (eq major-mode 'org-agenda-clockreport-mode)
 	 (eq major-mode 'org-src-mode)
@@ -278,12 +264,10 @@
 	 (eq major-mode 'org-agenda-log-mode))
      "Org mode")
     (t
-     "Misc buffers")
-    )))
+     "Editing")
+    ))) 
 
-(setq tabbar-ruler-global-tabbar t)
 ;; Tabbar ruler
-(require 'tabbar-ruler)
 ;; Hide tabbar in some specific modes
 (add-hook 'dashboard-mode-hook 'tabbar-local-mode)
 (add-hook 'term-mode-hook 'tabbar-local-mode)
@@ -297,10 +281,19 @@
 (add-hook 'magit-stashes-mode-hook 'tabbar-local-mode)
 
 (setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
-(tabbar-ruler-group-by-projectile-project)
 
 ;; Tabbar excluded buffers
-(setq tabbar-ruler-excluded-buffers '("*Messages*" "*Completions*" "*ESS*" "*Packages*" "*log-edit-files*" "*helm-mini*" "*helm-mode-describe-variable*" "*scratch*" "*Flycheck error messages*"))
+(setq tabbar-ruler-excluded-buffers '("*Messages*"
+				      "*Completions*"
+				      "*ESS*"
+				      "*Packages*"
+				      "*log-edit-files*"
+				      "*helm-mini*"
+				      "*helm-mode-describe-variable*"
+				      "*scratch*"
+				      "*Flycheck error messages*"
+				      "*Compile-Log*"
+				      "*Help*"))
 
 ;; Tab change keybinding
 (global-set-key (kbd "C-<home>") 'tabbar-press-home)
