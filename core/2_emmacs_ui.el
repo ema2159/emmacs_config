@@ -30,7 +30,14 @@
 ;; All The Icons Ivy
 (use-package all-the-icons-ivy
   :ensure t
-  :defer 3
+  :after ivy
+  :init
+  (setq all-the-icons-ivy-file-commands
+	'(counsel-find-file
+	  counsel-file-jump
+	  counsel-recentf
+	  projectile-find-file
+	  projectile-find-dir))
   :config
   (all-the-icons-ivy-setup))
 
