@@ -221,7 +221,24 @@
 
 ;; Company Tern
 (use-package company-tern
-  :ensure t)
+  :ensure t
+  :after company
+  :config
+  (add-to-list 'company-backends 'company-tern))
+
+;; Company C headers
+(use-package company-c-headers
+  :ensure t
+  :after company
+  :config
+  (add-to-list 'company-backends 'company-c-headers))
+
+;; Company Irony
+(use-package company-irony
+  :ensure t
+  :after company
+  :config
+  (add-to-list 'company-backends 'company-irony))
 
 ;; Company
 (use-package company
@@ -308,6 +325,13 @@
   (progn
     (projectile-mode 1)
     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)))
+
+;; Evil Matchit
+(use-package evil-matchit
+  :ensure t
+  :after evil
+  :hook
+  (html-mode . turn-on-evil-matchit-mode))
 
 (provide '3_emmacs_tools)
 ;;; 3_emmacs_tools.el ends here

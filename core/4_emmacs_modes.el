@@ -7,6 +7,7 @@
 ;; - Irony
 ;; - Js2-mode
 ;; - Specman mode
+;; - Tern mode
 
 ;;; Code:
 ;; Specman mode
@@ -39,13 +40,21 @@
   :mode
   ("\\.[Cc][Ss][Vv]\\'" . csv-mode))
 
+;; Tern mode
+(use-package tern
+  :ensure t
+  :after js-mode)
+
 ;; Js2-mode
-(use-package csv-mode
+(use-package js2-mode
   :ensure t
   :mode
   ("\\.js\\'" . js2-mode)
-  ("node" . js2-mode))
-
+  ("node" . js2-mode)
+  :config
+  (add-hook 'js2-mode-hook (lambda ()
+                           (tern-mode)
+                           (company-mode))))
 
 ;; ESS
 ;; (use-package ess
