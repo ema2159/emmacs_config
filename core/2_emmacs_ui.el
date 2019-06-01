@@ -419,7 +419,8 @@ TABSET is the tab set used to choose the appropriate buttons."
 ;; Counsel
 (use-package counsel
   :ensure t
-  :defer t)
+  :defer t
+  :bind (("\C-x\ \C-r" . counsel-recentf)))
 
 ;; Ivy configuration
 (use-package ivy

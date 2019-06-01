@@ -92,11 +92,7 @@
 
 ;; Recent files
 (use-package recentf
-  :ensure t
-  :config
-  (recentf-mode 1)
-  (setq recentf-max-menu-items 25)
-  :bind (("\C-x\ \C-r" . recentf-open-files)))
+  :ensure t)
 
 ;; Magit
 (use-package magit
