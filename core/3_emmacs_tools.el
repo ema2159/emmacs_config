@@ -203,7 +203,9 @@
 (use-package column-enforce-mode
   :ensure t
   :hook
-  (prog-mode . column-enforce-mode))
+  (prog-mode . column-enforce-mode)
+  :config
+  (setq column-enforce-column 100))
 
 ;; Shell-pop
 (use-package shell-pop
