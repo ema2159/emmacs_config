@@ -317,6 +317,10 @@
       ad-do-it))
   (progn
     (setq projectile-file-exists-remote-cache-expire nil)
+    (add-hook 'find-file-hook
+	      (lambda ()
+		(when (file-remote-p default-directory)
+		  (setq-local projectile-mode-line "Projectile"))))
     (setq projectile-completion-system 'ivy)
     ;; (setq projectile-mode-line '(:eval (format " Projectile[%s]" (projectile-project-name))))
     (setq projectile-globally-ignored-directories
