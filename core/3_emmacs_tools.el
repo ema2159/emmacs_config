@@ -250,7 +250,8 @@
   :hook
   (after-init . global-company-mode)
   :config
-  (company-mode 1))
+  (company-mode 1)
+  (setq company-idle-delay 0))
 
 ;; Yasnippet
 (use-package yasnippet
