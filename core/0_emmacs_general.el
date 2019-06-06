@@ -112,5 +112,8 @@
 (setq tramp-auto-save-directory "~/emacs/tramp-autosave")
 (setq tramp-verbose 3)
 
+;; Switch to help buffer automatically
+(setq help-window-select t)
+
 (provide '0_emmacs_general)
 ;;; 0_emmacs_general.el ends here
