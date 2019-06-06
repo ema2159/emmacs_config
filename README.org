@@ -1,0 +1,71 @@
+#+TITLE: Emmacs Config
+#+CREATOR: Emmanuel Bustos T.
+
+Welcome! This is Emmacs (yes, Emmacs). This is my personal Emacs configuration, in which I attempt to create a fast, intuitive text editor that helps in my work as a VLSI and verification engineer.
+
+* Why Emmacs?
+  My name es Emmanuel, Emma in short, and I happen to like bad puns, so there you have it, an Emacs configuration with a dumb name.
+
+* What packages are featured?
+  Here's a nice list with some of the most important packages installed:
+** Themes available
+   - Atom One Dark Theme
+   - Doom Themes
+   - Solarized Theme
+   - Spacemacs Theme
+** User interface tools
+   - All the icons
+   - All The Icons Ivy
+   - Amx
+   - Counsel
+   - Dashboard
+   - Dired Hacks
+   - Dired Single
+   - Doom Modeline
+   - Ivy
+   - Page Break Lines
+   - Solaire Mode
+   - Swiper
+   - Tabbar Ruler (don't like how bloated it is, might fork it and make it more minimalistic)
+   - Treemacs
+   - Which key
+** Editing tools and code navigation tools
+   - Avy
+   - Beacon
+   - Column Enforce Mode
+   - Company
+   - Company C Headers
+   - Company Irony
+   - Company Tern
+   - Drag Stuff
+   - Dumb Jump
+   - Evil
+   - Evil Matchit
+   - Evil Multiedit
+   - Evil Snipe
+   - Expand Region
+   - Flycheck
+   - Hydra
+   - Highlight Thing
+   - Magit
+   - Projectile
+   - Recentf
+   - Undo Tree
+   - Shell Pop
+   - Smartparens
+   - Windmove
+   - Yasnippet
+** Modes support
+   - CSV Mode
+   - Elpy
+   - Irony
+   - Js2-mode
+   - Specman mode (not many configs have it)
+   - Tern mode
+* Some screenshots
+  Dashboard interface:
+  [[./Screenshots/Dashboard.png]]
+  
+  User interface:
+  [[./Screenshots/UI.png]]
+
