@@ -78,6 +78,10 @@
     ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+]\\|\\]\\|\\[" . font-lock-punctuation-face)
     ("\\([A-Za-z][A-Za-z0-9_]*\\)[ \t\n]*\\((.*)\\)"
      (1 font-lock-function-name-face))))
+;; Improve js2-mode syntax highlighting
+(font-lock-add-keywords 'js2-mode
+  '(("-?\\b[0-9]+\\.?" . font-lock-constant-face)
+    ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+]\\|\\]\\|\\[" . font-lock-punctuation-face)))
 ;; Improve c-mode syntax highlighting
 (font-lock-add-keywords 'c-mode
   '(("-?\\b[0-9]+\\.?" . font-lock-constant-face)
