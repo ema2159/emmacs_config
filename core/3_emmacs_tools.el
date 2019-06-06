@@ -150,7 +150,9 @@
   (emacs-lisp-mode . smartparens-mode)
   (c-mode . smartparens-mode)
   (c++-mode . smartparens-mode)
-  (specman-mode . smartparens-mode))
+  (specman-mode . smartparens-mode)
+  (js2-mode . smartparens-mode)
+  (html-mode . smartparens-mode))
 
 ;; Highlight indent guides
 (use-package highlight-indent-guides
