@@ -2,6 +2,7 @@
 
 ;;; Commentary:
 ;; In this section the following packages are loaded:
+;; - All the icons
 ;; - All The Icons Ivy
 ;; - Amx
 ;; - Counsel
@@ -9,6 +10,7 @@
 ;; - Dired Hacks
 ;; - Dired Single
 ;; - Doom Modeline
+;; - Helpful
 ;; - Ivy
 ;; - Page Break Lines
 ;; - Solaire Mode
