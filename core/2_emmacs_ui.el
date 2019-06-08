@@ -464,6 +464,14 @@ TABSET is the tab set used to choose the appropriate buttons."
   (which-key-mode)
   (which-key-setup-side-window-bottom))
 
+;; Helpful
+(use-package helpful
+  :ensure t
+  :config
+  (add-to-list 'evil-emacs-state-modes 'helpful-mode)
+  :bind
+  (("C-h k" . helpful-key)))
+
 ;; Swiper
 (use-package swiper
   :ensure t
