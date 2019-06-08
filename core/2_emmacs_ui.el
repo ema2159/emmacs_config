@@ -486,7 +486,28 @@ TABSET is the tab set used to choose the appropriate buttons."
 (use-package counsel
   :ensure t
   :defer t
-  :bind (("\C-x\ \C-r" . counsel-recentf)))
+  :config
+  (setq counsel-describe-function-function #'helpful-callable)
+  (setq counsel-describe-variable-function #'helpful-variable)
+  :bind
+  (("\C-x\ \C-r" . counsel-recentf)
+   ("C-h b" . counsel-descbinds)
+   ("C-h a" . counsel-apropos)
+   ("C-h f" . counsel-describe-function)
+   ("C-h v" . counsel-describe-variable)
+   ("C-h i" . counsel-imenu)
+   ("C-p" . counsel-yank-pop)
+   ("C-x r b" . counsel-bookmark)
+   ("C-c g" . counsel-git)
+   ("C-c j" . counsel-git-grep)
+   ("C-c k" . counsel-ag)
+   ("C-x l" . counsel-locate)
+   ("M-x" . counsel-M-x)
+   ("C-x C-f" . counsel-find-file)
+   ("C-c u" . counsel-unicode-char)
+   (:map
+    minibuffer-local-map
+    ("C-r" . counsel-minibuffer-history))))
 
 ;; Ivy configuration
 (use-package ivy
@@ -495,26 +516,13 @@ TABSET is the tab set used to choose the appropriate buttons."
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)
-  :bind (("\C-s" . swiper)
-	 ("C-c C-r" . ivy-resume)
-	 ("<f6>" . ivy-resume)
-	 ("M-x" . counsel-M-x)
-	 ("C-x C-f" . counsel-find-file)
-	 ("<f1> f" . counsel-describe-function)
-	 ("<f1> v" . counsel-describe-variable)
-	 ("<f1> l" . counsel-find-library)
-	 ("<f2> i" . counsel-info-lookup-symbol)
-	 ("<f2> u" . counsel-unicode-char)
-	 ("C-c g" . counsel-git)
-	 ("C-c j" . counsel-git-grep)
-	 ("C-c k" . counsel-ag)
-	 ("C-x l" . counsel-locate)
-	 ("C-S-o" . counsel-rhythmbox))
+  :bind
+  (("\C-s" . swiper)
+   ("C-c C-r" . ivy-resume))
   :config
-  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
   (setq swiper-goto-start-of-match t))
 
-;; Smex configuration
+;; AMX configuration
 (use-package amx
   :ensure t
   :defer t) 
