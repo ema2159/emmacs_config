@@ -306,6 +306,9 @@
      "Dashboard")
     ((eq major-mode 'term-mode)
      "Term")
+    ((or (eq major-mode 'helpful-mode)
+	 (eq major-mode 'help-mode))
+     "Help")
     ((or (eq major-mode 'org-mode)
 	 (eq major-mode 'org-agenda-clockreport-mode)
 	 (eq major-mode 'org-src-mode)
@@ -332,6 +335,8 @@
 (add-hook 'magit-status-mode-hook 'tabbar-local-mode)
 (add-hook 'magit-process-mode-hook 'tabbar-local-mode)
 (add-hook 'magit-stashes-mode-hook 'tabbar-local-mode)
+(add-hook 'helpful-mode-hook 'tabbar-local-mode)
+(add-hook 'help-mode-hook 'tabbar-local-mode)
 
 (setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
 
