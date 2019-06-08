@@ -161,7 +161,7 @@
   (setq highlight-indent-guides-method 'character)
   (setq highlight-indent-guides-responsive 'stack)
   :hook
-  (prog-mode-hook . highlight-indent-guides-mode))
+  (prog-mode . highlight-indent-guides-mode))
 
 ;; Flycheck
 (use-package flycheck
