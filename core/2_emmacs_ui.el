@@ -222,20 +222,27 @@
   (setq dashboard-set-navigator t)
   (setq dashboard-set-footer t)
   (setq dashboard-navigator-buttons
-	`((,(all-the-icons-octicon "mark-github" :height 1.5 :v-adjust 0.0)
-	   "Github"
-	   "Go to Github profile"
-	   (lambda (&rest _) (browse-url "https://github.com/ema2159"))
-	   'font-lock-function-name-face
-	   ""
-	   "")
-	  (,(all-the-icons-faicon "linkedin" :height 1.5 :v-adjust 0.0)
-	   "LinkedIn"
-	   "Go to LinkedIn profile"
-	   (lambda (&rest _) (browse-url "https://www.linkedin.com/feed/"))
-	   'font-lock-function-name-face
-	   ""
-	   "")))
+	`(((,(all-the-icons-octicon "mark-github" :height 1.5 :v-adjust 0.0)
+	    "Github"
+	    "Go to Github profile"
+	    (lambda (&rest _) (browse-url "https://github.com/ema2159"))
+	    'font-lock-keyword-face
+	    ""
+	    "")
+	   (,(all-the-icons-faicon "linkedin" :height 1.5 :v-adjust 0.0)
+	    "LinkedIn"
+	    "Go to LinkedIn profile"
+	    (lambda (&rest _) (browse-url "https://www.linkedin.com/feed/"))
+	    'font-lock-keyword-face
+	    ""
+	    "")
+	   (,(all-the-icons-octicon "steps" :height 1.5 :v-adjust 0.0)
+	    "Previous session"
+	    "Restore previous session"
+	    (lambda (&rest _) (desktop-read))
+	    'font-lock-keyword-face
+	    ""
+	    ""))))
   ;; Disable Evil mode on dashboard
   (add-to-list 'evil-emacs-state-modes 'dashboard-mode)
   ;; Set the title

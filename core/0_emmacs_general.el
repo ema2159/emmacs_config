@@ -119,5 +119,10 @@
 ;; Switch to help buffer automatically
 (setq help-window-select t)
 
+;; desktop-save configuration
+(setq desktop-path '("~/.emacs.d/sessions"))
+(setq desktop-load-locked-desktop t)
+(add-hook 'kill-emacs-hook '(lambda()
+			      (desktop-save (car desktop-path))))
 (provide '0_emmacs_general)
 ;;; 0_emmacs_general.el ends here
