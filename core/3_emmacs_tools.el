@@ -6,6 +6,7 @@
 ;; - Beacon
 ;; - Column Enforce Mode
 ;; - Company
+;; - Company Quick Help
 ;; - Company C Headers
 ;; - Company Irony
 ;; - Company Tern
@@ -20,6 +21,7 @@
 ;; - Hydra
 ;; - Highlight Thing
 ;; - Magit
+;; - Origami
 ;; - Projectile
 ;; - Recentf
 ;; - Undo Tree
@@ -213,7 +215,7 @@
   :config
   (setq shell-pop-window-size 30)
   (evil-set-initial-state 'term-mode 'emacs)
-  :bind ("<f5>" . shell-pop))
+  :bind (("<f5>" . shell-pop)))
 
 ;; Evil Snipe
 (use-package evil-snipe
@@ -243,6 +245,15 @@
   :config
   (add-to-list 'company-backends 'company-irony))
 
+;; Company Quick Help
+(use-package company-quickhelp
+  :ensure t
+  :defines company-quickhelp-delay
+  :bind (:map company-active-map
+	      ([remap company-show-doc-buffer] . company-quickhelp-manual-begin))
+  :hook (global-company-mode . company-quickhelp-mode)
+  :init (setq company-quickhelp-delay 0.5))
+
 ;; Company
 (use-package company
   :ensure t
@@ -259,8 +270,7 @@
   :defer t
   :config
   (setq yas-snippet-dirs
-	'("~/.emacs.d/snippets" ;; personal snippets
-	  ))
+	'("~/.emacs.d/snippets"))
   ;; Add yasnippet support for all company backends
   (defvar company-mode/enable-yas t
     "Enable yasnippet for all backends.")
@@ -336,6 +346,16 @@
   :after evil
   :hook
   (html-mode . turn-on-evil-matchit-mode))
+
+(use-package origami
+  :ensure t
+  :hook
+  (prog-mode . origami-mode)
+  :bind ((:map origami-mode-map
+	       ("C-c o a" . origami-toggle-all-nodes)
+	       ("C-c o c" . origami-close-node)
+	       ("C-c o o" . origami-open-node)
+	       ("C-c o t" . origami-forward-toggle-node))))
 
 (provide '3_emmacs_tools)
 ;;; 3_emmacs_tools.el ends here

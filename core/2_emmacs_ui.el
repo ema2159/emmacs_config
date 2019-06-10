@@ -48,8 +48,7 @@
   :ensure t
   :config
   (solaire-global-mode +1)
-  (solaire-mode-swap-bg)
-  )
+  (solaire-mode-swap-bg))
 
 ;; Dired
 (use-package dired
