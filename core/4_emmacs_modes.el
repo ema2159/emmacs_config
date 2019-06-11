@@ -2,10 +2,11 @@
 
 ;;; Commentary:
 ;; In this section the following packages are loaded:
+;; - Anaconda Mode
 ;; - CSV Mode
 ;; - Elpy
 ;; - Irony
-;; - Js2-mode
+;; - Js2 mode
 ;; - Specman mode
 ;; - Tern mode
 
@@ -26,7 +27,7 @@
   :init
   (advice-add 'python-mode :before 'elpy-enable))
 
-;; Irnony
+;; Irony
 (use-package irony
   :ensure t
   :hook
@@ -34,7 +35,7 @@
    (c++-mode . irony-mode)
    (irony-mode . irony-cdb-autosetup-compile-options)))
 
-;; Csv-mode
+;; Csv mode
 (use-package csv-mode
   :ensure t
   :mode
@@ -45,7 +46,7 @@
   :ensure t
   :after js-mode)
 
-;; Js2-mode
+;; Js2 mode
 (use-package js2-mode
   :ensure t
   :mode
@@ -55,6 +56,14 @@
   (add-hook 'js2-mode-hook (lambda ()
                            (tern-mode)
                            (company-mode))))
+
+;; Anaconda mode
+(use-package anaconda-mode
+  :ensure t
+  :config
+  (pythonic-activate "/home/emmanuel/anaconda3/envs/ml")
+  :hook
+  (python-mode . anaconda-mode))
 
 ;; ESS
 ;; (use-package ess
