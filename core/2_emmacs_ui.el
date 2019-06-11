@@ -357,7 +357,12 @@
 				      "*scratch*"
 				      "*Flycheck error messages*"
 				      "*Compile-Log*"
-				      "*Help*"))
+				      "*tramp*"
+				      "*Help*"
+				      "*company-documentation*"
+				      "*Flymake log*"
+				      "*anaconda-mode*"
+				      "*Anaconda*"))
 
 ;; Tab change keybinding
 (global-set-key (kbd "C-<home>") 'tabbar-press-home)
