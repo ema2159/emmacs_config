@@ -124,5 +124,9 @@
 (setq desktop-load-locked-desktop t)
 (add-hook 'kill-emacs-hook '(lambda()
 			      (desktop-save (car desktop-path))))
+
+;; Remove the side fringes
+(fringe-mode 0)
+
 (provide '0_emmacs_general)
 ;;; 0_emmacs_general.el ends here
