@@ -6,6 +6,7 @@
 ;; - All The Icons Ivy
 ;; - Amx
 ;; - Counsel
+;; - Counsel Projectile
 ;; - Dashboard
 ;; - Dired Hacks
 ;; - Dired Single
@@ -29,17 +30,22 @@
     (function
      (lambda nil (interactive) (dired-single-buffer "..")))))
 
+;; All The Icons
+(use-package all-the-icons
+  :ensure t)
+
 ;; All The Icons Ivy
 (use-package all-the-icons-ivy
   :ensure t
-  :after ivy
+  :after counsel-projectile
   :init
   (setq all-the-icons-ivy-file-commands
 	'(counsel-find-file
 	  counsel-file-jump
 	  counsel-recentf
-	  projectile-find-file
-	  projectile-find-dir))
+	  counsel-projectile-find-file
+	  counsel-projectile-find-dir))
+  (setq all-the-icons-spacer " ")
   :config
   (all-the-icons-ivy-setup))
 
@@ -87,7 +93,6 @@
   :after dired
   :config
   (define-key dired-mode-map (kbd "C-f") dired-filter-map))
-
 (use-package dired-subtree
   :ensure t
   :after dired-hacks-utils
@@ -520,6 +525,12 @@ TABSET is the tab set used to choose the appropriate buttons."
     minibuffer-local-map
     ("C-r" . counsel-minibuffer-history))))
 
+;; Counsel Projectile
+(use-package counsel-projectile
+  :ensure t
+  :config
+  (counsel-projectile-mode))
+
 ;; Ivy configuration
 (use-package ivy
   :ensure t
@@ -529,7 +540,8 @@ TABSET is the tab set used to choose the appropriate buttons."
   (setq enable-recursive-minibuffers t)
   :bind
   (("\C-s" . swiper)
-   ("C-c C-r" . ivy-resume))
+   ("C-c C-r" . ivy-resume)
+   ("C-x b" . ivy-switch-buffer))
   :config
   (setq swiper-goto-start-of-match t))
 
