@@ -21,15 +21,6 @@
 ;; - Which key
 
 ;;; Code:
-;; FUNCTIONS
-(defun my-dired-init ()
-  (define-key dired-mode-map [return] 'dired-single-buffer)
-  (define-key dired-mode-map [remap dired-mouse-find-file-other-window]
-    'dired-single-buffer-mouse)
-  (define-key dired-mode-map "^"
-    (function
-     (lambda nil (interactive) (dired-single-buffer "..")))))
-
 ;; All The Icons
 (use-package all-the-icons
   :ensure t)
@@ -73,8 +64,10 @@
 ;; Dired Single
 (use-package dired-single
   :ensure t
-  :hook
-  (dired-load-hook . my-dired-init))
+  :after dired
+  :bind (:map dired-mode-map
+	 ("<return>" . dired-single-buffer)
+	 ("<mouse 1>" . 'dired-single-buffer-mouse)))
 
 ;; All The Icons Dired
 (if (display-graphic-p)
