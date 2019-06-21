@@ -384,6 +384,99 @@
   (setq centaur-tabs-set-icons nil)
   (centaur-tabs-inherit-tabbar-faces)
   (centaur-tabs-mode t)
+  (defun centaur-tabs-buffer-groups ()
+    "`centaur-tabs-buffer-groups' control buffers' group rules.
+
+Group centaur-tabs with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
+All buffer name start with * will group to \"Emacs\".
+Other buffer group by `centaur-tabs-get-group-name' with project name."
+    (list
+     (cond
+      ((or (string-equal "*" (substring (buffer-name) 0 1))
+	   (memq major-mode '(magit-process-mode
+			      magit-status-mode
+			      magit-diff-mode
+			      magit-log-mode
+			      magit-file-mode
+			      magit-blob-mode
+			      magit-blame-mode
+			      )))
+       "Emacs")
+      ((derived-mode-p 'prog-mode)
+       "Editing")
+      ((derived-mode-p 'dired-mode)
+       "Dired")
+      ((memq major-mode '(helpful-mode
+			  help-mode))
+       "Help")
+      ((memq major-mode '(org-mode
+			  org-agenda-clockreport-mode
+			  org-src-mode
+			  org-agenda-mode
+			  org-beamer-mode
+			  org-indent-mode
+			  org-bullets-mode
+			  org-cdlatex-mode
+			  org-agenda-log-mode
+			  diary-mode))
+       "OrgMode")
+      (t
+       (centaur-tabs-get-group-name (current-buffer))))))
+  ;; (defun centaur-tabs-buffer-groups ()
+  ;;   (list
+  ;;    (cond
+  ;;     ((memq major-mode '(magit-log-mode
+  ;; 			  magit-mode
+  ;; 			  magit-wip-mode
+  ;; 			  magit-blob-mode
+  ;; 			  magit-diff-mode
+  ;; 			  magit-file-mode
+  ;; 			  magit-refs-mode
+  ;; 			  magit-blame-mode
+  ;; 			  magit-popup-mode
+  ;; 			  magit-stash-mode
+  ;; 			  magit-cherry-mode
+  ;; 			  magit-reflog-mode
+  ;; 			  magit-status-mode
+  ;; 			  magit-process-mode
+  ;; 			  magit-stashes-mode
+  ;; 			  magit-repolist-mode
+  ;; 			  magit-revision-mode
+  ;; 			  magit-log-select-mode
+  ;; 			  magit-popup-help-mode
+  ;; 			  magit-auto-revert-mode
+  ;; 			  magit-merge-preview-mode
+  ;; 			  magit-submodule-list-mode
+  ;; 			  magit-wip-after-save-mode
+  ;; 			  magit-blame-read-only-mode
+  ;; 			  magit-wip-after-apply-mode
+  ;; 			  magit-wip-before-change-mode
+  ;; 			  magit-wip-initial-backup-mode
+  ;; 			  magit-wip-after-save-mode))
+  ;;      "Magit")
+  ;;     ((derived-mode-p 'dired-mode)
+  ;;      "Dired")
+  ;;     ((derived-mode-p 'dashboard-mode)
+  ;;      "Dashboard")
+  ;;     ((derived-mode-p 'term-mode)
+  ;;      "Term")
+  ;;     ((memq major-mode '(helpful-mode
+  ;; 			  help-mode))
+  ;;      "Help")
+  ;;     ((memq major-mode '(org-mode
+  ;; 			  org-agenda-clockreport-mode
+  ;; 			  org-src-mode
+  ;; 			  org-agenda-mode
+  ;; 			  org-beamer-mode
+  ;; 			  org-indent-mode
+  ;; 			  org-bullets-mode
+  ;; 			  org-cdlatex-mode
+  ;; 			  org-agenda-log-mode))
+  ;;      "Org mode")
+  ;;     ((derived-mode-p 'prog-mode)
+  ;;      "Editing")
+  ;;     (t
+  ;;      (awesome-tab-get-group-name (current-buffer))))))
   :hook
   (dashboard-mode . centaur-tabs-local-mode)
   (term-mode . centaur-tabs-local-mode)
