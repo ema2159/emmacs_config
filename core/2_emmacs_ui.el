@@ -79,7 +79,9 @@
       ;; if graphic
       (use-package all-the-icons)
       (use-package all-the-icons-dired
-	:hook (dired-mode . all-the-icons-dired-mode))))
+	:hook (dired-mode . all-the-icons-dired-mode)
+	:custom-face
+	(all-the-icons-dired-dir-face ((t (:inherit (mode-line-emphasis bold))))))))
 
 ;; Dired Hacks
 (use-package dired-hacks-utils
