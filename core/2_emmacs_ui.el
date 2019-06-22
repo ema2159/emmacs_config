@@ -28,24 +28,28 @@
 ;; All The Icons Ivy
 (use-package all-the-icons-ivy
   :ensure t
-  :after counsel-projectile
+  :after ivy
   :init
   (setq all-the-icons-ivy-file-commands
 	'(counsel-find-file
 	  counsel-file-jump
 	  counsel-recentf
-	  counsel-projectile-find-file
-	  counsel-projectile-find-dir))
+	  projectile-completing-read))
+	  
   (setq all-the-icons-spacer " ")
   :config
-  (all-the-icons-ivy-setup))
+  (all-the-icons-ivy-setup)
+  :custom-face
+  (all-the-icons-ivy-dir-face ((t (:inherit (mode-line-emphasis bold))))))
 
 ;; Solaire mode
 (use-package solaire-mode
   :ensure t
   :config
+  (solaire-mode-swap-bg)
+  (setq solaire-mode-remap-fringe t)
   (solaire-global-mode +1)
-  (solaire-mode-swap-bg))
+  )
 
 ;; Dired
 (use-package dired
@@ -545,12 +549,6 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
    (:map
     minibuffer-local-map
     ("C-r" . counsel-minibuffer-history))))
-
-;; Counsel Projectile
-(use-package counsel-projectile
-  :ensure t
-  :config
-  (counsel-projectile-mode))
 
 ;; Ivy configuration
 (use-package ivy
