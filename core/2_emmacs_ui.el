@@ -5,8 +5,8 @@
 ;; - All the icons
 ;; - All The Icons Ivy
 ;; - Amx
+;; - Centaur Tabs
 ;; - Counsel
-;; - Counsel Projectile
 ;; - Dashboard
 ;; - Dired Hacks
 ;; - Dired Single
@@ -16,7 +16,6 @@
 ;; - Page Break Lines
 ;; - Solaire Mode
 ;; - Swiper
-;; - Tabbar Ruler
 ;; - Treemacs
 ;; - Which key
 
@@ -174,10 +173,10 @@
   :after treemacs projectile
   :ensure t)
 
-(use-package treemacs-icons-dired
-  :after treemacs dired
-  :ensure t
-  :config (treemacs-icons-dired-mode))
+;; (use-package treemacs-icons-dired
+  ;; :after treemacs dired
+  ;; :ensure t
+  ;; :config (treemacs-icons-dired-mode))
 
 (use-package treemacs-magit
   :after treemacs magit
@@ -276,119 +275,19 @@
       :hook
       (after-init . doom-modeline-mode))
 
-;; Tabbar ruler
-;; (require 'emacs-tabs)
-;; (defun tabbar-buffer-groups ()
-;;   (list
-;;    (cond
-;;     ((or (eq major-mode 'magit-log-mode)
-;; 	 (eq major-mode 'magit-mode)
-;; 	 (eq major-mode 'magit-wip-mode)
-;; 	 (eq major-mode 'magit-blob-mode)
-;; 	 (eq major-mode 'magit-diff-mode)
-;; 	 (eq major-mode 'magit-file-mode)
-;; 	 (eq major-mode 'magit-refs-mode)
-;; 	 (eq major-mode 'magit-blame-mode)
-;; 	 (eq major-mode 'magit-popup-mode)
-;; 	 (eq major-mode 'magit-stash-mode)
-;; 	 (eq major-mode 'magit-cherry-mode)
-;; 	 (eq major-mode 'magit-reflog-mode)
-;; 	 (eq major-mode 'magit-status-mode)
-;; 	 (eq major-mode 'magit-process-mode)
-;; 	 (eq major-mode 'magit-stashes-mode)
-;; 	 (eq major-mode 'magit-repolist-mode)
-;; 	 (eq major-mode 'magit-revision-mode)
-;; 	 (eq major-mode 'magit-log-select-mode)
-;; 	 (eq major-mode 'magit-popup-help-mode)
-;; 	 (eq major-mode 'magit-auto-revert-mode)
-;; 	 (eq major-mode 'magit-merge-preview-mode)
-;; 	 (eq major-mode 'magit-submodule-list-mode)
-;; 	 (eq major-mode 'magit-wip-after-save-mode)
-;; 	 (eq major-mode 'magit-blame-read-only-mode)
-;; 	 (eq major-mode 'magit-wip-after-apply-mode)
-;; 	 (eq major-mode 'magit-wip-before-change-mode)
-;; 	 (eq major-mode 'magit-wip-initial-backup-mode)
-;; 	 (eq major-mode 'magit-wip-after-save-mode))
-;;      "Magit")
-;;     ((eq major-mode 'dired-mode)
-;;      "Dired")
-;;     ((eq major-mode 'dashboard-mode)
-;;      "Dashboard")
-;;     ((eq major-mode 'term-mode)
-;;      "Term")
-;;     ((or (eq major-mode 'helpful-mode)
-;; 	 (eq major-mode 'help-mode))
-;;      "Help")
-;;     ((or (eq major-mode 'org-mode)
-;; 	 (eq major-mode 'org-agenda-clockreport-mode)
-;; 	 (eq major-mode 'org-src-mode)
-;; 	 (eq major-mode 'org-agenda-mode)
-;; 	 (eq major-mode 'org-beamer-mode)
-;; 	 (eq major-mode 'org-indent-mode)
-;; 	 (eq major-mode 'org-bullets-mode)
-;; 	 (eq major-mode 'org-cdlatex-mode)
-;; 	 (eq major-mode 'org-agenda-log-mode))
-;;      "Org mode")
-;;     (t
-;;      "Editing")
-;;     )))
-
-;; ;; Hide tabbar in some specific modes
-;; (add-hook 'dashboard-mode-hook 'tabbar-local-mode)
-;; (add-hook 'term-mode-hook 'tabbar-local-mode)
-;; (add-hook 'calendar-mode-hook 'tabbar-local-mode)
-;; (add-hook 'dired-mode-hook 'tabbar-local-mode)
-;; (add-hook 'org-agenda-mode-hook 'tabbar-local-mode)
-;; (add-hook 'magit-log-mode-hook 'tabbar-local-mode)
-;; (add-hook 'magit-diff-mode-hook 'tabbar-local-mode)
-;; (add-hook 'magit-status-mode-hook 'tabbar-local-mode)
-;; (add-hook 'magit-process-mode-hook 'tabbar-local-mode)
-;; (add-hook 'magit-stashes-mode-hook 'tabbar-local-mode)
-;; (add-hook 'helpful-mode-hook 'tabbar-local-mode)
-;; (add-hook 'help-mode-hook 'tabbar-local-mode)
-;; (add-hook 'fundamental-mode-hook 'tabbar-local-mode)
-
-;; (setq tabbar-buffer-groups-function 'tabbar-buffer-groups)
-
-;; ;; Tabbar excluded buffers
-;; (setq emacs-tabs-excluded-buffers '("*Messages*"
-;; 				      "*Completions*"
-;; 				      "*ESS*"
-;; 				      "*Packages*"
-;; 				      "*log-edit-files*"
-;; 				      "*helm-mini*"
-;; 				      "*helm-mode-describe-variable*"
-;; 				      "*scratch*"
-;; 				      "*Flycheck error messages*"
-;; 				      "*Compile-Log*"
-;; 				      "*tramp*"
-;; 				      "*Help*"
-;; 				      "*company-documentation*"
-;; 				      "*Flymake log*"
-;; 				      "*anaconda-mode*"
-;; 				      "*Anaconda*"))
-
-;; ;; Tab change keybinding
-;; (global-set-key (kbd "C-<home>") 'tabbar-press-home)
-;; (global-set-key (kbd "C-<prior>") 'tabbar-backward)
-;; (global-set-key (kbd "C-<next>") 'tabbar-forward)
-
-;; ;; Hide tabbar buttons
-;; (setq tabbar-hide-header-button t)
-;; (setq tabbar-use-images nil)
-;; (defsubst tabbar-line-buttons (tabset)
-;;   "Return a list of propertized strings for tab bar buttons.
-;; TABSET is the tab set used to choose the appropriate buttons."
-;; (list (propertize "")))
-
+;; Centaur Tabs
 (use-package centaur-tabs
   :load-path "~/.emacs.d/other/centaur-tabs"
   :config
   (setq centaur-tabs-background-color (face-background 'default))
-  (setq centaur-tabs-style "bar")
-  (setq centaur-tabs-height 30)
-  (setq centaur-tabs-set-icons nil)
   (centaur-tabs-inherit-tabbar-faces)
+  (setq centaur-tabs-style "bar")
+  (setq centaur-tabs-height 32)
+  (setq centaur-tabs-set-icons t)
+  (setq centaur-tabs-set-bar t)
+  (setq centaur-tabs-set-close-button nil)
+  (setq centaur-tabs-set-modified-marker t)
+  (setq centaur-tabs-modified-marker (concat " " (make-string 1 #x25CB)))
   (centaur-tabs-mode t)
   (defun centaur-tabs-buffer-groups ()
     "`centaur-tabs-buffer-groups' control buffers' group rules.
@@ -428,61 +327,6 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
        "OrgMode")
       (t
        (centaur-tabs-get-group-name (current-buffer))))))
-  ;; (defun centaur-tabs-buffer-groups ()
-  ;;   (list
-  ;;    (cond
-  ;;     ((memq major-mode '(magit-log-mode
-  ;; 			  magit-mode
-  ;; 			  magit-wip-mode
-  ;; 			  magit-blob-mode
-  ;; 			  magit-diff-mode
-  ;; 			  magit-file-mode
-  ;; 			  magit-refs-mode
-  ;; 			  magit-blame-mode
-  ;; 			  magit-popup-mode
-  ;; 			  magit-stash-mode
-  ;; 			  magit-cherry-mode
-  ;; 			  magit-reflog-mode
-  ;; 			  magit-status-mode
-  ;; 			  magit-process-mode
-  ;; 			  magit-stashes-mode
-  ;; 			  magit-repolist-mode
-  ;; 			  magit-revision-mode
-  ;; 			  magit-log-select-mode
-  ;; 			  magit-popup-help-mode
-  ;; 			  magit-auto-revert-mode
-  ;; 			  magit-merge-preview-mode
-  ;; 			  magit-submodule-list-mode
-  ;; 			  magit-wip-after-save-mode
-  ;; 			  magit-blame-read-only-mode
-  ;; 			  magit-wip-after-apply-mode
-  ;; 			  magit-wip-before-change-mode
-  ;; 			  magit-wip-initial-backup-mode
-  ;; 			  magit-wip-after-save-mode))
-  ;;      "Magit")
-  ;;     ((derived-mode-p 'dired-mode)
-  ;;      "Dired")
-  ;;     ((derived-mode-p 'dashboard-mode)
-  ;;      "Dashboard")
-  ;;     ((derived-mode-p 'term-mode)
-  ;;      "Term")
-  ;;     ((memq major-mode '(helpful-mode
-  ;; 			  help-mode))
-  ;;      "Help")
-  ;;     ((memq major-mode '(org-mode
-  ;; 			  org-agenda-clockreport-mode
-  ;; 			  org-src-mode
-  ;; 			  org-agenda-mode
-  ;; 			  org-beamer-mode
-  ;; 			  org-indent-mode
-  ;; 			  org-bullets-mode
-  ;; 			  org-cdlatex-mode
-  ;; 			  org-agenda-log-mode))
-  ;;      "Org mode")
-  ;;     ((derived-mode-p 'prog-mode)
-  ;;      "Editing")
-  ;;     (t
-  ;;      (awesome-tab-get-group-name (current-buffer))))))
   :hook
   (dashboard-mode . centaur-tabs-local-mode)
   (term-mode . centaur-tabs-local-mode)
@@ -500,7 +344,9 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   (lisp-interaction-mode . centaur-tabs-local-mode)
   :bind
   ("C-<prior>" . centaur-tabs-backward)
-   ("C-<next>" . centaur-tabs-forward))
+  ("C-<next>" . centaur-tabs-forward)
+  :custom-face
+  (centaur-active-bar-face ((t (:inherit doom-modeline-bar)))))
 
 ;; Which key
 (use-package which-key
