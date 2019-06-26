@@ -345,8 +345,11 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   :bind
   ("C-<prior>" . centaur-tabs-backward)
   ("C-<next>" . centaur-tabs-forward)
+  (:map evil-normal-state-map
+	("g t" . centaur-tabs-forward)
+	("g T" . centaur-tabs-backward))
   :custom-face
-  (centaur-active-bar-face ((t (:inherit doom-modeline-bar)))))
+  (centaur-tabs-active-bar-face ((t (:inherit doom-modeline-bar)))))
 
 ;; Which key
 (use-package which-key
