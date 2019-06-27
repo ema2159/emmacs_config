@@ -228,21 +228,21 @@
 	    "Github"
 	    "Go to Github profile"
 	    (lambda (&rest _) (browse-url "https://github.com/ema2159"))
-	    'font-lock-keyword-face
+	    font-lock-keyword-face
 	    ""
 	    "")
 	   (,(all-the-icons-faicon "linkedin" :height 1.5 :v-adjust 0.0)
 	    "LinkedIn"
 	    "Go to LinkedIn profile"
 	    (lambda (&rest _) (browse-url "https://www.linkedin.com/feed/"))
-	    'font-lock-keyword-face
+	    font-lock-keyword-face
 	    ""
 	    "")
 	   (,(all-the-icons-material "save" :height 1.5 :v-adjust -0.2)
 	    "Previous session"
 	    "Restore previous session"
 	    (lambda (&rest _) (desktop-read))
-	    'font-lock-keyword-face
+	    font-lock-keyword-face
 	    ""
 	    ""))))
   ;; Disable Evil mode on dashboard
