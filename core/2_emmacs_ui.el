@@ -285,10 +285,10 @@
   (setq centaur-tabs-height 32)
   (setq centaur-tabs-set-icons t)
   (setq centaur-tabs-set-bar t)
-  (setq centaur-tabs-set-close-button nil)
   (setq centaur-tabs-set-modified-marker t)
-  (setq centaur-tabs-modified-marker (concat " " (make-string 1 #x25CB)))
   (centaur-tabs-mode t)
+  (set-face-attribute 'centaur-tabs-modified-marker-selected nil :foreground (face-background 'doom-modeline-bar))
+  (set-face-attribute 'centaur-tabs-modified-marker-unselected nil :foreground (face-background 'doom-modeline-bar))
   (defun centaur-tabs-buffer-groups ()
     "`centaur-tabs-buffer-groups' control buffers' group rules.
 
