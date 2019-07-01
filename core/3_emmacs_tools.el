@@ -104,9 +104,41 @@
 ;; Magit
 (use-package magit
   :bind ("C-x g" . magit-status)
-  :init
-  (add-hook 'magit-process-mode-hook
-	    (lambda () (setq-local linum-active nil))))
+  :config
+  (require 'dash)
+  (defmacro pretty-magit (WORD ICON PROPS &optional NO-PROMPT?)
+    "Replace sanitized WORD with ICON, PROPS and by default add to prompts."
+    `(prog1
+	 (add-to-list 'pretty-magit-alist
+		      (list (rx bow (group ,WORD (eval (if ,NO-PROMPT? "" ":"))))
+			    ,ICON ',PROPS))
+       (unless ,NO-PROMPT?
+	 (add-to-list 'pretty-magit-prompt (concat ,WORD ": ")))))
+
+  (setq pretty-magit-alist nil)
+  (setq pretty-magit-prompt nil)
+  (pretty-magit "Add"     (all-the-icons-faicon "plus") ('all-the-icons-blue))
+  (pretty-magit "Fix"     (all-the-icons-faicon "bug") ('all-the-icons-red))
+  (pretty-magit "Doc"     (all-the-icons-octicon "file-text") ('all-the-icons-green))
+  (pretty-magit "Clean"     (all-the-icons-faicon "scissors") ('all-the-icons-purple))
+
+  (defun add-magit-faces ()
+    "Add face properties and compose symbols for buffer from pretty-magit."
+    (interactive)
+    (with-silent-modifications
+      (--each pretty-magit-alist
+	(-let (((rgx icon props) it))
+	  (save-excursion
+	    (goto-char (point-min))
+	    (while (search-forward-regexp rgx nil t)
+	      (compose-region
+	       (match-beginning 1) (match-end 1) icon)
+	      (when props
+		(add-face-text-property
+		 (match-beginning 1) (match-end 1) props))))))))
+
+  (advice-add 'magit-status :after 'add-magit-faces)
+  (advice-add 'magit-refresh-buffer :after 'add-magit-faces))
 
 ;; Avy
 (use-package avy
