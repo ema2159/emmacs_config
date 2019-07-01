@@ -381,6 +381,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   :config
   (setq counsel-describe-function-function #'helpful-callable)
   (setq counsel-describe-variable-function #'helpful-variable)
+  (setq counsel-descbinds-function #'helpful-key)
   :bind
   (("\C-x\ \C-r" . counsel-recentf)
    ("C-h b" . counsel-descbinds)
