@@ -67,8 +67,12 @@
   (css-mode . emmet-mode))
 
 ;; ESS
-;; (use-package ess
-;;   :ensure t)
+(use-package ess
+  :ensure t)
+
+;; Go Mode
+(use-package go-mode
+  :ensure t)
 
 (provide '4_emmacs_modes)
 ;;; 4_emmacs_modes.el ends here
