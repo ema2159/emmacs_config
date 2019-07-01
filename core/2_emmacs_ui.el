@@ -182,20 +182,6 @@
   :after treemacs magit
   :ensure t)
 
-;; Telephone line
-;; (use-package telephone-line
-;;   :ensure t
-;;   :config
-;;   (setq telephone-line-primary-left-separator 'telephone-line-sin-left
-;; 	telephone-line-secondary-left-separator 'telephone-line-sin-hollow-left
-;; 	telephone-line-primary-right-separator 'telephone-line-sin-right
-;; 	telephone-line-secondary-right-separator 'telephone-line-sin-hollow-right)
-;;   (telephone-line-mode 1)
-;;   (set-face-attribute 'telephone-line-evil-normal
-;; 		      nil
-;; 		      :background
-;; 		      "#317DC9"))
-
 (use-package page-break-lines
   :ensure t
   :hook
