@@ -6,6 +6,7 @@
 ;; - CSV Mode
 ;; - Elpy
 ;; - Emmet Mode
+;; - Go Mode
 ;; - Irony
 ;; - Js2 Mode
 ;; - Specman Mode
@@ -13,13 +14,25 @@
 
 ;;; Code:
 ;; Specman Mode
-(add-to-list 'load-path "~/.emacs.d/specman")
-(put 'specman-mode 'derived-mode-parent 'prog-mode)
-(load "specman-mode")
-(add-to-list 'auto-mode-alist '("\\.e\\'" . specman-mode))
-(add-to-list 'auto-mode-alist '("\\.ecom\\'" . specman-mode))
-(add-hook 'specman-mode-hook (lambda () (use-local-map nil)))
-(add-hook 'specman-mode-hook 'yas-minor-mode)
+(use-package specman-mode
+  :load-path "~/.emacs.d/specman"
+  :mode "\\.e\\'"
+  "\\.ecom\\'"
+  :config
+  (put 'specman-mode 'derived-mode-parent 'prog-mode)
+  :hook
+  (specman-mode . (lambda () (use-local-map nil)))
+  (specman-mode . yas-minor-mode)
+  (specman-mode . display-line-numbers-mode))
+
+;; (add-to-list 'load-path "~/.emacs.d/specman")
+;; (put 'specman-mode 'derived-mode-parent 'prog-mode)
+;; (load "specman-mode")
+;; (add-to-list 'auto-mode-alist '("\\.e\\'" . specman-mode))
+;; (add-to-list 'auto-mode-alist '("\\.ecom\\'" . specman-mode))
+;; (add-hook 'specman-mode-hook (lambda () (use-local-map nil)))
+;; (add-hook 'specman-mode-hook 'yas-minor-mode)
+;; (add-hook 'specman-mode-hook 'display-line-numbers-mode)
 
 ;; Irony
 (use-package irony
