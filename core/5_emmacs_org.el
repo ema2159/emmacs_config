@@ -40,5 +40,11 @@
   :hook
   (org-mode . (lambda () (org-bullets-mode 1))))
 
+;; Org bullets
+(use-package toc-org
+  :ensure t
+  :hook
+  (org-mode-hook . toc-org-mode))
+
 (provide '5_emmacs_org)
 ;;; 5_emmacs_org.el ends here
