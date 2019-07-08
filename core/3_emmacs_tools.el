@@ -117,10 +117,10 @@
 
   (setq pretty-magit-alist nil)
   (setq pretty-magit-prompt nil)
-  (pretty-magit "Add"     (all-the-icons-faicon "plus") ('all-the-icons-blue))
-  (pretty-magit "Fix"     (all-the-icons-faicon "bug") ('all-the-icons-red))
-  (pretty-magit "Doc"     (all-the-icons-octicon "file-text") ('all-the-icons-green))
-  (pretty-magit "Clean"     (all-the-icons-faicon "scissors") ('all-the-icons-purple))
+  (pretty-magit "Add"    ?⊕ ('all-the-icons-blue))
+  (pretty-magit "Fix"    ?🐞 ('all-the-icons-red))
+  (pretty-magit "Doc"    ?🗎 ('all-the-icons-green))
+  (pretty-magit "Clean"  ?✀ ('all-the-icons-yellow))
 
   (defun add-magit-faces ()
     "Add face properties and compose symbols for buffer from pretty-magit."
