@@ -540,11 +540,23 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
   :ensure t
   :hook
   (prog-mode . origami-mode)
+  :config
+  (defhydra hydra-origami (:color red)
+    "
+――――――――――――――――――――――――――――――――――――――――――――――――――――
+ _o_pen node  │ _n_ext fold     │ _t_oggle node
+ _c_lose node │ _p_revious fold │ toggle _a_ll
+――――――――――――――――――――――――――――――――――――――――――――――――――――
+  "
+    ("o" origami-open-node)
+    ("c" origami-close-node)
+    ("n" origami-next-fold)
+    ("p" origami-previous-fold)
+    ("t" origami-toggle-node)
+    ("a" origami-toggle-all-nodes)
+    ("C-c o" nil :color blue))
   :bind ((:map origami-mode-map
-	       ("C-c o a" . origami-toggle-all-nodes)
-	       ("C-c o c" . origami-close-node)
-	       ("C-c o o" . origami-open-node)
-	       ("C-c o t" . origami-forward-toggle-node))))
+	       ("C-c o" . hydra-origami/body))))
 
 (provide '3_emmacs_tools)
 ;;; 3_emmacs_tools.el ends here
