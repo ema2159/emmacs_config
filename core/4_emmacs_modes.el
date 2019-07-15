@@ -23,7 +23,9 @@
   :hook
   (specman-mode . (lambda () (use-local-map nil)))
   (specman-mode . yas-minor-mode)
-  (specman-mode . display-line-numbers-mode))
+  (specman-mode . display-line-numbers-mode)
+  :custom-face
+  (specman-punctuation-face ((t (:inherit font-lock-keyword-face)))))
 
 ;; (add-to-list 'load-path "~/.emacs.d/specman")
 ;; (put 'specman-mode 'derived-mode-parent 'prog-mode)
