@@ -125,30 +125,38 @@ _v_iew             │ ^ ^              │                │                 �
 	 ("<return>" . dired-single-buffer)
 	 ("<mouse 1>" . 'dired-single-buffer-mouse)))
 
+;; All The Icons
+(use-package all-the-icons
+  :ensure t)
+
 ;; All The Icons Dired
-(if (display-graphic-p)
-    (progn
-      ;; if graphic
-      (use-package all-the-icons)
-      (use-package all-the-icons-dired
-	:hook (dired-mode . all-the-icons-dired-mode)
-	:custom-face
-	(all-the-icons-dired-dir-face ((t (:inherit (mode-line-emphasis bold))))))))
+(use-package all-the-icons-dired
+  :ensure t
+  :hook (dired-mode . all-the-icons-dired-mode)
+  :custom-face
+  (all-the-icons-dired-dir-face ((t (:inherit (mode-line-emphasis bold))))))
 
 ;; Dired Hacks
 (use-package dired-hacks-utils
   :ensure t
   :after dired)
+
+;; Dired Filter
 (use-package dired-filter
   :ensure t
   :after dired
   :config
   (define-key dired-mode-map (kbd "C-f") dired-filter-map))
+
+;; Dired Subtree
 (use-package dired-subtree
   :ensure t
   :after dired-hacks-utils
   :config
   (setq dired-subtree-use-backgrounds nil)
+  (add-hook 'dired-subtree-after-insert-hook 'all-the-icons-dired--display)
+  ;; :hook
+  ;; (dired-subtree-after-insert . (all-the-icons-dired--display))
   :bind
   (:map dired-mode-map
    ("i" . dired-subtree-insert)
