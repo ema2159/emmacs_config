@@ -318,16 +318,14 @@ _v_iew             │ ^ ^              │                │                 �
 (use-package centaur-tabs
   :load-path "~/.emacs.d/other/centaur-tabs"
   :config
-  (setq centaur-tabs-background-color (face-background 'default))
-  (centaur-tabs-inherit-tabbar-faces)
   (setq centaur-tabs-style "bar")
   (setq centaur-tabs-height 32)
   (setq centaur-tabs-set-icons t)
-  (setq centaur-tabs-set-bar t)
   (setq centaur-tabs-set-modified-marker t)
+  (centaur-tabs-headline-match)
+  (setq centaur-tabs-set-bar 'over)
+  ;; (centaur-tabs-enable-buffer-reordering)
   (centaur-tabs-mode t)
-  (set-face-attribute 'centaur-tabs-modified-marker-selected nil :foreground (face-background 'doom-modeline-bar))
-  (set-face-attribute 'centaur-tabs-modified-marker-unselected nil :foreground (face-background 'doom-modeline-bar))
   (defun centaur-tabs-buffer-groups ()
     "`centaur-tabs-buffer-groups' control buffers' group rules.
 
@@ -370,25 +368,17 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   (dashboard-mode . centaur-tabs-local-mode)
   (term-mode . centaur-tabs-local-mode)
   (calendar-mode . centaur-tabs-local-mode)
-  (dired-mode . centaur-tabs-local-mode)
   (org-agenda-mode . centaur-tabs-local-mode)
-  (magit-log-mode . centaur-tabs-local-mode)
-  (magit-diff-mode . centaur-tabs-local-mode)
-  (magit-status-mode . centaur-tabs-local-mode)
-  (magit-process-mode . centaur-tabs-local-mode)
-  (magit-stashes-mode . centaur-tabs-local-mode)
   (helpful-mode . centaur-tabs-local-mode)
-  (help-mode . centaur-tabs-local-mode)
-  (fundamental-mode . centaur-tabs-local-mode)
-  (lisp-interaction-mode . centaur-tabs-local-mode)
   :bind
   ("C-<prior>" . centaur-tabs-backward)
   ("C-<next>" . centaur-tabs-forward)
+  ("C-c t s" . centaur-tabs-counsel-switch-group)
+  ("C-c t p" . centaur-tabs-group-by-projectile-project)
+  ("C-c t g" . centaur-tabs-group-buffer-groups)
   (:map evil-normal-state-map
 	("g t" . centaur-tabs-forward)
-	("g T" . centaur-tabs-backward))
-  :custom-face
-  (centaur-tabs-active-bar-face ((t (:inherit doom-modeline-bar)))))
+	("g T" . centaur-tabs-backward)))
 
 ;; Which key
 (use-package which-key
