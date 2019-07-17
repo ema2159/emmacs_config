@@ -459,9 +459,9 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   :config
   (setq ivy-posframe-display-functions-alist
 	'((swiper          . nil)
-	  (complete-symbol . ivy-posframe-display-at-frame-center)
-	  (counsel-M-x     . ivy-posframe-display-at-frame-center)
-	  (t               . ivy-posframe-display-at-point)))
+	  (complete-symbol            . ivy-posframe-display-at-frame-center)
+	  (counsel-M-x                . ivy-posframe-display-at-point)
+	  (t                          . ivy-posframe-display-at-frame-center)))
   (ivy-posframe-mode 1))
 
 ;; AMX configuration
