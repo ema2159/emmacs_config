@@ -13,6 +13,7 @@
 ;; - Doom Modeline
 ;; - Helpful
 ;; - Ivy
+;; - Ivy Post Frame
 ;; - Page Break Lines
 ;; - Solaire Mode
 ;; - Swiper
@@ -453,10 +454,20 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   :config
   (setq swiper-goto-start-of-match t))
 
+(use-package ivy-posframe
+  :ensure t
+  :config
+  (setq ivy-posframe-display-functions-alist
+	'((swiper          . nil)
+	  (complete-symbol . ivy-posframe-display-at-frame-center)
+	  (counsel-M-x     . ivy-posframe-display-at-frame-center)
+	  (t               . ivy-posframe-display-at-point)))
+  (ivy-posframe-mode 1))
+
 ;; AMX configuration
 (use-package amx
   :ensure t
-  :defer t) 
+  :defer t)
 
 (provide '2_emmacs_ui)
 ;;; 2_emmacs-ui.el ends here
