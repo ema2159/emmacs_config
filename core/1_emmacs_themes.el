@@ -141,18 +141,15 @@
 |                         |                        |                   | 116 base16-summerfruit-dark         |
 |                         |                        |                   | 117 base16-summerfruit-light        |
 |                         |                        |                   | 118 base16-synth-midnight-dark      |
-|                         |                        |                   | 119 base16-theme-autoloads.el       |
-|                         |                        |                   | 120 base16                          |
-|                         |                        |                   | 121 base16-theme-pkg.el             |
-|                         |                        |                   | 122 base16-tomorrow-night           |
-|                         |                        |                   | 123 base16-tomorrow                 |
-|                         |                        |                   | 124 base16-tube                     |
-|                         |                        |                   | 125 base16-twilight                 |
-|                         |                        |                   | 126 base16-unikitty-dark            |
-|                         |                        |                   | 127 base16-unikitty-light           |
-|                         |                        |                   | 128 base16-woodland                 |
-|                         |                        |                   | 129 base16-xcode-dusk               |
-|                         |                        |                   | 130 base16-zenburn                  |
+|                         |                        |                   | 119 base16-tomorrow-night           |
+|                         |                        |                   | 120 base16-tomorrow                 |
+|                         |                        |                   | 121 base16-tube                     |
+|                         |                        |                   | 122 base16-twilight                 |
+|                         |                        |                   | 123 base16-unikitty-dark            |
+|                         |                        |                   | 124 base16-unikitty-light           |
+|                         |                        |                   | 125 base16-woodland                 |
+|                         |                        |                   | 126 base16-xcode-dusk               |
+|                         |                        |                   | 127 base16-zenburn                  |
 |-------------------------+------------------------+-------------------+-------------------------------------|"
   )
 
@@ -346,15 +343,15 @@
      ((eq emmacs-theme-number 119) (load-theme 'base16-theme-autoloads.el t))
      ((eq emmacs-theme-number 120) (load-theme 'base16 t))
      ((eq emmacs-theme-number 121) (load-theme 'base16-theme-pkg.el t))
-     ((eq emmacs-theme-number 122) (load-theme 'base16-tomorrow-night t))
-     ((eq emmacs-theme-number 123) (load-theme 'base16-tomorrow t))
-     ((eq emmacs-theme-number 124) (load-theme 'base16-tube t))
-     ((eq emmacs-theme-number 125) (load-theme 'base16-twilight t))
-     ((eq emmacs-theme-number 126) (load-theme 'base16-unikitty-dark t))
-     ((eq emmacs-theme-number 127) (load-theme 'base16-unikitty-light t))
-     ((eq emmacs-theme-number 128) (load-theme 'base16-woodland t))
-     ((eq emmacs-theme-number 129) (load-theme 'base16-xcode-dusk t))
-     ((eq emmacs-theme-number 130) (load-theme 'base16-zenburn t))
+     ((eq emmacs-theme-number 119) (load-theme 'base16-tomorrow-night t))
+     ((eq emmacs-theme-number 120) (load-theme 'base16-tomorrow t))
+     ((eq emmacs-theme-number 121) (load-theme 'base16-tube t))
+     ((eq emmacs-theme-number 122) (load-theme 'base16-twilight t))
+     ((eq emmacs-theme-number 123) (load-theme 'base16-unikitty-dark t))
+     ((eq emmacs-theme-number 124) (load-theme 'base16-unikitty-light t))
+     ((eq emmacs-theme-number 125) (load-theme 'base16-woodland t))
+     ((eq emmacs-theme-number 126) (load-theme 'base16-xcode-dusk t))
+     ((eq emmacs-theme-number 127) (load-theme 'base16-zenburn t))
      )
     (set-face-attribute 'widget-button nil :underline nil)))
  ((eq emmacs-theme-package 5)
