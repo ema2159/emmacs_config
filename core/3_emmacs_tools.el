@@ -28,6 +28,7 @@
 ;; - Recentf
 ;; - Undo Tree
 ;; - Shell Pop
+;; - Smart Jump
 ;; - Smartparens
 ;; - Windmove
 ;; - Yasnippet
@@ -56,12 +57,17 @@
   :config
   (setq dumb-jump-selector 'ivy)
   (setq dumb-jump-prefer-searcher 'rg)
-  (dumb-jump-mode)
+  (dumb-jump-mode))
+
+;; Smart Jump
+(use-package smart-jump
+  :ensure t
+  :config
+  (smart-jump-setup-default-registers)
   :bind (:map evil-motion-state-map
-	      ("gd" . dumb-jump-go)
-	      ("gb" . dumb-jump-back)
-	      ("go" . dumb-jump-go-other-window)
-	      ("gl" . dumb-jump-quick-look)))
+	      ("gd" . smart-jump-go)
+	      ("gb" . smart-jump-back)
+	      ("gl" . smart-jump-peek)))
 
 ;; Drag Stuff
 (use-package drag-stuff
