@@ -44,7 +44,7 @@
 (use-package toc-org
   :ensure t
   :hook
-  (org-mode-hook . toc-org-mode))
+  (org-mode . toc-org-mode))
 
 (provide '5_emmacs_org)
 ;;; 5_emmacs_org.el ends here
