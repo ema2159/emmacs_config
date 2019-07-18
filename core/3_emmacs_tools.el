@@ -112,37 +112,35 @@
   :bind ("C-x g" . magit-status)
   :config
   (require 'dash)
-  (defmacro pretty-magit (WORD ICON PROPS &optional NO-PROMPT?)
-    "Replace sanitized WORD with ICON, PROPS and by default add to prompts."
+  (defmacro pretty-magit (WORD ICON COLOR &optional NO-PROMPT?)
+    "Replace sanitized WORD with ICON, coloring it with COLOR."
     `(prog1
 	 (add-to-list 'pretty-magit-alist
 		      (list (rx bow (group ,WORD (eval (if ,NO-PROMPT? "" ":"))))
-			    ,ICON ',PROPS))
-       (unless ,NO-PROMPT?
-	 (add-to-list 'pretty-magit-prompt (concat ,WORD ": ")))))
+			    ,ICON ,COLOR))))
 
   (setq pretty-magit-alist nil)
-  (setq pretty-magit-prompt nil)
-  (pretty-magit "Add"    ?⊕ ('all-the-icons-blue))
-  (pretty-magit "Fix"    ?🐞 ('all-the-icons-red))
-  (pretty-magit "Doc"    ?🗎 ('all-the-icons-green))
-  (pretty-magit "Clean"  ?✀ ('all-the-icons-yellow))
+  (pretty-magit "Add"    (all-the-icons-faicon "plus-circle") (face-foreground 'all-the-icons-blue))
+  (pretty-magit "Fix"    (all-the-icons-octicon "bug")        (face-foreground 'all-the-icons-red))
+  (pretty-magit "Doc"    (all-the-icons-octicon "file-text")  (face-foreground 'all-the-icons-green))
+  (pretty-magit "Clean"  (all-the-icons-faicon  "scissors")   (face-foreground 'all-the-icons-yellow))
+  (pretty-magit "Mod"    (all-the-icons-faicon  "wrench")     (face-foreground 'all-the-icons-purple))
 
   (defun add-magit-faces ()
     "Add face properties and compose symbols for buffer from pretty-magit."
     (interactive)
     (with-silent-modifications
       (--each pretty-magit-alist
-	(-let (((rgx icon props) it))
+	(-let (((rgx icon color) it))
 	  (save-excursion
 	    (goto-char (point-min))
 	    (while (search-forward-regexp rgx nil t)
 	      (compose-region
 	       (match-beginning 1) (match-end 1) icon)
-	      (when props
-		(add-face-text-property
-		 (match-beginning 1) (match-end 1) props))))))))
-
+	      ;; (when props
+	      (put-text-property
+	       (match-beginning 1) (match-end 1) 'face `(:inherit ,(get-text-property 0 'face icon)
+								  :foreground ,color))))))))
   (advice-add 'magit-status :after 'add-magit-faces)
   (advice-add 'magit-refresh-buffer :after 'add-magit-faces))
 
