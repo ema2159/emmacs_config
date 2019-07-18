@@ -17,9 +17,11 @@
 5 - Zenburn")
 
 (defvar emmacs-treemacs-theme 0
-  "Treemacs theme to be loaded.")
+  "Treemacs theme to be loaded.
+0 - Doom Themes
+1 - Kaolin Themes")
 
-(defvar emmacs-theme-number 21
+(defvar emmacs-theme-number 14
   "Available themes.
 | Doom                    | Kaolin                 | Spacemacs         | Base16                              |
 |-------------------------+------------------------+-------------------+-------------------------------------|
