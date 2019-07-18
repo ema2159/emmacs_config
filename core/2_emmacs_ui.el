@@ -48,8 +48,7 @@
   :config
   (solaire-mode-swap-bg)
   (setq solaire-mode-remap-fringe t)
-  (solaire-global-mode +1)
-  )
+  (solaire-global-mode +1))
 
 ;; Dired
 (use-package dired
@@ -327,13 +326,14 @@ _v_iew             │ ^ ^              │                │                 �
 (use-package centaur-tabs
   :load-path "~/.emacs.d/other/centaur-tabs"
   :config
-  (setq centaur-tabs-style "bar")
-  (setq centaur-tabs-height 32)
-  (setq centaur-tabs-set-icons t)
-  (setq centaur-tabs-set-modified-marker t)
+  (setq centaur-tabs-style "bar"
+	centaur-tabs-height 32
+	centaur-tabs-set-icons t
+	centaur-tabs-set-modified-marker t
+	centaur-tabs-set-bar 'left)
   (centaur-tabs-headline-match)
-  (setq centaur-tabs-set-bar 'over)
-  ;; (centaur-tabs-enable-buffer-reordering)
+  ;; (setq centaur-tabs-gray-out-icons 'buffer)
+  (centaur-tabs-enable-buffer-reordering)
   (centaur-tabs-mode t)
   (defun centaur-tabs-buffer-groups ()
     "`centaur-tabs-buffer-groups' control buffers' group rules.
@@ -454,6 +454,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   :config
   (setq swiper-goto-start-of-match t))
 
+;; Ivy Posframe configuration
 (use-package ivy-posframe
   :ensure t
   :config
