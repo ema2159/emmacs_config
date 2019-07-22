@@ -405,7 +405,11 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 ;; Swiper
 (use-package swiper
   :ensure t
-  :defer t)
+  :defer t
+  :after evil
+  :bind (:map evil-normal-state-map
+	      ("/" . swiper)
+	      ("?" . swiper-backward)))
 
 ;; Counsel
 (use-package counsel

@@ -45,11 +45,7 @@
   ;; When evil :wq, save and close buffer and window instead of Emacs
   (evil-ex-define-cmd "wq" 'save-and-kill-buffer-and-window)
   ;; Remap "," to repeat last macro (@@)
-  (define-key evil-normal-state-map "," (kbd "@@"))
-  (setq isearch-forward t)
-  :bind (:map evil-normal-state-map
-	      ("/" . swiper)
-	      ("?" . swiper)))
+  (define-key evil-normal-state-map "," (kbd "@@")))
 
 ;; Dumb Jump
 (use-package dumb-jump
@@ -167,7 +163,7 @@
 				     :hint nil)
      "
  Moving^^^^                    Spliting^^^^
- ――――――――――――――――――――――――――――――――――――――――――――――――――
+ ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
   [_C-<up>_]    window-left   │ [_2_] split-window-below
   [_C-<right>_] window-right  │ [_3_] split-window-right
   [_C-<left>_]  window-left   │ [_1_] delete-other-windows

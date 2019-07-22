@@ -126,5 +126,8 @@
 ;; Remove the side fringes
 (fringe-mode 0)
 
+;; Default isearch to forward
+(setq isearch-forward t)
+
 (provide '0_emmacs_general)
 ;;; 0_emmacs_general.el ends here
