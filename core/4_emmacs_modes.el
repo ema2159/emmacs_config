@@ -9,6 +9,8 @@
 ;; - Go Mode
 ;; - Irony
 ;; - Js2 Mode
+;; - Simple HTTPD
+;; - Skewer Mode
 ;; - Specman Mode
 ;; - Tern Mode
 
@@ -88,6 +90,20 @@
 ;; Go Mode
 (use-package go-mode
   :ensure t)
+
+;; Skewer mode
+(use-package skewer-mode
+  :ensure t
+  :hook
+  (js2-mode . skewer-mode)
+  (css-mode . skewer-css-mode)
+  (mhtml-mode . skewer-html-mode))
+
+;; Simple HTTPD
+(use-package simple-httpd
+  :ensure t
+  :config
+  (setq httpd-root "/var/www"))
 
 (provide '4_emmacs_modes)
 ;;; 4_emmacs_modes.el ends here
