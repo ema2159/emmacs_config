@@ -312,6 +312,8 @@ _v_iew             │ ^ ^              │                │                 �
 			   		      nil
 			   		      :foreground
 			   		      "#317DC9")
+      (set-face-attribute 'mode-line nil :height 105)
+      (set-face-attribute 'mode-line-inactive nil :height 105)
       :init
       (doom-modeline-mode)
       :hook
