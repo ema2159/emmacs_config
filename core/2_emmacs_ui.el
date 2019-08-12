@@ -457,12 +457,10 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 (use-package ivy-posframe
   :ensure t
   :config
-  (defun ivy-posframe-display-at-frame-top-center (str)
-    (ivy-posframe--display str #'posframe-poshandler-frame-top-center))
   (setq ivy-posframe-display-functions-alist
 	'((swiper          . nil)
 	  (counsel-M-x                . ivy-posframe-display-at-point)
-	  (t                          . ivy-posframe-display-at-frame-top-center)))
+	  (t                          . nil)))
   (ivy-posframe-mode 1))
 
 ;; AMX configuration
