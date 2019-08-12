@@ -21,7 +21,7 @@
 1 - Doom Themes colorful
 2 - Kaolin Themes")
 
-(defvar emmacs-theme-number 26
+(defvar emmacs-theme-number 10
   "Available themes.
 | Doom                    | Kaolin                 | Spacemacs         |
 |-------------------------+------------------------+-------------------|
@@ -51,7 +51,9 @@
 | 23 doom-fairy-floss     |                        |                   |
 | 24 doom-outrun-electric |                        |                   |
 | 25 doom-snazzy          |                        |                   |
-| 25 doom-palenight       |                        |                   |
+| 26 doom-palenight       |                        |                   |
+| 27 doom-moonlight       |                        |                   |
+| 28 doom-wilmersdorf     |                        |                   |
 |-------------------------+------------------------+-------------------|"
   )
 
@@ -92,6 +94,7 @@
      ((eq emmacs-theme-number 25) (load-theme 'doom-snazzy t))
      ((eq emmacs-theme-number 26) (load-theme 'doom-palenight t))
      ((eq emmacs-theme-number 27) (load-theme 'doom-moonlight t))
+     ((eq emmacs-theme-number 28) (load-theme 'doom-wilmersdorf t))
      )))
  ((eq emmacs-theme-package 1)
   ;; Kaolin Themes
