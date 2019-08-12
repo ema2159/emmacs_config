@@ -51,6 +51,7 @@
 | 23 doom-fairy-floss     |                        |                   |
 | 24 doom-outrun-electric |                        |                   |
 | 25 doom-snazzy          |                        |                   |
+| 25 doom-palenight       |                        |                   |
 |-------------------------+------------------------+-------------------|"
   )
 
@@ -90,6 +91,7 @@
      ((eq emmacs-theme-number 24) (load-theme 'doom-outrun-electric t))
      ((eq emmacs-theme-number 25) (load-theme 'doom-snazzy t))
      ((eq emmacs-theme-number 26) (load-theme 'doom-palenight t))
+     ((eq emmacs-theme-number 27) (load-theme 'doom-moonlight t))
      )))
  ((eq emmacs-theme-package 1)
   ;; Kaolin Themes
@@ -137,7 +139,7 @@
        (use-package doom-themes
 	 :ensure t
 	 :config
-	 (setq doom-themes-treemacs-color-icons t)
+	 (setq doom-themes-treemacs-theme "doom-colors")
 	 (doom-themes-treemacs-config)))
       ((eq emmacs-treemacs-theme 2)
        ;; Kaolin Themes
