@@ -40,7 +40,7 @@
   :config
   (all-the-icons-ivy-setup)
   :custom-face
-  (all-the-icons-ivy-dir-face ((t (:inherit (mode-line-emphasis bold))))))
+  (all-the-icons-ivy-dir-face ((t (:inherit (font-lock-doc-face bold))))))
 
 ;; Solaire mode
 (use-package solaire-mode
