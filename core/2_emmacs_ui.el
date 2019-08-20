@@ -420,7 +420,34 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   :config
   (setq counsel-describe-function-function #'helpful-callable)
   (setq counsel-describe-variable-function #'helpful-variable)
-  (setq counsel-descbinds-function #'helpful-key)
+  ;; (setq counsel-descbinds-function #'helpful-key)
+  (defun counsel-load-theme-action (x)
+    "Disable current themes and load theme X."
+    (condition-case nil
+	(progn
+	  (mapc #'disable-theme custom-enabled-themes)
+	  (load-theme (intern x) t)
+	  (when (eq centaur-tabs-set-bar 'over)
+	    (set-face-attribute 'centaur-tabs-selected nil :overline (face-background 'centaur-tabs-active-bar-face))
+	    (set-face-attribute 'centaur-tabs-selected-modified nil :overline (face-background 'centaur-tabs-active-bar-face))
+	    (set-face-attribute 'centaur-tabs-unselected nil :overline nil)
+	    (set-face-attribute 'centaur-tabs-unselected-modified nil :overline nil))
+	  (solaire-mode-swap-bg)
+	  (centaur-tabs-separator-reset-cache)
+	  (centaur-tabs-set-template centaur-tabs-current-tabset nil)
+	  (centaur-tabs-display-update)
+	  (centaur-tabs-headline-match))
+      (error "Problem loading theme %s" x)))
+  (defun counsel-load-theme ()
+    "Forward to `load-theme'.
+Usable with `ivy-resume', `ivy-next-line-and-call' and
+`ivy-previous-line-and-call'."
+    (interactive)
+    (ivy-read "Load custom theme: "
+	      (mapcar 'symbol-name
+		      (custom-available-themes))
+	      :action #'counsel-load-theme-action
+	      :caller 'counsel-load-theme))
   :bind
   (("\C-x\ \C-r" . counsel-recentf)
    ("C-h b" . counsel-descbinds)
@@ -437,6 +464,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
    ("M-x" . counsel-M-x)
    ("C-x C-f" . counsel-find-file)
    ("C-c u" . counsel-unicode-char)
+   ("C-x C-l" . counsel-load-theme)
    (:map
     minibuffer-local-map
     ("C-r" . counsel-minibuffer-history))))
