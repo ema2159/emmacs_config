@@ -433,8 +433,11 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 	    (set-face-attribute 'centaur-tabs-unselected nil :overline nil)
 	    (set-face-attribute 'centaur-tabs-unselected-modified nil :overline nil))
 	  (solaire-mode-swap-bg)
-	  (centaur-tabs-separator-reset-cache)
-	  (centaur-tabs-set-template centaur-tabs-current-tabset nil)
+	  (setq centaur-tabs-active-bar
+	    (centaur-tabs--make-xpm 'centaur-tabs-active-bar-face
+				    2
+				    centaur-tabs-bar-height))
+	  (centaur-tabs-init-tabsets-store)
 	  (centaur-tabs-display-update)
 	  (centaur-tabs-headline-match))
       (error "Problem loading theme %s" x)))
