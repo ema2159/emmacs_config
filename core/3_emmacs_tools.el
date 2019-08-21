@@ -162,14 +162,6 @@
   (defhydra hydra-window (global-map "C-x"
 				     :color red
 				     :hint nil)
-     "
- Moving^^^^                    Spliting^^^^
- ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
-  [_C-<up>_]    window-left   │ [_2_] split-window-below
-  [_C-<right>_] window-right  │ [_3_] split-window-right
-  [_C-<left>_]  window-left   │ [_1_] delete-other-windows
-  [_C-<down>_]  window-right  │
-"
     ("C-<left>"  windmove-left)
     ("C-<right>" windmove-right)
     ("C-<up>"    windmove-up)
