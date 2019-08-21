@@ -290,6 +290,8 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
   (setq highlight-thing-delay-seconds 0.5)
   (setq highlight-thing-all-visible-buffers-p t)
   :hook
+  (csv-mode . (lambda()
+		(highlight-thing-mode 0)))
   (prog-mode . highlight-thing-mode)
   (specman-mode . highlight-thing-mode))
 
