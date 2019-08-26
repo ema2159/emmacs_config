@@ -21,6 +21,7 @@
 ;; - Evil Snipe
 ;; - Expand Region
 ;; - Flycheck
+;; - Format All
 ;; - Hydra
 ;; - Highlight Thing
 ;; - Magit
@@ -560,6 +561,10 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
     ("C-c o" nil :color blue))
   :bind ((:map origami-mode-map
 	       ("C-c o" . hydra-origami/body))))
+
+;; - Format All
+(use-package format-all
+  :ensure t)
 
 (provide '3_emmacs_tools)
 ;;; 3_emmacs_tools.el ends here
