@@ -132,9 +132,7 @@ _v_iew             │ ^ ^              │                │                 �
 ;; All The Icons Dired
 (use-package all-the-icons-dired
   :ensure t
-  :hook (dired-mode . all-the-icons-dired-mode)
-  :custom-face
-  (all-the-icons-dired-dir-face ((t (:inherit (mode-line-emphasis bold))))))
+  :hook (dired-mode . all-the-icons-dired-mode))
 
 ;; Dired Hacks
 (use-package dired-hacks-utils
@@ -330,8 +328,11 @@ _v_iew             │ ^ ^              │                │                 �
 	centaur-tabs-set-bar 'left)
   (centaur-tabs-headline-match)
   ;; (setq centaur-tabs-gray-out-icons 'buffer)
-  (centaur-tabs-enable-buffer-reordering)
+  ;; (centaur-tabs-enable-buffer-reordering)
+  ;; (setq centaur-tabs-adjust-buffer-order t)
   (centaur-tabs-mode t)
+  (setq uniquify-separator "/")
+  (setq uniquify-buffer-name-style 'forward)
   (defun centaur-tabs-buffer-groups ()
     "`centaur-tabs-buffer-groups' control buffers' group rules.
 
@@ -340,6 +341,8 @@ All buffer name start with * will group to \"Emacs\".
 Other buffer group by `centaur-tabs-get-group-name' with project name."
     (list
      (cond
+      ;; ((not (eq (file-remote-p (buffer-file-name)) nil))
+      ;; "Remote")
       ((or (string-equal "*" (substring (buffer-name) 0 1))
 	   (memq major-mode '(magit-process-mode
 			      magit-status-mode
@@ -438,7 +441,8 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 				    2
 				    centaur-tabs-bar-height))
 	  (centaur-tabs-init-tabsets-store)
-	  (centaur-tabs-display-update)
+	  ;; (centaur-tabs-display-update)
+	  (centaur-tabs-force-update)
 	  (centaur-tabs-headline-match))
       (error "Problem loading theme %s" x)))
   (defun counsel-load-theme ()
@@ -450,7 +454,9 @@ Usable with `ivy-resume', `ivy-next-line-and-call' and
 	      (mapcar 'symbol-name
 		      (custom-available-themes))
 	      :action #'counsel-load-theme-action
-	      :caller 'counsel-load-theme))
+	      :caller 'counsel-load-theme
+	      ;; :update-fn (lambda() (counsel-load-theme-action (ivy-state-current ivy-last)))
+	      ))
   :bind
   (("\C-x\ \C-r" . counsel-recentf)
    ("C-h b" . counsel-descbinds)

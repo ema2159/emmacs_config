@@ -21,6 +21,7 @@
 ;; - Evil Snipe
 ;; - Expand Region
 ;; - Flycheck
+;; - Flycheck Pycheck
 ;; - Format All
 ;; - Hydra
 ;; - Highlight Thing
@@ -565,6 +566,12 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
 ;; - Format All
 (use-package format-all
   :ensure t)
+
+;; - Flycheck Pycheck
+(use-package flycheck-pycheckers
+  :ensure t
+  :hook
+  (flycheck-mode . flycheck-pycheckers-setup))
 
 (provide '3_emmacs_tools)
 ;;; 3_emmacs_tools.el ends here
