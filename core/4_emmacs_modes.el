@@ -9,6 +9,7 @@
 ;; - Go Mode
 ;; - Irony
 ;; - Js2 Mode
+;; - rjsx Mode
 ;; - Simple HTTPD
 ;; - Skewer Mode
 ;; - Specman Mode
@@ -58,13 +59,26 @@
   :after js-mode)
 
 ;; Js2 Mode
-(use-package js2-mode
+;; (use-package js2-mode
+;;   :ensure t
+;;   :mode
+;;   ("\\.js\\'" . js2-mode)
+;;   ("node" . js2-mode)
+;;   :config
+;;   (setq js-indent-level 2)
+;;   (add-hook 'js2-mode-hook (lambda ()
+;;                            (tern-mode)
+;;                            (company-mode))))
+
+;; rjsx Mode
+(use-package rjsx-mode
   :ensure t
   :mode
-  ("\\.js\\'" . js2-mode)
-  ("node" . js2-mode)
+  ("\\.js\\'" . rjsx-mode)
+  ("node" . rjsx-mode)
   :config
-  (add-hook 'js2-mode-hook (lambda ()
+  (setq js-indent-level 2)
+  (add-hook 'rjsx-mode-hook (lambda ()
                            (tern-mode)
                            (company-mode))))
 
@@ -72,14 +86,17 @@
 (use-package anaconda-mode
   :ensure t
   :config
-  (pythonic-activate "/home/emmanuel/anaconda3/envs/ml")
+  (pythonic-activate "/home/martaalexis/anaconda3/envs/env")
   :hook
   (python-mode . anaconda-mode))
 
 ;; Emmet Mode
 (use-package emmet-mode
   :ensure t
+  :bind
+  ((emmet-expand-line . "C-j"))
   :hook
+  (rjsx-mode . emmet-mode)
   (sgml-mode . emmet-mode)
   (css-mode . emmet-mode))
 
@@ -95,6 +112,7 @@
 (use-package skewer-mode
   :ensure t
   :hook
+  (rjsx-mode . skewer-mode)
   (js2-mode . skewer-mode)
   (css-mode . skewer-css-mode)
   (mhtml-mode . skewer-html-mode))

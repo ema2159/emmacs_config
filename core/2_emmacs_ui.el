@@ -295,7 +295,7 @@ _v_iew             │ ^ ^              │                │                 �
   (setq dashboard-items '(
 			  (recents  . 8)
 			  (bookmarks . 5)
-			  (agenda . 5)
+			  ;; (agenda . 5)
 			  (projects . 3)
 			  (registers . 1))))
 
@@ -305,11 +305,8 @@ _v_iew             │ ^ ^              │                │                 �
       :config
       (column-number-mode)
       (size-indication-mode)
-      (setq doom-modeline-buffer-file-name-style 'file-name)
-      (set-face-attribute 'doom-modeline-evil-insert-state
-			   		      nil
-			   		      :foreground
-			   		      "#317DC9")
+      (setq doom-modeline-buffer-file-name-style 'file-name
+	    doom-modeline-major-mode-color-icon nil)
       (set-face-attribute 'mode-line nil :height 105)
       (set-face-attribute 'mode-line-inactive nil :height 105)
       :init
@@ -325,7 +322,9 @@ _v_iew             │ ^ ^              │                │                 �
 	centaur-tabs-height 32
 	centaur-tabs-set-icons t
 	centaur-tabs-set-modified-marker t
-	centaur-tabs-set-bar 'left)
+	centaur-tabs-show-navigation-buttons t
+	centaur-tabs-set-bar 'under
+	x-underline-at-descent-line t)
   (centaur-tabs-headline-match)
   ;; (setq centaur-tabs-gray-out-icons 'buffer)
   ;; (centaur-tabs-enable-buffer-reordering)
