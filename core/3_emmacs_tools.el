@@ -175,16 +175,21 @@
 ;; Undo Tree
 (use-package undo-tree
   :ensure t
-  :init
+  :config
   (global-undo-tree-mode)
   (setq undo-tree-enable-undo-in-region nil)
-  :hook
-  (undo-tree-visualizer-mode . transpose-frame))
+  (defun undo-tree-split-side-by-side (original-function &rest args)
+    "Split undo-tree side-by-side."
+    (let ((split-height-threshold nil)
+	  (split-width-threshold 0))
+      (apply original-function args)))
+  (advice-add 'undo-tree-visualize :around #'undo-tree-split-side-by-side))
 
-;; Smart parens
+;; Smartparens
 (use-package smartparens
   :ensure t
   :config
+  (setq sp-autoskip-opening-pair t)
   (defhydra hydra-smartparens (:hint nil :color red)
     "
 Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Sexp juggling^^^^                Destructive^^^^        Exit
