@@ -76,6 +76,8 @@
   :mode
   ("\\.js\\'" . rjsx-mode)
   ("node" . rjsx-mode)
+  :bind
+  (("C-j" . emmet-expand-line))
   :config
   (setq js-indent-level 2)
   (add-hook 'rjsx-mode-hook (lambda ()
