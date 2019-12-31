@@ -95,8 +95,6 @@
 ;; Emmet Mode
 (use-package emmet-mode
   :ensure t
-  :bind
-  ((emmet-expand-line . "C-j"))
   :hook
   (rjsx-mode . emmet-mode)
   (sgml-mode . emmet-mode)
