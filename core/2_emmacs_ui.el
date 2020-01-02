@@ -14,7 +14,9 @@
 ;; - Helpful
 ;; - Ivy
 ;; - Ivy Post Frame
+;; - Ivy Rich
 ;; - Page Break Lines
+;; - Pretty Mode
 ;; - Solaire Mode
 ;; - Swiper
 ;; - Treemacs
@@ -477,32 +479,80 @@ Usable with `ivy-resume', `ivy-next-line-and-call' and
     minibuffer-local-map
     ("C-r" . counsel-minibuffer-history))))
 
-;; Ivy configuration
+;; Ivy
 (use-package ivy
   :ensure t
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)
+  (setq swiper-goto-start-of-match t)
   :bind
   (("\C-s" . swiper)
    ("C-c C-r" . ivy-resume)
    ("C-x b" . ivy-switch-buffer))
-  :config
-  (setq swiper-goto-start-of-match t))
+  :config)
 
-;; Ivy Posframe configuration
+;; Ivy Posframe
 (use-package ivy-posframe
   :ensure t
   :config
   (setq ivy-posframe-display-functions-alist
 	'((swiper          . nil)
-	  (counsel-M-x                . ivy-posframe-display-at-point)
+	  (counsel-M-x                . ivy-posframe-display-at-frame-top-center)
 	  (t                          . nil)))
+  (setq ivy-posframe-width 70)
   (ivy-posframe-mode 1))
 
-;; AMX configuration
+;; Ivy Rich
+(use-package ivy-rich
+  :ensure t
+  :after all-the-icons-ivy
+  :preface
+  (defun ivy-rich-switch-buffer-icon (candidate)
+    (with-current-buffer
+	(get-buffer candidate)
+      (all-the-icons-icon-for-mode major-mode)))
+  :init
+  (setq ivy-rich-display-transformers-list ; max column width sum = (ivy-poframe-width - 1)
+	'(ivy-switch-buffer
+	  (:columns
+	   ((ivy-rich-switch-buffer-icon (:width 2))
+	    (ivy-rich-candidate (:width 35))
+	    (ivy-rich-switch-buffer-project (:width 15 :face success))
+	    (ivy-rich-switch-buffer-major-mode (:width 13 :face warning)))
+	   :predicate
+	   #'(lambda (cand) (get-buffer cand)))
+	  counsel-M-x
+	  (:columns
+	   ((counsel-M-x-transformer (:width 35))
+	    (ivy-rich-counsel-function-docstring (:width 34 :face font-lock-doc-face))))
+	  counsel-describe-function
+	  (:columns
+	   ((counsel-describe-function-transformer (:width 35))
+	    (ivy-rich-counsel-function-docstring (:width 34 :face font-lock-doc-face))))
+	  counsel-describe-variable
+	  (:columns
+	   ((counsel-describe-variable-transformer (:width 35))
+	    (ivy-rich-counsel-variable-docstring (:width 34 :face font-lock-doc-face))))
+	  package-install
+	  (:columns
+	   ((ivy-rich-candidate (:width 25))
+	    (ivy-rich-package-version (:width 12 :face font-lock-comment-face))
+	    (ivy-rich-package-archive-summary (:width 7 :face font-lock-builtin-face))
+	    (ivy-rich-package-install-summary (:width 23 :face font-lock-doc-face))))))
+  :config
+  (ivy-rich-mode +1)
+  (all-the-icons-ivy-setup)
+  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
+
+;; AMX
 (use-package amx
+  :ensure t
+  :defer t)
+
+;; Pretty mode
+(use-package pretty-mode
   :ensure t
   :defer t)
 
