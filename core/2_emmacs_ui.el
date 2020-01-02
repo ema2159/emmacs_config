@@ -37,10 +37,8 @@
 	  counsel-file-jump
 	  counsel-recentf
 	  projectile-completing-read))
-	  
+
   (setq all-the-icons-spacer " ")
-  :config
-  (all-the-icons-ivy-setup)
   :custom-face
   (all-the-icons-ivy-dir-face ((t (:inherit (font-lock-doc-face bold))))))
 
@@ -124,8 +122,8 @@ _v_iew             │ ^ ^              │                │                 �
   :ensure t
   :after dired
   :bind (:map dired-mode-map
-	 ("<return>" . dired-single-buffer)
-	 ("<mouse 1>" . 'dired-single-buffer-mouse)))
+	      ("<return>" . dired-single-buffer)
+	      ("<mouse 1>" . 'dired-single-buffer-mouse)))
 
 ;; All The Icons
 (use-package all-the-icons
@@ -159,10 +157,10 @@ _v_iew             │ ^ ^              │                │                 �
   ;; (dired-subtree-after-insert . (all-the-icons-dired--display))
   :bind
   (:map dired-mode-map
-   ("i" . dired-subtree-insert)
-   ("r" . dired-subtree-remove)))
+	("i" . dired-subtree-insert)
+	("r" . dired-subtree-remove)))
 
-;; Treemacs configuration
+;; Treemacs
 (use-package treemacs
   :ensure t
   :defer t
@@ -302,19 +300,19 @@ _v_iew             │ ^ ^              │                │                 �
 			  (registers . 1))))
 
 (use-package doom-modeline
-      :ensure t
-      :defer 2
-      :config
-      (column-number-mode)
-      (size-indication-mode)
-      (setq doom-modeline-buffer-file-name-style 'file-name
-	    doom-modeline-major-mode-color-icon nil)
-      (set-face-attribute 'mode-line nil :height 105)
-      (set-face-attribute 'mode-line-inactive nil :height 105)
-      :init
-      (doom-modeline-mode)
-      :hook
-      (after-init . doom-modeline-mode))
+  :ensure t
+  :defer 2
+  :config
+  (column-number-mode)
+  (size-indication-mode)
+  (setq doom-modeline-buffer-file-name-style 'file-name
+	doom-modeline-major-mode-color-icon nil)
+  (set-face-attribute 'mode-line nil :height 105)
+  (set-face-attribute 'mode-line-inactive nil :height 105)
+  :init
+  (doom-modeline-mode)
+  :hook
+  (after-init . doom-modeline-mode))
 
 ;; Centaur Tabs
 (use-package centaur-tabs
@@ -438,9 +436,9 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 	    (set-face-attribute 'centaur-tabs-unselected-modified nil :overline nil))
 	  (solaire-mode-swap-bg)
 	  (setq centaur-tabs-active-bar
-	    (centaur-tabs--make-xpm 'centaur-tabs-active-bar-face
-				    2
-				    centaur-tabs-bar-height))
+		(centaur-tabs--make-xpm 'centaur-tabs-active-bar-face
+					2
+					centaur-tabs-bar-height))
 	  (centaur-tabs-init-tabsets-store)
 	  ;; (centaur-tabs-display-update)
 	  (centaur-tabs-force-update)
