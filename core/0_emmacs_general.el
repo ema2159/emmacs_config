@@ -31,6 +31,9 @@
 ;; Disable scrollbar
 (scroll-bar-mode -1)
 
+;; Disable menubar
+(menu-bar-mode -1)
+
 ;; Remove warning bell sound
 (setq ring-bell-function 'ignore)
 
