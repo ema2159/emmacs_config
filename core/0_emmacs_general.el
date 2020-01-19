@@ -127,8 +127,8 @@
 (setq isearch-forward t)
 
 ;; Focus most recent window
-(global-set-key "\C-x2" (lambda () (interactive)(split-window-vertically) (other-window 1)))
-(global-set-key "\C-x3" (lambda () (interactive)(split-window-horizontally) (other-window 1)))
+(global-set-key (kbd "C-x 2") (lambda () (interactive) (split-window-vertically) (other-window 1)))
+(global-set-key (kbd "C-x 3") (lambda () (interactive) (split-window-horizontally) (other-window 1)))
 
 (provide '0_emmacs_general)
 ;;; 0_emmacs_general.el ends here
