@@ -3,6 +3,8 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 
+;;; Code:
+
 ;; GC threshold to 1GB
 (setq gc-cons-threshold 1000000000
       gc-cons-percentage 0.6)
@@ -12,19 +14,32 @@
 	    (setq gc-cons-threshold 800000
 		  gc-cons-percentage 0.1)))
 
-(package-initialize)
+;; (package-initialize)
 
-;; Bootstrap 'use-package
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+;; Bootstrap 'use-package and 'straight
+;; (unless (package-installed-p 'use-package)
+;;   (package-refresh-contents)
+;;   (package-install 'use-package))
 
-(eval-when-compile
-  (require 'use-package))
+;; (eval-when-compile
+;;   (require 'use-package))
 
-;; (setq use-package-always-defer t
-;;       use-package-always-ensure t
-;;       use-package-compute-statistics t)
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+;; Use straight by default with use-package
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
 
 ;; Package repos
 (require 'package)
@@ -53,7 +68,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
-   ["#1D252C" "#D95468" "#8BD49C" "#EBBF83" "#5EC4FF" "#E27E8D" "#70E1E8" "#A0B3C5"])
+   ["#343145" "#D95468" "#8BD49C" "#EBBF83" "#5EC4FF" "#E27E8D" "#70E1E8" "#A0B3C5"])
  '(custom-safe-themes
    (quote
     ("db10381a554231a40b7474eaac28bd58f05067faacce3b25d294bb179a3511a1" "9c27124b3a653d43b3ffa088cd092c34f3f82296cf0d5d4f719c0c0817e1afa6" "9de6237a2054e206100e42c04b3b7e72c2ec94f0fbc55f03dd28cec544940cd1" "fd944f09d4d0c4d4a3c82bd7b3360f17e3ada8adf29f28199d09308ba01cc092" default "muse-solarized-dark")))
