@@ -303,7 +303,8 @@ _v_iew             │ ^ ^              │                │                 �
 	centaur-tabs-set-modified-marker t
 	centaur-tabs-show-navigation-buttons t
 	centaur-tabs-set-bar 'under
-	x-underline-at-descent-line t)
+	x-underline-at-descent-line t
+	centaur-tabs-left-edge-margin nil)
   (centaur-tabs-headline-match)
   ;; (setq centaur-tabs-gray-out-icons 'buffer)
   ;; (centaur-tabs-enable-buffer-reordering)
