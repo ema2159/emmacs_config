@@ -7,12 +7,11 @@
 
 ;; Org mode
 (use-package org
-  :ensure t
   :mode ("\\.org\\'" . org-mode)
   :config
   ;; Org mouse for checkboxes
   (require 'org-mouse)
-  (setq org-agenda-files (list "~/org/week.org"))
+  (setq org-agenda-files (list "~/org/agenda.org"))
   (setq org-support-shift-select t)
   ;; Hide markers for italic, bold etc
   (setq org-hide-emphasis-markers t)
@@ -35,14 +34,12 @@
 
 ;; Org bullets
 (use-package org-bullets
-  :ensure t
   :defer t
   :hook
   (org-mode . (lambda () (org-bullets-mode 1))))
 
 ;; Org bullets
 (use-package toc-org
-  :ensure t
   :hook
   (org-mode . toc-org-mode))
 

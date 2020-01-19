@@ -24,13 +24,10 @@
 
 ;;; Code:
 ;; All The Icons
-(use-package all-the-icons
-  :ensure t)
+(use-package all-the-icons)
 
 ;; All The Icons Ivy
 (use-package all-the-icons-ivy
-  :ensure t
-  :after ivy
   :init
   (setq all-the-icons-ivy-file-commands
 	'(counsel-find-file
@@ -44,7 +41,6 @@
 
 ;; Solaire mode
 (use-package solaire-mode
-  :ensure t
   :config
   (solaire-mode-swap-bg)
   (setq solaire-mode-remap-fringe t)
@@ -119,36 +115,27 @@ _v_iew             │ ^ ^              │                │                 �
 
 ;; Dired Single
 (use-package dired-single
-  :ensure t
   :after dired
   :bind (:map dired-mode-map
 	      ("<return>" . dired-single-buffer)
 	      ("<mouse 1>" . 'dired-single-buffer-mouse)))
 
-;; All The Icons
-(use-package all-the-icons
-  :ensure t)
-
 ;; All The Icons Dired
 (use-package all-the-icons-dired
-  :ensure t
   :hook (dired-mode . all-the-icons-dired-mode))
 
 ;; Dired Hacks
 (use-package dired-hacks-utils
-  :ensure t
   :after dired)
 
 ;; Dired Filter
 (use-package dired-filter
-  :ensure t
   :after dired
   :config
   (define-key dired-mode-map (kbd "C-f") dired-filter-map))
 
 ;; Dired Subtree
 (use-package dired-subtree
-  :ensure t
   :after dired-hacks-utils
   :config
   (setq dired-subtree-use-backgrounds nil)
@@ -162,7 +149,6 @@ _v_iew             │ ^ ^              │                │                 �
 
 ;; Treemacs
 (use-package treemacs
-  :ensure t
   :defer t
   :init
   (with-eval-after-load 'winum
@@ -225,25 +211,20 @@ _v_iew             │ ^ ^              │                │                 �
         ("C-x t M-t" . treemacs-find-tag)))
 
 (use-package treemacs-evil
-  :after treemacs evil
-  :ensure t)
+  :after treemacs evil)
 
 (use-package treemacs-projectile
-  :after treemacs projectile
-  :ensure t)
+  :after treemacs projectile)
 
 (use-package treemacs-magit
-  :after treemacs magit
-  :ensure t)
+  :after treemacs magit)
 
 (use-package page-break-lines
-  :ensure t
   :hook
   (help-mode . page-break-lines-mode))
 
 ;; Dashboard
 (use-package dashboard
-  :ensure t
   :after evil
   :diminish (dashboard-mode page-break-lines-mode)
   :defines (persp-save-dir persp-special-last-buffer)
@@ -300,7 +281,6 @@ _v_iew             │ ^ ^              │                │                 �
 			  (registers . 1))))
 
 (use-package doom-modeline
-  :ensure t
   :defer 2
   :config
   (column-number-mode)
@@ -390,7 +370,6 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 
 ;; Which key
 (use-package which-key
-  :ensure t
   :defer 1
   :diminish
   :commands which-key-mode
@@ -400,7 +379,6 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 
 ;; Helpful
 (use-package helpful
-  :ensure t
   :config
   (add-to-list 'evil-emacs-state-modes 'helpful-mode)
   :bind
@@ -408,7 +386,6 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 
 ;; Swiper
 (use-package swiper
-  :ensure t
   :defer t
   :after evil
   :bind (:map evil-normal-state-map
@@ -417,7 +394,6 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 
 ;; Counsel
 (use-package counsel
-  :ensure t
   :defer t
   :config
   (setq counsel-describe-function-function #'helpful-callable)
@@ -479,7 +455,6 @@ Usable with `ivy-resume', `ivy-next-line-and-call' and
 
 ;; Ivy
 (use-package ivy
-  :ensure t
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
@@ -493,7 +468,6 @@ Usable with `ivy-resume', `ivy-next-line-and-call' and
 
 ;; Ivy Posframe
 (use-package ivy-posframe
-  :ensure t
   :config
   (setq ivy-posframe-display-functions-alist
 	'((swiper          . nil)
@@ -504,7 +478,6 @@ Usable with `ivy-resume', `ivy-next-line-and-call' and
 
 ;; Ivy Rich
 (use-package ivy-rich
-  :ensure t
   :after all-the-icons-ivy
   :preface
   (defun ivy-rich-switch-buffer-icon (candidate)
@@ -546,12 +519,10 @@ Usable with `ivy-resume', `ivy-next-line-and-call' and
 
 ;; AMX
 (use-package amx
-  :ensure t
   :defer t)
 
 ;; Pretty mode
 (use-package pretty-mode
-  :ensure t
   :defer t)
 
 (provide '2_emmacs_ui)

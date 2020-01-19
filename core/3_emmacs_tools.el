@@ -37,9 +37,10 @@
 ;; - Yasnippet
 
 ;;; Code:
+
+
 ;; Evil
 (use-package evil
-  :ensure t
   :init
   (evil-mode)
   :config
@@ -52,7 +53,6 @@
 
 ;; Dumb Jump
 (use-package dumb-jump
-  :ensure t
   :config
   (setq dumb-jump-selector 'ivy)
   (setq dumb-jump-prefer-searcher 'rg)
@@ -60,7 +60,6 @@
 
 ;; Smart Jump
 (use-package smart-jump
-  :ensure t
   :config
   (smart-jump-setup-default-registers)
   :bind (:map evil-motion-state-map
@@ -70,7 +69,6 @@
 
 ;; Drag Stuff
 (use-package drag-stuff
-  :ensure t
   :config
   (drag-stuff-define-keys)
   :hook
@@ -78,7 +76,6 @@
 
 ;; Evil Multiedit
 (use-package evil-multiedit
-  :ensure t
   :bind (:map evil-normal-state-map
 	 ("C-<" . evil-multiedit-match-symbol-and-next)
 	 ("C->" . evil-multiedit-match-symbol-and-prev)
@@ -103,8 +100,10 @@
   (evil-ex-define-cmd "ie[dit]" #'evil-multiedit-ex-match))
 
 ;; Recent files
-(use-package recentf
-  :ensure t)
+(use-package recentf)
+
+;; Rainbow mode
+(use-package rainbow-mode)
 
 ;; Magit
 (use-package magit
@@ -152,13 +151,11 @@
 
 ;; Beacon
 (use-package beacon
-  :ensure t
   :config
   (beacon-mode 1))
 
 ;; Windmove
 (use-package windmove
-  :ensure t
   :after hydra
   :config
   (defhydra hydra-window (global-map "C-x"
@@ -174,7 +171,6 @@
 
 ;; Undo Tree
 (use-package undo-tree
-  :ensure t
   :config
   (global-undo-tree-mode)
   (setq undo-tree-enable-undo-in-region nil)
@@ -187,7 +183,7 @@
 
 ;; Smartparens
 (use-package smartparens
-  :ensure t
+  :after hydra
   :config
   (setq sp-autoskip-opening-pair t)
   (defhydra hydra-smartparens (:hint nil :color red)
@@ -257,7 +253,6 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
 
 ;; Highlight indent guides
 (use-package highlight-indent-guides
-  :ensure t
   :config
   (setq highlight-indent-guides-method 'character)
   (setq highlight-indent-guides-responsive 'stack)
@@ -266,20 +261,17 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
 
 ;; Flycheck
 (use-package flycheck
-  :ensure t
   :defer 3
   :init
   (global-flycheck-mode))
 
 ;; Expand Region
 (use-package expand-region
-  :ensure t
   :bind
   ("C-0"  . 'er/expand-region))
 
 ;; Highlight thing
 (use-package highlight-thing
-  :ensure t
   :config
   (set-face-attribute 'highlight-thing nil
 		      :inherit 'highlight)
@@ -304,7 +296,6 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
 
 ;; Column Enforce Mode
 (use-package column-enforce-mode
-  :ensure t
   :hook
   (prog-mode . column-enforce-mode)
   :config
@@ -312,7 +303,6 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
 
 ;; Shell Pop
 (use-package shell-pop
-  :ensure t
   :config
   (setq shell-pop-window-size 30)
   (evil-set-initial-state 'term-mode 'emacs)
@@ -320,21 +310,18 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
 
 ;; Evil Snipe
 (use-package evil-snipe
-  :ensure t
   :hook
   (prog-mode . evil-snipe-mode)
   (magit-mode . turn-off-evil-snipe-override-mode))
 
 ;; Company Anaconda
 (use-package company-anaconda
-  :ensure t
   :after (company anaconda-mode)
   :config
   (add-to-list 'company-backends 'company-anaconda))
 
 ;; Company Tern
 (use-package company-tern
-  :ensure t
   :after (company tern)
   :config
   (setq company-tern-property-marker " <p>")
@@ -342,21 +329,18 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
 
 ;; Company C headers
 (use-package company-c-headers
-  :ensure t
   :after company
   :config
   (add-to-list 'company-backends 'company-c-headers))
 
 ;; Company Irony
 (use-package company-irony
-  :ensure t
   :after (company irony)
   :config
   (add-to-list 'company-backends 'company-irony))
 
 ;; Company Quick Help
 (use-package company-quickhelp
-  :ensure t
   :defines company-quickhelp-delay
   :bind (:map company-active-map
 	      ([remap company-show-doc-buffer] . company-quickhelp-manual-begin))
@@ -449,7 +433,6 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
 
 ;; Company
 (use-package company
-  :ensure t
   :defer 2
   :hook
   (after-init . global-company-mode)
@@ -461,7 +444,6 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
 
 ;; Yasnippet
 (use-package yasnippet
-  :ensure t
   :defer t
   :config
   (setq yas-snippet-dirs
@@ -490,20 +472,17 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
 
 ;; Ivy yasnippet
 (use-package ivy-yasnippet
-  :ensure t
   :bind
   ("C-x C-a" . ivy-yasnippet))
 
 ;; Hydra
 (use-package hydra
-  :ensure t
   :defer 2
   :config
   (hydra-add-font-lock))
 
 ;; Evil Easymotion
 (use-package evil-easymotion
-  :ensure t
   :after evil
   :config
   (evilem-default-keybindings "SPC")
@@ -512,7 +491,6 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
 
 ;; Projectile
 (use-package projectile
-  :ensure t
   :config
   (defadvice projectile-on (around exlude-tramp activate)
     "This should disable projectile when visiting a remote file"
@@ -540,14 +518,12 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
 
 ;; Evil Matchit
 (use-package evil-matchit
-  :ensure t
   :after evil
   :hook
   (html-mode . turn-on-evil-matchit-mode))
 
 ;; Origami
 (use-package origami
-  :ensure t
   :hook
   (prog-mode . origami-mode)
   :config
@@ -569,14 +545,13 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
 	       ("C-c o" . hydra-origami/body))))
 
 ;; - Format All
-(use-package format-all
-  :ensure t)
+(use-package format-all)
 
 ;; - Flycheck Pycheck
-(use-package flycheck-pycheckers
-  :ensure t
-  :hook
-  (flycheck-mode . flycheck-pycheckers-setup))
+;; (use-package flycheck-pycheckers
+  ;; :ensure t
+  ;; :hook
+  ;; (flycheck-mode . flycheck-pycheckers-setup))
 
 (provide '3_emmacs_tools)
 ;;; 3_emmacs_tools.el ends here

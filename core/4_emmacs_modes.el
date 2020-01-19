@@ -41,7 +41,6 @@
 
 ;; Irony
 (use-package irony
-  :ensure t
   :hook
   ((c-mode . irony-mode)
    (c++-mode . irony-mode)
@@ -49,18 +48,15 @@
 
 ;; Csv Mode
 (use-package csv-mode
-  :ensure t
   :mode
   ("\\.[Cc][Ss][Vv]\\'" . csv-mode))
 
 ;; Tern Mode
 (use-package tern
-  :ensure t
   :after js-mode)
 
 ;; Js2 Mode
 ;; (use-package js2-mode
-;;   :ensure t
 ;;   :mode
 ;;   ("\\.js\\'" . js2-mode)
 ;;   ("node" . js2-mode)
@@ -72,12 +68,13 @@
 
 ;; rjsx Mode
 (use-package rjsx-mode
-  :ensure t
   :mode
   ("\\.js\\'" . rjsx-mode)
   ("node" . rjsx-mode)
   :bind
   (("C-j" . emmet-expand-line))
+  :hook
+  (rjsx-mode . yas-minor-mode)
   :config
   (setq js-indent-level 2)
   (add-hook 'rjsx-mode-hook (lambda ()
@@ -86,7 +83,6 @@
 
 ;; Anaconda Mode
 (use-package anaconda-mode
-  :ensure t
   :config
   (pythonic-activate "/home/martaalexis/anaconda3/envs/env")
   :hook
@@ -94,23 +90,19 @@
 
 ;; Emmet Mode
 (use-package emmet-mode
-  :ensure t
   :hook
   (rjsx-mode . emmet-mode)
   (sgml-mode . emmet-mode)
   (css-mode . emmet-mode))
 
 ;; ESS
-(use-package ess
-  :ensure t)
+(use-package ess)
 
 ;; Go Mode
-(use-package go-mode
-  :ensure t)
+(use-package go-mode)
 
 ;; Skewer mode
 (use-package skewer-mode
-  :ensure t
   :hook
   (rjsx-mode . skewer-mode)
   (js2-mode . skewer-mode)
@@ -119,7 +111,6 @@
 
 ;; Simple HTTPD
 (use-package simple-httpd
-  :ensure t
   :config
   (setq httpd-root "/var/www"))
 

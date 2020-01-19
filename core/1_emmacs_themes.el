@@ -65,7 +65,6 @@
  ((eq emmacs-theme-package 0)
   ;; Doom themes
   (use-package doom-themes
-    :ensure t
     :config
     (doom-themes-org-config)
     (cond
@@ -105,7 +104,6 @@
  ((eq emmacs-theme-package 1)
   ;; Kaolin Themes
   (use-package kaolin-themes
-    :ensure t
     :config
     (cond
      ((eq emmacs-theme-number 0) (load-theme 'kaolin-eclipse t))
@@ -141,19 +139,16 @@
 
 (cond ((eq emmacs-treemacs-theme 0)
        (use-package doom-themes
-	 :ensure t
 	 :config
 	 (doom-themes-treemacs-config)))
       ((eq emmacs-treemacs-theme 1)
        (use-package doom-themes
-	 :ensure t
 	 :config
 	 (setq doom-themes-treemacs-theme "doom-colors")
 	 (doom-themes-treemacs-config)))
       ((eq emmacs-treemacs-theme 2)
        ;; Kaolin Themes
        (use-package kaolin-themes
-	 :ensure t
 	 :config
 	 (kaolin-treemacs-theme))))
       
