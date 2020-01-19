@@ -7,21 +7,25 @@
 ;; - Spacemacs Theme
 
 ;;; Code:
-(defvar emmacs-theme-package 0
+(defcustom emmacs-theme-package 0
   "Theme to be loaded.
 0 - Doom Themes
 1 - Kaolin Themes
 2 - Spacemacs Theme
 3 - Atom One Dark
-4 - Zenburn")
+4 - Zenburn"
+  :group 'emmacs
+  :type 'integer)
 
-(defvar emmacs-treemacs-theme 1
+(defcustom emmacs-treemacs-theme 1
   "Treemacs theme to be loaded.
 0 - Doom Themes
 1 - Doom Themes colorful
-2 - Kaolin Themes")
+2 - Kaolin Themes"
+  :group 'emmacs
+  :type 'integer)
 
-(defvar emmacs-theme-number 31
+(defcustom emmacs-theme-number 31
   "Available themes.
 | Doom                    | Kaolin                 | Spacemacs         |
 |-------------------------+------------------------+-------------------|
@@ -58,7 +62,8 @@
 | 30 doom-laserwave       |                        |                   |
 | 31 doom-material        |                        |                   |
 |-------------------------+------------------------+-------------------|"
-  )
+  :group 'emmacs
+  :type 'integer)
 
 ;; Theme switch
 (cond
