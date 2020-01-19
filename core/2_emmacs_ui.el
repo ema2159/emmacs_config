@@ -271,8 +271,7 @@ _v_iew             │ ^ ^              │                │                 �
   (add-to-list 'evil-emacs-state-modes 'dashboard-mode)
   ;; Set the title
   (setq dashboard-banner-logo-title "Welcome to Emmacs, boi")
-  (setq dashboard-startup-banner "~/.emacs.d/banners/logo.png")
-  ;; (setq dashboard-startup-banner 3)
+  (setq dashboard-startup-banner "~/.emacs.d/banners/escherlogo.png")
   (setq dashboard-center-content t)
   (setq dashboard-items '(
 			  (recents  . 8)
