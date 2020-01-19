@@ -48,8 +48,9 @@
 
 ;; Dired
 (use-package dired
+  :straight nil
+  :after (evil hydra)
   :defer t
-  :after evil
   :config
   (add-to-list 'evil-emacs-state-modes 'dired-mode)
   (defhydra hydra-dired (:hint nil :color pink)

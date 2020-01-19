@@ -18,6 +18,7 @@
 ;;; Code:
 ;; Specman Mode
 (use-package specman-mode
+  :straight nil
   :load-path "~/.emacs.d/specman"
   :mode "\\.e\\'"
   "\\.ecom\\'"
