@@ -25,6 +25,7 @@
 ;; - Format All
 ;; - Hydra
 ;; - Highlight Thing
+;; - LSP Mode
 ;; - Magit
 ;; - Origami
 ;; - Projectile
@@ -37,7 +38,11 @@
 ;; - Yasnippet
 
 ;;; Code:
-
+;; Customs
+(defcustom emmacs-activate-lsp t
+  "Non-nil means that LSP mode will be activated."
+  :group 'emmacs
+  :type 'boolean)
 
 ;; Evil
 (use-package evil
@@ -314,30 +319,40 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
   (prog-mode . evil-snipe-mode)
   (magit-mode . turn-off-evil-snipe-override-mode))
 
-;; Company Anaconda
-(use-package company-anaconda
-  :after (company anaconda-mode)
-  :config
-  (add-to-list 'company-backends 'company-anaconda))
+(when emmacs-activate-lsp
+  (use-package lsp-mode
+    :commands lsp
+    :custom
+    (lsp-auto-guess-root nil)
+    (lsp-prefer-flymake nil) ; Use flycheck instead of flymake
+    :bind (:map lsp-mode-map ("C-c C-f" . lsp-format-buffer))
+    :hook ((python-mode) . lsp)))
 
-;; Company Tern
-(use-package company-tern
-  :after (company tern)
-  :config
-  (setq company-tern-property-marker " <p>")
-  (add-to-list 'company-backends 'company-tern))
+(unless emmacs-activate-lsp
+  ;; Company Anaconda
+  (use-package company-anaconda
+    :after (company anaconda-mode)
+    :config
+    (add-to-list 'company-backends 'company-anaconda))
 
-;; Company C headers
-(use-package company-c-headers
-  :after company
-  :config
-  (add-to-list 'company-backends 'company-c-headers))
+  ;; Company Tern
+  (use-package company-tern
+    :after (company tern)
+    :config
+    (setq company-tern-property-marker " <p>")
+    (add-to-list 'company-backends 'company-tern))
 
-;; Company Irony
-(use-package company-irony
-  :after (company irony)
-  :config
-  (add-to-list 'company-backends 'company-irony))
+  ;; Company C headers
+  (use-package company-c-headers
+    :after company
+    :config
+    (add-to-list 'company-backends 'company-c-headers))
+
+  ;; Company Irony
+  (use-package company-irony
+    :after (company irony)
+    :config
+    (add-to-list 'company-backends 'company-irony)))
 
 ;; Company Quick Help
 (use-package company-quickhelp
