@@ -297,7 +297,6 @@ _v_iew             │ ^ ^              │                │                 �
 
 ;; Centaur Tabs
 (use-package centaur-tabs
-  :load-path "~/.emacs.d/other/centaur-tabs"
   :config
   (setq centaur-tabs-style "bar"
 	centaur-tabs-height 32
