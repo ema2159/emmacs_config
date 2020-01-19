@@ -169,10 +169,7 @@
     ("C-<left>"  windmove-left)
     ("C-<right>" windmove-right)
     ("C-<up>"    windmove-up)
-    ("C-<down>"  windmove-down)
-    ("2" split-window-below)
-    ("3" split-window-right)
-    ("1" delete-other-windows)))
+    ("C-<down>"  windmove-down)))
 
 ;; Undo Tree
 (use-package undo-tree
