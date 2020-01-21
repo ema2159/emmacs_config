@@ -1,1 +1,5 @@
-/anaconda-mode/0.1.13/easy-install.pth
+/anaconda-mode/*
+/auto-save-list/*
+/backups/*
+/elpa/*
+/straight/*
