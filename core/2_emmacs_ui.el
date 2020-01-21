@@ -12,6 +12,7 @@
 ;; - Dired Single
 ;; - Doom Modeline
 ;; - Helpful
+;; - Highlight Numbers
 ;; - Ivy
 ;; - Ivy Post Frame
 ;; - Ivy Rich
@@ -525,5 +526,10 @@ Usable with `ivy-resume', `ivy-next-line-and-call' and
 (use-package pretty-mode
   :defer t)
 
+;; Highlight Numbers
+(use-package highlight-numbers
+  :hook
+  (prog-mode . highlight-numbers-mode))
+ 
 (provide '2_emmacs_ui)
 ;;; 2_emmacs-ui.el ends here
