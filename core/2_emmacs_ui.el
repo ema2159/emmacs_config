@@ -287,9 +287,11 @@ _v_iew             │ ^ ^              │                │                 �
   (column-number-mode)
   (size-indication-mode)
   (setq doom-modeline-buffer-file-name-style 'file-name
-	doom-modeline-major-mode-color-icon nil)
-  (set-face-attribute 'mode-line nil :height 105)
-  (set-face-attribute 'mode-line-inactive nil :height 105)
+	doom-modeline-height 10
+	doom-modeline-major-mode-color-icon nil
+	doom-modeline-lsp t
+	doom-modeline-env-version t
+	)
   :init
   (doom-modeline-mode)
   :hook
