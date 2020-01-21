@@ -43,5 +43,7 @@
   :hook
   (org-mode . toc-org-mode))
 
+(use-package org-pomodoro)
+
 (provide '5_emmacs_org)
 ;;; 5_emmacs_org.el ends here
