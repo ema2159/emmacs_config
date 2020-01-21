@@ -106,5 +106,8 @@
   :config
   (setq httpd-root "/var/www"))
 
+;; Markdown
+(use-package markdown-mode)
+
 (provide '4_emmacs_modes)
 ;;; 4_emmacs_modes.el ends here
