@@ -31,15 +31,6 @@
   :custom-face
   (specman-punctuation-face ((t (:inherit font-lock-keyword-face)))))
 
-;; (add-to-list 'load-path "~/.emacs.d/specman")
-;; (put 'specman-mode 'derived-mode-parent 'prog-mode)
-;; (load "specman-mode")
-;; (add-to-list 'auto-mode-alist '("\\.e\\'" . specman-mode))
-;; (add-to-list 'auto-mode-alist '("\\.ecom\\'" . specman-mode))
-;; (add-hook 'specman-mode-hook (lambda () (use-local-map nil)))
-;; (add-hook 'specman-mode-hook 'yas-minor-mode)
-;; (add-hook 'specman-mode-hook 'display-line-numbers-mode)
-
 ;; Irony
 (use-package irony
   :hook
