@@ -187,7 +187,11 @@
 (use-package smartparens
   :after hydra
   :config
-  (setq sp-autoskip-opening-pair t)
+  (sp-pair "(" nil :unless '(sp-point-before-word-p))
+  (sp-pair "[" nil :unless '(sp-point-before-word-p))
+  (sp-pair "{" nil :unless '(sp-point-before-word-p))
+  (sp-pair "\"" nil :unless '(sp-point-before-word-p))
+  (sp-pair "'" nil :unless '(sp-point-before-word-p))
   (defhydra hydra-smartparens (:hint nil :color red)
     "
 Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Sexp juggling^^^^                Destructive^^^^        Exit
