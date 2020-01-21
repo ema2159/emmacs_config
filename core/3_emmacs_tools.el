@@ -287,13 +287,15 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
   (add-hook 'iedit-mode-end-hook (lambda()
 				   (highlight-thing-mode 1)))
   (add-hook 'evil-visual-state-entry-hook (lambda()
-			       (highlight-thing-mode -1)))
+					    (highlight-thing-mode -1)))
   (add-hook 'evil-visual-state-exit-hook (lambda()
-			       (highlight-thing-mode 1)))
+					   (highlight-thing-mode 1)))
   :init
-  (setq highlight-thing-what-thing 'symbol)
-  (setq highlight-thing-delay-seconds 0.5)
-  (setq highlight-thing-all-visible-buffers-p t)
+  (setq highlight-thing-what-thing 'symbol
+	highlight-thing-delay-seconds 0.5
+	highlight-thing-all-visible-buffers-p t
+	highlight-thing-limit-to-region-in-large-buffers-p t
+	highlight-thing-narrow-region-lines 30)
   :hook
   (csv-mode . (lambda()
 		(highlight-thing-mode 0)))
