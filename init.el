@@ -53,6 +53,11 @@
 (defvar emacs-dir (expand-file-name user-emacs-directory)
   "The path to this emacs.d directory.")
 
+
+(defgroup emmacs nil
+  "Options for Emmacs."
+  :group 'emacs)
+
 (defvar core-dir  "core/"
   "Where essential files are stored.")
 
