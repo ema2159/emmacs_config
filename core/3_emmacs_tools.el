@@ -190,8 +190,9 @@
   (sp-pair "(" nil :unless '(sp-point-before-word-p))
   (sp-pair "[" nil :unless '(sp-point-before-word-p))
   (sp-pair "{" nil :unless '(sp-point-before-word-p))
-  (sp-pair "\"" nil :unless '(sp-point-before-word-p))
-  (sp-pair "'" nil :unless '(sp-point-before-word-p))
+  (sp-pair "\"" nil :unless '(sp-point-before-word-p sp-point-after-word-p))
+  (sp-pair "'" nil :unless '(sp-point-before-word-p sp-point-after-word-p))
+  (sp-pair "`" nil :unless '(sp-point-before-word-p sp-point-after-word-p))
   (defhydra hydra-smartparens (:hint nil :color red)
     "
 Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Sexp juggling^^^^                Destructive^^^^        Exit
