@@ -475,7 +475,9 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
   (company-mode 1)
   (setq company-idle-delay 0
 	company-tooltip-align-annotations t
-	company-minimum-prefix-length 2))
+	company-minimum-prefix-length 2
+	company-dabbrev-ignore-case t
+	company-dabbrev-downcase nil))
 
 ;; Yasnippet
 (use-package yasnippet
