@@ -12,7 +12,6 @@
 ;; - Dired Single
 ;; - Doom Modeline
 ;; - Helpful
-;; - Highlight Numbers
 ;; - Ivy
 ;; - Ivy Post Frame
 ;; - Ivy Rich
@@ -528,10 +527,40 @@ Usable with `ivy-resume', `ivy-next-line-and-call' and
 (use-package pretty-mode
   :defer t)
 
-;; Highlight Numbers
-(use-package highlight-numbers
-  :hook
-  (prog-mode . highlight-numbers-mode))
+;; Custom syntax highlighting
+;; Create a font lock face for punctuation signs
+(defvar font-lock-punctuation-face 'font-lock-punctuation-face)
+(defface font-lock-punctuation-face
+  '((t :inherit font-lock-keyword-face))
+  "Face for highlighting punctuation signs."
+  :group 'emmacs)
+(set-face-attribute 'font-lock-punctuation-face nil :weight 'normal)
+
+(defvar highlight-numbers-number 'highlight-numbers-number)
+(defface highlight-numbers-number
+  '((t :inherit font-lock-constant-face))
+  "Face for highlighting punctuation signs."
+  :group 'emmacs)
+(set-face-attribute 'highlight-numbers-number nil :weight 'normal)
+
+;; Improve python-mode syntax highlighting
+(font-lock-add-keywords 'python-mode
+  '(("-?\\b[0-9]+\\.?" . highlight-numbers-number)
+    ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+]\\|\\]\\|\\[" . font-lock-punctuation-face)
+    ("\\([A-Za-z][A-Za-z0-9_]*\\)[ \t\n]*\\((.*)\\)"
+     (1 font-lock-function-name-face))))
+;; Improve js-mode syntax highlighting
+(font-lock-add-keywords 'rjsx-mode
+  '(("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+]\\|\\]\\|\\[" . font-lock-punctuation-face)))
+;; Improve c-mode syntax highlighting
+(font-lock-add-keywords 'c-mode
+  '(("-?\\b[0-9]+\\.?" . highlight-numbers-number)
+    ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+\@]\\|\\]\\|\\[" . font-lock-punctuation-face)))
+;; Improve verilog-mode syntax highlighting
+(font-lock-add-keywords 'verilog-mode
+  '(("-?\\b[0-9]+\\.?" . highlight-numbers-number)
+    ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+\@]\\|\\]\\|\\[" . font-lock-punctuation-face)))
+
  
 (provide '2_emmacs_ui)
 ;;; 2_emmacs-ui.el ends here

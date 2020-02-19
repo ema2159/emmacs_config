@@ -67,33 +67,6 @@
   (save-buffer)
   (kill-buffer-and-window))
 
-;; Custom syntax highlighting
-;; Create a font lock face for punctuation signs
-(defvar font-lock-punctuation-face 'font-lock-punctuation-face)
-(defface font-lock-punctuation-face
-  '((t :inherit font-lock-keyword-face))
-  "Face for highlighting punctuation signs.")
-(set-face-attribute 'font-lock-punctuation-face nil :weight 'normal)
-
-;; Improve python-mode syntax highlighting
-(font-lock-add-keywords 'python-mode
-  '(("-?\\b[0-9]+\\.?" . font-lock-constant-face)
-    ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+]\\|\\]\\|\\[" . font-lock-punctuation-face)
-    ("\\([A-Za-z][A-Za-z0-9_]*\\)[ \t\n]*\\((.*)\\)"
-     (1 font-lock-function-name-face))))
-;; Improve js2-mode syntax highlighting
-(font-lock-add-keywords 'js2-mode
-  '(("-?\\b[0-9]+\\.?" . font-lock-constant-face)
-    ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+]\\|\\]\\|\\[" . font-lock-punctuation-face)))
-;; Improve c-mode syntax highlighting
-(font-lock-add-keywords 'c-mode
-  '(("-?\\b[0-9]+\\.?" . font-lock-constant-face)
-    ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+\@]\\|\\]\\|\\[" . font-lock-punctuation-face)))
-;; Improve verilog-mode syntax highlighting
-(font-lock-add-keywords 'verilog-mode
-  '(("-?\\b[0-9]+\\.?" . font-lock-constant-face)
-    ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+\@]\\|\\]\\|\\[" . font-lock-punctuation-face)))
-
 ;; Configure backup files
 (setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
 (setq backup-by-copying t)
