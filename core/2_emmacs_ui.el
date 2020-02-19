@@ -392,7 +392,9 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   :after evil
   :bind (:map evil-normal-state-map
 	      ("/" . swiper)
-	      ("?" . swiper-backward)))
+	      ("?" . swiper-backward)
+	      ("#" . swiper-all-thing-at-point)
+	      ("*" . swiper-all-thing-at-point)))
 
 ;; Counsel
 (use-package counsel
