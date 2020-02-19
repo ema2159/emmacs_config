@@ -285,8 +285,8 @@ _v_iew             │ ^ ^              │                │                 �
   :config
   (column-number-mode)
   (size-indication-mode)
-  (setq doom-modeline-buffer-file-name-style 'file-name
-	doom-modeline-height 10
+  (setq doom-modeline-buffer-file-name-style 'auto
+	doom-modeline-height 30
 	doom-modeline-major-mode-color-icon nil
 	doom-modeline-lsp t
 	doom-modeline-env-version t
