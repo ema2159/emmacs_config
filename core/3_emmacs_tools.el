@@ -474,8 +474,9 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
   (after-init . global-company-mode)
   :config
   (company-mode 1)
-  (setq company-idle-delay 0
+  (setq company-idle-delay 0.3
 	company-tooltip-align-annotations t
+	company-require-match nil
 	company-minimum-prefix-length 2
 	company-dabbrev-ignore-case t
 	company-dabbrev-downcase nil))
