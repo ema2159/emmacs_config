@@ -559,7 +559,8 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
 (use-package evil-matchit
   :after evil
   :hook
-  (html-mode . turn-on-evil-matchit-mode))
+  (html-mode . turn-on-evil-matchit-mode)
+  (rjsx-mode . turn-on-evil-matchit-mode))
 
 ;; Origami
 (use-package origami
