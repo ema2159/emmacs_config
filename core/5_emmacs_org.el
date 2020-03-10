@@ -25,6 +25,7 @@
 	'("pdflatex --shell-escape -interaction nonstopmode -output-directory %o %f"
 	  "pdflatex --shell-escape -interaction nonstopmode -output-directory %o %f"
 	  "pdflatex --shell-escape -interaction nonstopmode -output-directory %o %f"))
+  (setq org-hide-leading-stars t)
   :bind (("C-c l" . org-store-link)
 	 ("C-c a" . org-agenda)
 	 ("C-c c" . org-capture))

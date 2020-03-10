@@ -25,7 +25,7 @@
   :group 'emmacs
   :type 'integer)
 
-(defcustom emmacs-theme-number 32
+(defcustom emmacs-theme-number 35
   "Available themes.
 | Doom                    | Kaolin                 | Spacemacs         |
 |-------------------------+------------------------+-------------------|
@@ -64,6 +64,7 @@
 | 32 doom-dark+           |                        |                   |
 | 33 doom-horizon         |                        |                   |
 | 34 doom-manegarm        |                        |                   |
+| 35 doom-ephemeral       |                        |                   |
 |-------------------------+------------------------+-------------------|"
   :group 'emmacs
   :type 'integer)
@@ -111,6 +112,7 @@
      ((eq emmacs-theme-number 32) (load-theme 'doom-dark+ t))
      ((eq emmacs-theme-number 33) (load-theme 'doom-horizon t))
      ((eq emmacs-theme-number 34) (load-theme 'doom-manegarm t))
+     ((eq emmacs-theme-number 35) (load-theme 'doom-ephemeral t))
      )))
  ((eq emmacs-theme-package 1)
   ;; Kaolin Themes

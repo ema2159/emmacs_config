@@ -39,7 +39,7 @@
 
 ;;; Code:
 ;; Customs
-(defcustom emmacs-activate-lsp t
+(defcustom emmacs-activate-lsp nil
   "Non-nil means that LSP mode will be activated."
   :group 'emmacs
   :type 'boolean)
@@ -294,7 +294,7 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
   :init
   (setq highlight-thing-what-thing 'symbol
 	highlight-thing-delay-seconds 0.5
-	highlight-thing-all-visible-buffers-p t
+	highlight-thing-all-visible-buffers-p nil
 	highlight-thing-limit-to-region-in-large-buffers-p t
 	highlight-thing-narrow-region-lines 30)
   :hook

@@ -468,11 +468,7 @@ Usable with `ivy-resume', `ivy-next-line-and-call' and
   :bind
   (("\C-s" . swiper)
    ("C-c C-r" . ivy-resume)
-   ("C-x b" . ivy-switch-buffer))
-  :config
-  (setq ivy-re-builders-alist
-	'((swiper . ivy--regex-plus)
-	  (t      . ivy--regex-fuzzy))))
+   ("C-x b" . ivy-switch-buffer)))
 
 ;; Ivy Posframe
 (use-package ivy-posframe
