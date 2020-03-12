@@ -3,3 +3,9 @@
 /backups/*
 /elpa/*
 /straight/*
+/.cache/
+/amx-items
+/recentf
+/server/
+/transient/
+/*.eld
