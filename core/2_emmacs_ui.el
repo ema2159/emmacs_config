@@ -425,7 +425,9 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 					centaur-tabs-bar-height))
 	  (centaur-tabs-init-tabsets-store)
 	  (centaur-tabs-display-update)
-	  (centaur-tabs-headline-match))
+	  (centaur-tabs-headline-match)
+	  (set-face-attribute 'default nil :height 130)
+	  (centaur-tabs-change-fonts "DejaVu Sans Mono-10" 110))
       (error "Problem loading theme %s" x)))
   (defun counsel-load-theme ()
     "Forward to `load-theme'.
