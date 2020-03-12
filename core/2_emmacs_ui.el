@@ -309,6 +309,7 @@ _v_iew             │ ^ ^              │                │                 �
 	  centaur-tabs-set-bar 'under
 	  x-underline-at-descent-line t
 	  centaur-tabs-left-edge-margin nil)
+    (centaur-tabs-change-fonts "DejaVu Sans Mono-10" 110)
     (centaur-tabs-headline-match)
     ;; (setq centaur-tabs-gray-out-icons 'buffer)
     ;; (centaur-tabs-enable-buffer-reordering)

@@ -103,21 +103,9 @@
 (global-set-key (kbd "C-x 2") (lambda () (interactive) (split-window-vertically) (other-window 1)))
 (global-set-key (kbd "C-x 3") (lambda () (interactive) (split-window-horizontally) (other-window 1)))
 
-;; Windows utils
-(when (string-equal system-type "windows-nt")
-
-  (progn
-    (setq cygwin-bin "C:\\cygwin64\\bin")
-    (setenv "PATH"
-	    (concat (getenv "PATH") ";" cygwin-bin))
-
-    (setq find-program "C:/cygwin64/bin/find.exe"
-            grep-program "c:/cygwin64/bin/grep.exe"))
-  
-  (defun grep--change-null-dev (orig-fun &rest args)
-    (let ((null-device "/dev/null"))
-      (apply orig-fun args)))
-  (advice-add 'grep-compute-defaults :around #'grep--change-null-dev))
+;; Default font
+(set-frame-font "Consolas" nil t)
+(set-face-attribute 'default nil :height 130)
 
 (provide '0_emmacs_general)
 ;;; 0_emmacs_general.el ends here
