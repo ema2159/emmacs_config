@@ -309,7 +309,7 @@ _v_iew             │ ^ ^              │                │                 �
 	  centaur-tabs-set-bar 'under
 	  x-underline-at-descent-line t
 	  centaur-tabs-left-edge-margin nil)
-    (centaur-tabs-change-fonts "DejaVu Sans Mono-10" 110)
+    (centaur-tabs-change-fonts (face-attribute 'default :font) 110)
     (centaur-tabs-headline-match)
     ;; (setq centaur-tabs-gray-out-icons 'buffer)
     ;; (centaur-tabs-enable-buffer-reordering)
@@ -427,7 +427,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 	  (centaur-tabs-display-update)
 	  (centaur-tabs-headline-match)
 	  (set-face-attribute 'default nil :height 130)
-	  (centaur-tabs-change-fonts "DejaVu Sans Mono-10" 110))
+	  (centaur-tabs-change-fonts (face-attribute 'default :font) 110))
       (error "Problem loading theme %s" x)))
   (defun counsel-load-theme ()
     "Forward to `load-theme'.
