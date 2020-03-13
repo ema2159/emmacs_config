@@ -104,6 +104,8 @@
 (global-set-key (kbd "C-x 3") (lambda () (interactive) (split-window-horizontally) (other-window 1)))
 
 ;; Default font
+(set-language-environment "UTF-8")
+(set-default-coding-systems 'utf-8)
 (set-frame-font "Consolas" nil t)
 (set-face-attribute 'default nil :height 130)
 
