@@ -147,6 +147,13 @@
   (advice-add 'magit-status :after 'add-magit-faces)
   (advice-add 'magit-refresh-buffer :after 'add-magit-faces))
 
+;; Git time machine
+(use-package git-timemachine
+  :config
+  (evil-make-overriding-map git-timemachine-mode-map 'normal)
+  ;; force update evil keymaps after git-timemachine-mode loaded
+  (add-hook 'git-timemachine-mode-hook #'evil-normalize-keymaps))
+
 ;; Avy
 (use-package avy
   :bind* ("C-'" . avy-goto-word-1)
