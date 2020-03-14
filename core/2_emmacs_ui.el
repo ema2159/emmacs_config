@@ -566,6 +566,95 @@ Usable with `ivy-resume', `ivy-next-line-and-call' and
 			'(("-?\\b[0-9]+\\.?" . highlight-numbers-number)
 			  ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+\@]\\|\\]\\|\\[" . font-lock-punctuation-face)))
 
+;;; Fira code
+;; Install Fira Code Symbols
+(defun emmacs-fira-install-fonts (&optional pfx)
+  "Helper function to download and install the latests fonts based on OS.
+When PFX is non-nil, ignore the prompt and just install.
+Taken from all-the-icons.el."
+  (interactive "P")
+  (when (or pfx (yes-or-no-p "This will download and install fonts, are you sure you want to do this?"))
+    (let* ((url-format "https://raw.githubusercontent.com/ema2159/emmacs_config/master/other/fonts/%s")
+           (font-dest (cl-case window-system
+                        (x  (concat (or (getenv "XDG_DATA_HOME")            ;; Default Linux install directories
+                                        (concat (getenv "HOME") "/.local/share"))
+                                    "/fonts/"))
+                        (mac (concat (getenv "HOME") "/Library/Fonts/" ))
+                        (ns (concat (getenv "HOME") "/Library/Fonts/" ))))  ;; Default MacOS install directory
+           (known-dest? (stringp font-dest))
+           (font-dest (or font-dest (read-directory-name "Font installation directory: " "~/"))))
+
+      (unless (file-directory-p font-dest) (mkdir font-dest t))
+
+      (mapc (lambda (font)
+              (url-copy-file (format url-format font) (expand-file-name font font-dest) t))
+            '("FiraCodeSymbol-Symbol-Regular.ttf"))
+      (when known-dest?
+        (message "Fonts downloaded, updating font cache... <fc-cache -f -v> ")
+        (shell-command-to-string (format "fc-cache -f -v")))
+      (message "Successfully %s `Fira Code Symbol' font to `%s'!"
+               (if known-dest? "installed" "downloaded")
+               font-dest))))
+
+;; When installed, reload
+(when (member "Fira Code Symbol" (font-family-list))
+  (defun fira-code-mode--make-alist (list)
+    "Generate prettify-symbols alist from LIST."
+    (let ((idx -1))
+      (mapcar
+       (lambda (s)
+	 (setq idx (1+ idx))
+	 (let* ((code (+ #Xf100 idx))
+		(width (string-width s))
+		(prefix ())
+		(suffix '(?\s (Br . Br)))
+		(n 1))
+	   (while (< n width)
+	     (setq prefix (append prefix '(?\s (Br . Bl))))
+	     (setq n (1+ n)))
+	   (cons s (append prefix suffix (list (decode-char 'ucs code))))))
+       list)))
+
+  (defconst fira-code-mode--ligatures
+    '("www" "**" "***" "**/" "*>" "*/" "\\\\" "\\\\\\"
+      "{-" "[]" "::" ":::" ":=" "!!" "!=" "!==" "-}"
+      "--" "---" "-->" "->" "->>" "-<" "-<<" "-~"
+      "#{" "#[" "##" "###" "####" "#(" "#?" "#_" "#_("
+      ".-" ".=" ".." "..<" "..." "?=" "??" ";;" "/*"
+      "/**" "/=" "/==" "/>" "//" "///" "&&" "||" "||="
+      "|=" "|>" "^=" "$>" "++" "+++" "+>" "=:=" "=="
+      "===" "==>" "=>" "=>>" "<=" "=<<" "=/=" ">-" ">="
+      ">=>" ">>" ">>-" ">>=" ">>>" "<*" "<*>" "<|" "<|>"
+      "<$" "<$>" "<!--" "<-" "<--" "<->" "<+" "<+>" "<="
+      "<==" "<=>" "<=<" "<>" "<<" "<<-" "<<=" "<<<" "<~"
+      "<~~" "</" "</>" "~@" "~-" "~=" "~>" "~~" "~~>" "%%"
+      "x" ":" "+" "+" "*"))
+
+  (defvar fira-code-mode--old-prettify-alist)
+
+  (defun fira-code-mode--enable ()
+    "Enable Fira Code ligatures in current buffer."
+    (fira-code-mode--setup)
+    (setq-local fira-code-mode--old-prettify-alist prettify-symbols-alist)
+    (setq-local prettify-symbols-alist (append (fira-code-mode--make-alist fira-code-mode--ligatures) fira-code-mode--old-prettify-alist))
+    (prettify-symbols-mode t))
+
+  (defun fira-code-mode--disable ()
+    "Disable Fira Code ligatures in current buffer."
+    (setq-local prettify-symbols-alist fira-code-mode--old-prettify-alist)
+    (prettify-symbols-mode -1))
+
+  (define-minor-mode fira-code-mode
+    "Fira Code ligatures minor mode"
+    :lighter " Fira Code Symbol"
+    (setq-local prettify-symbols-unprettify-at-point 'right-edge)
+    (if fira-code-mode
+	(fira-code-mode--enable)
+      (fira-code-mode--disable)))
+
+  (defun fira-code-mode--setup ()
+    "Setup Fira Code Symbols"
+    (set-fontset-font t '(#Xf100 . #Xf16f) "Fira Code Symbol")))
 
 (provide '2_emmacs_ui)
 ;;; 2_emmacs-ui.el ends here
