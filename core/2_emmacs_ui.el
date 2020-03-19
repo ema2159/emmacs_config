@@ -307,11 +307,12 @@ _v_iew             │ ^ ^              │                │                 �
 	  centaur-tabs-set-modified-marker t
 	  centaur-tabs-show-navigation-buttons t
 	  centaur-tabs-set-bar 'under
+	  ;; centaur-tabs-gray-out-icons 'buffer
+	  ;; centaur-tabs-plain-icons t
 	  x-underline-at-descent-line t
 	  centaur-tabs-left-edge-margin nil)
     (centaur-tabs-change-fonts (face-attribute 'default :font) 110)
     (centaur-tabs-headline-match)
-    ;; (setq centaur-tabs-gray-out-icons 'buffer)
     ;; (centaur-tabs-enable-buffer-reordering)
     ;; (setq centaur-tabs-adjust-buffer-order t)
     (centaur-tabs-mode t)
@@ -418,6 +419,7 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 	    (set-face-attribute 'centaur-tabs-selected-modified nil :overline (face-background 'centaur-tabs-active-bar-face))
 	    (set-face-attribute 'centaur-tabs-unselected nil :overline nil)
 	    (set-face-attribute 'centaur-tabs-unselected-modified nil :overline nil))
+	  (set-face-attribute 'highlight-numbers-number nil :weight 'normal)
 	  (solaire-mode-swap-bg)
 	  (setq centaur-tabs-active-bar
 		(centaur-tabs--make-xpm 'centaur-tabs-active-bar-face
@@ -533,6 +535,13 @@ Usable with `ivy-resume', `ivy-next-line-and-call' and
   :defer t)
 
 ;; Custom syntax highlighting
+;; Highlight numbers mode
+(use-package highlight-numbers
+  :config
+  (set-face-attribute 'highlight-numbers-number nil :weight 'normal)
+  :hook
+  (prog-mode . highlight-numbers-mode))
+
 ;; Create a font lock face for punctuation signs
 (defvar font-lock-punctuation-face 'font-lock-punctuation-face)
 (defface font-lock-punctuation-face
@@ -541,17 +550,15 @@ Usable with `ivy-resume', `ivy-next-line-and-call' and
   :group 'emmacs)
 (set-face-attribute 'font-lock-punctuation-face nil :weight 'normal)
 
-(defvar highlight-numbers-number 'highlight-numbers-number)
-(defface highlight-numbers-number
-  '((t :inherit font-lock-constant-face))
-  "Face for highlighting punctuation signs."
-  :group 'emmacs)
-(set-face-attribute 'highlight-numbers-number nil :weight 'normal)
+;; (defvar highlight-numbers-number 'highlight-numbers-number)
+;; (defface highlight-numbers-number
+;;   '((t :inherit font-lock-constant-face))
+;;   "Face for highlighting punctuation signs."
+;;   :group 'emmacs)
 
 ;; Improve python-mode syntax highlighting
 (font-lock-add-keywords 'python-mode
-			'(("-?\\b[0-9]+\\.?" . highlight-numbers-number)
-			  ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+]\\|\\]\\|\\[" . font-lock-punctuation-face)
+			'(("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+]\\|\\]\\|\\[" . font-lock-punctuation-face)
 			  ("\\([A-Za-z][A-Za-z0-9_]*\\)[ \t\n]*\\((.*)\\)"
 			   (1 font-lock-function-name-face))))
 ;; Improve js-mode syntax highlighting
@@ -559,12 +566,10 @@ Usable with `ivy-resume', `ivy-next-line-and-call' and
 			'(("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+]\\|\\]\\|\\[" . font-lock-punctuation-face)))
 ;; Improve c-mode syntax highlighting
 (font-lock-add-keywords 'c-mode
-			'(("-?\\b[0-9]+\\.?" . highlight-numbers-number)
-			  ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+\@]\\|\\]\\|\\[" . font-lock-punctuation-face)))
+			'(("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+\@]\\|\\]\\|\\[" . font-lock-punctuation-face)))
 ;; Improve verilog-mode syntax highlighting
 (font-lock-add-keywords 'verilog-mode
-			'(("-?\\b[0-9]+\\.?" . highlight-numbers-number)
-			  ("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+\@]\\|\\]\\|\\[" . font-lock-punctuation-face)))
+			'(("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+\@]\\|\\]\\|\\[" . font-lock-punctuation-face)))
 
 ;;; Fira code
 ;; Install Fira Code Symbols
@@ -654,7 +659,9 @@ Taken from all-the-icons.el."
 
   (defun fira-code-mode--setup ()
     "Setup Fira Code Symbols"
-    (set-fontset-font t '(#Xf100 . #Xf16f) "Fira Code Symbol")))
+    (set-fontset-font t '(#Xf100 . #Xf16f) "Fira Code Symbol"))
+
+  (add-hook 'prog-mode-hook #'fira-code-mode))
 
 (provide '2_emmacs_ui)
 ;;; 2_emmacs-ui.el ends here

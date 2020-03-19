@@ -143,7 +143,7 @@
 	      ;; (when props
 	      (put-text-property
 	       (match-beginning 1) (match-end 1) 'font-lock-face `(:inherit ,(get-text-property 0 'face icon)
-								  :foreground ,color))))))))
+									    :foreground ,color))))))))
   (advice-add 'magit-status :after 'add-magit-faces)
   (advice-add 'magit-refresh-buffer :after 'add-magit-faces))
 

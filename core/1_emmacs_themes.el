@@ -69,6 +69,8 @@
   :group 'emmacs
   :type 'integer)
 
+(setq doom-rouge-brighter-tabs t)
+
 ;; Theme switch
 (cond
  ((eq emmacs-theme-package 0)
