@@ -94,7 +94,9 @@
 (setq help-window-select t)
 
 ;; Remove the side fringes
-(fringe-mode 0)
+;; (fringe-mode 0)
+(setq left-fringe-width  20)
+(setq right-fringe-width 0)
 
 ;; Default isearch to forward
 (setq isearch-forward t)

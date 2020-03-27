@@ -1,4 +1,4 @@
-;; 2_emmacs-ui.el --- User Insterface
+;; 2_emmacs-ui.el --- User Interface
 
 ;;; Commentary:
 ;; In this section the following packages are loaded:

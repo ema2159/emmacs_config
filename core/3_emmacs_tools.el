@@ -23,6 +23,7 @@
 ;; - Flycheck
 ;; - Flycheck Pycheck
 ;; - Format All
+;; - Git Gutter Fringe
 ;; - Hydra
 ;; - Highlight Thing
 ;; - LSP Mode
@@ -591,14 +592,17 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
   :bind ((:map origami-mode-map
 	       ("C-c o" . hydra-origami/body))))
 
-;; - Format All
+;; Format All
 (use-package format-all)
 
-;; - Flycheck Pycheck
+;; Flycheck Pycheck
 ;; (use-package flycheck-pycheckers
   ;; :ensure t
   ;; :hook
   ;; (flycheck-mode . flycheck-pycheckers-setup))
+
+;; Git Gutter Fringe
+(use-package git-gutter-fringe)
 
 (provide '3_emmacs_tools)
 ;;; 3_emmacs_tools.el ends here
