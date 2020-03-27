@@ -6,6 +6,8 @@
 ;; - Doom Themes
 ;; - Spacemacs Theme
 
+(use-package kaolin-themes)
+
 ;;; Code:
 (defcustom emmacs-theme-package 0
   "Theme to be loaded.
