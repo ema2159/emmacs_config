@@ -109,5 +109,17 @@
 ;; Markdown
 (use-package markdown-mode)
 
+;; Web Mode
+(use-package web-mode
+  :mode ("\\.html$" . web-mode)
+  :init
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq js-indent-level 2)
+  (setq web-mode-enable-auto-pairing t)
+  (setq web-mode-enable-auto-expanding t)
+  (setq web-mode-enable-css-colorization t))
+
 (provide '4_emmacs_modes)
 ;;; 4_emmacs_modes.el ends here
