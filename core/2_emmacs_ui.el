@@ -550,12 +550,6 @@ Usable with `ivy-resume', `ivy-next-line-and-call' and
   :group 'emmacs)
 (set-face-attribute 'font-lock-punctuation-face nil :weight 'normal)
 
-;; (defvar highlight-numbers-number 'highlight-numbers-number)
-;; (defface highlight-numbers-number
-;;   '((t :inherit font-lock-constant-face))
-;;   "Face for highlighting punctuation signs."
-;;   :group 'emmacs)
-
 ;; Improve python-mode syntax highlighting
 (font-lock-add-keywords 'python-mode
 			'(("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+]\\|\\]\\|\\[" . font-lock-punctuation-face)
@@ -566,6 +560,9 @@ Usable with `ivy-resume', `ivy-next-line-and-call' and
 			'(("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+]\\|\\]\\|\\[" . font-lock-punctuation-face)))
 ;; Improve c-mode syntax highlighting
 (font-lock-add-keywords 'c-mode
+			'(("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+\@]\\|\\]\\|\\[" . font-lock-punctuation-face)))
+;; Improve c++-mode syntax highlighting
+(font-lock-add-keywords 'c++-mode
 			'(("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+\@]\\|\\]\\|\\[" . font-lock-punctuation-face)))
 ;; Improve verilog-mode syntax highlighting
 (font-lock-add-keywords 'verilog-mode
