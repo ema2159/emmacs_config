@@ -55,7 +55,8 @@
   ;; When evil :wq, save and close buffer and window instead of Emacs
   (evil-ex-define-cmd "wq" 'save-and-kill-buffer-and-window)
   ;; Remap "," to repeat last macro (@@)
-  (define-key evil-normal-state-map "," (kbd "@@")))
+  (define-key evil-normal-state-map "," (kbd "@@"))
+  (define-key evil-normal-state-map "\C-b" 'beginning-of-defun))
 
 ;; Dumb Jump
 (use-package dumb-jump
