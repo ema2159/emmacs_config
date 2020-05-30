@@ -111,5 +111,8 @@
 (set-frame-font "Consolas" nil t)
 (set-face-attribute 'default nil :height 130)
 
+;; Which func config
+(setq which-func-unknown "n/a")
+
 (provide '0_emmacs_general)
 ;;; 0_emmacs_general.el ends here
