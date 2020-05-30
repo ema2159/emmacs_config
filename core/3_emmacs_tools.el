@@ -289,8 +289,8 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
 ;; Highlight thing
 (use-package highlight-thing
   :config
-  (set-face-attribute 'highlight-thing nil
-		      :inherit 'highlight)
+  ;; (set-face-attribute 'highlight-thing nil
+		      ;; :inherit 'region)
   (add-hook 'iedit-mode-hook (lambda()
 			       (highlight-thing-mode -1)))
 
