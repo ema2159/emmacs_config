@@ -114,5 +114,12 @@
 ;; Which func config
 (setq which-func-unknown "n/a")
 
+;; Smooth scrolling
+(setq redisplay-dont-pause t
+  scroll-margin 1
+  scroll-step 1
+  scroll-conservatively 10000
+  scroll-preserve-screen-position 1)
+
 (provide '0_emmacs_general)
 ;;; 0_emmacs_general.el ends here
