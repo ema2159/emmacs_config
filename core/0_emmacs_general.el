@@ -57,7 +57,7 @@
    #b00000000
    #b00000000])
 
-;; Define a variable for hooks to turn on/off the relative and absolute number lines
+;; Display line numbers
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 ;; Function for saving and killing buffer and window
@@ -120,6 +120,11 @@
   scroll-step 1
   scroll-conservatively 10000
   scroll-preserve-screen-position 1)
+
+;; Always change to grep buffer
+(add-hook 'grep-mode-hook
+          '(lambda ()
+             (switch-to-buffer-other-window "*grep*")))
 
 (provide '0_emmacs_general)
 ;;; 0_emmacs_general.el ends here
