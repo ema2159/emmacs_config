@@ -10,12 +10,13 @@
 
 ;;; Code:
 (defcustom emmacs-theme-package 0
-  "Theme to be loaded.
+  "Theme package to be loaded.
 0 - Doom Themes
 1 - Kaolin Themes
 2 - Spacemacs Theme
 3 - Atom One Dark
-4 - Zenburn"
+4 - Zenburn
+5 - Gruvbox"
   :group 'emmacs
   :type 'integer)
 
@@ -27,8 +28,8 @@
   :group 'emmacs
   :type 'integer)
 
-(defcustom emmacs-theme-number 35
-  "Available themes.
+(defcustom emmacs-theme-number 38
+  "Default theme to be loaded.
 | Doom                    | Kaolin                 | Spacemacs         |
 |-------------------------+------------------------+-------------------|
 | 0 doom-one              | 0 kaolin-eclipse       | 0 spacemacs-dark  |
@@ -46,7 +47,7 @@
 | 12 doom-opera-light     |                        |                   |
 | 13 doom-opera           |                        |                   |
 | 14 doom-peacock         |                        |                   |
-| 15 doom-solarized-light |                        |                   |
+| 15 doom-henna           |                        |                   |
 | 16 doom-sourcerer       |                        |                   |
 | 17 doom-spacegrey       |                        |                   |
 | 18 doom-tomorrow-day    |                        |                   |
@@ -67,11 +68,15 @@
 | 33 doom-horizon         |                        |                   |
 | 34 doom-manegarm        |                        |                   |
 | 35 doom-ephemeral       |                        |                   |
+| 36 doom-monokai-classic |                        |                   |
+| 37 doom-monokai-pro     |                        |                   |
+| 38 doom-monokai-spectrum|                        |                   |
 |-------------------------+------------------------+-------------------|"
   :group 'emmacs
   :type 'integer)
 
 (setq doom-rouge-brighter-tabs t)
+(setq doom-solarized-dark-brighter-text t)
 
 ;; Theme switch
 (cond
@@ -96,7 +101,7 @@
      ((eq emmacs-theme-number 12) (load-theme 'doom-opera-light t))
      ((eq emmacs-theme-number 13) (load-theme 'doom-opera t))
      ((eq emmacs-theme-number 14) (load-theme 'doom-peacock t))
-     ((eq emmacs-theme-number 15) (load-theme 'doom-solarized-light t))
+     ((eq emmacs-theme-number 15) (load-theme 'doom-henna t))
      ((eq emmacs-theme-number 16) (load-theme 'doom-sourcerer t))
      ((eq emmacs-theme-number 17) (load-theme 'doom-spacegrey t))
      ((eq emmacs-theme-number 18) (load-theme 'doom-tomorrow-day t))
@@ -117,6 +122,9 @@
      ((eq emmacs-theme-number 33) (load-theme 'doom-horizon t))
      ((eq emmacs-theme-number 34) (load-theme 'doom-manegarm t))
      ((eq emmacs-theme-number 35) (load-theme 'doom-ephemeral t))
+     ((eq emmacs-theme-number 36) (load-theme 'doom-monokai-classic t))
+     ((eq emmacs-theme-number 37) (load-theme 'doom-monokai-pro t))
+     ((eq emmacs-theme-number 38) (load-theme 'doom-monokai-spectrum t))
      )))
  ((eq emmacs-theme-package 1)
   ;; Kaolin Themes
@@ -152,7 +160,11 @@
  ((eq emmacs-theme-package 4)
   (use-package zenburn-theme
     :config
-    (load-theme 'zenburn t))))
+    (load-theme 'zenburn t)))
+ ((eq emmacs-theme-package 5)
+  (use-package gruvbox-theme
+    :config
+    (load-theme 'gruvbox t))))
 
 (cond ((eq emmacs-treemacs-theme 0)
        (use-package doom-themes
