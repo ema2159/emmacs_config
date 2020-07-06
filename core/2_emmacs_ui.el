@@ -447,7 +447,7 @@ Usable with `ivy-resume', `ivy-next-line-and-call' and
    ("C-h f" . counsel-describe-function)
    ("C-h v" . counsel-describe-variable)
    ("C-h i" . counsel-imenu)
-   ("C-x C-p" . counsel-yank-pop)
+   ("C-p" . counsel-yank-pop)
    ("C-x r b" . counsel-bookmark)
    ("C-c g" . counsel-git)
    ("C-c j" . counsel-git-grep)
