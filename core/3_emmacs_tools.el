@@ -23,7 +23,7 @@
 ;; - Flycheck
 ;; - Flycheck Pycheck
 ;; - Format All
-;; - Git Gutter Fringe
+;; - Git Gutter
 ;; - Hydra
 ;; - Highlight Thing
 ;; - LSP Mode
@@ -602,8 +602,10 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
   ;; :hook
   ;; (flycheck-mode . flycheck-pycheckers-setup))
 
-;; Git Gutter Fringe
-(use-package git-gutter-fringe)
+;; Git Gutter
+(use-package git-gutter
+  :hook
+  (prog-mode . git-gutter-mode))
 
 (provide '3_emmacs_tools)
 ;;; 3_emmacs_tools.el ends here
