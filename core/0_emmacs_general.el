@@ -108,8 +108,8 @@
 ;; Default font
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
-(set-frame-font "Consolas" nil t)
-(set-face-attribute 'default nil :height 130)
+(if (string-equal system-type "windows-nt")
+    (progn (set-frame-font "Consolas" nil t)))
 
 ;; Which func config
 (setq which-func-unknown "n/a")
@@ -125,6 +125,9 @@
 (add-hook 'grep-mode-hook
           '(lambda ()
              (switch-to-buffer-other-window "*grep*")))
+
+;; Open Emacs on fullscreen
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (provide '0_emmacs_general)
 ;;; 0_emmacs_general.el ends here

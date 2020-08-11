@@ -603,9 +603,13 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
   ;; (flycheck-mode . flycheck-pycheckers-setup))
 
 ;; Git Gutter
-(use-package git-gutter
+;; (use-package git-gutter
+;;   :hook
+;;   (prog-mode . git-gutter-mode))
+
+(use-package diff-hl
   :hook
-  (prog-mode . git-gutter-mode))
+  (prog-mode . diff-hl-mode))
 
 (provide '3_emmacs_tools)
 ;;; 3_emmacs_tools.el ends here

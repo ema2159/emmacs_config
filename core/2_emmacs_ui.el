@@ -297,7 +297,7 @@ _v_iew             │ ^ ^              │                │                 �
   (after-init . doom-modeline-mode))
 
 ;; Centaur Tabs
-(use-package powerline)
+;; (use-package powerline)
 (use-package centaur-tabs
   :config
   (setq centaur-tabs-style "bar"
@@ -393,11 +393,13 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 (use-package swiper
   :defer t
   :after evil
+  :config
   :bind (:map evil-normal-state-map
+	      ("\C-s" . swiper-all)
 	      ("/" . swiper)
 	      ("?" . swiper-backward)
 	      ("#" . swiper-all-thing-at-point)
-	      ("*" . swiper-all-thing-at-point)))
+	      ("*" . swiper-thing-at-point)))
 
 ;; Counsel
 (use-package counsel
@@ -467,10 +469,8 @@ Usable with `ivy-resume', `ivy-next-line-and-call' and
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)
-  (setq swiper-goto-start-of-match t)
   :bind
-  (("\C-s" . swiper)
-   ("C-c C-r" . ivy-resume)
+  (("C-c C-r" . ivy-resume)
    ("C-x b" . ivy-switch-buffer)))
 
 ;; Ivy Posframe
@@ -657,6 +657,7 @@ Taken from all-the-icons.el."
     (set-fontset-font t '(#Xf100 . #Xf16f) "Fira Code Symbol"))
 
   (add-hook 'prog-mode-hook #'fira-code-mode))
+(set-face-attribute 'default nil :height 130)
 
 (provide '2_emmacs_ui)
 ;;; 2_emmacs-ui.el ends here
