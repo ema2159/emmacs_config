@@ -571,28 +571,6 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
   (html-mode . turn-on-evil-matchit-mode)
   (rjsx-mode . turn-on-evil-matchit-mode))
 
-;; Origami
-(use-package origami
-  :hook
-  (prog-mode . origami-mode)
-  :config
-  (defhydra hydra-origami (:color red)
-    "
-――――――――――――――――――――――――――――――――――――――――――――――――――――
- _o_pen node  │ _n_ext fold     │ _t_oggle node
- _c_lose node │ _p_revious fold │ toggle _a_ll
-――――――――――――――――――――――――――――――――――――――――――――――――――――
-  "
-    ("o" origami-open-node)
-    ("c" origami-close-node)
-    ("n" origami-next-fold)
-    ("p" origami-previous-fold)
-    ("t" origami-toggle-node)
-    ("a" origami-toggle-all-nodes)
-    ("C-c o" nil :color blue))
-  :bind ((:map origami-mode-map
-	       ("C-c o" . hydra-origami/body))))
-
 ;; Format All
 (use-package format-all)
 
