@@ -17,6 +17,7 @@
 ;; - Ivy Rich
 ;; - Page Break Lines
 ;; - Pretty Mode
+;; - Rainbow delimiters
 ;; - Solaire Mode
 ;; - Swiper
 ;; - Treemacs
@@ -533,6 +534,11 @@ Usable with `ivy-resume', `ivy-next-line-and-call' and
 ;; Pretty mode
 (use-package pretty-mode
   :defer t)
+
+;; Rainbow delimiters
+(use-package rainbow-delimiters
+  :hook
+  (prog-mode . rainbow-delimiters-mode))
 
 ;; Custom syntax highlighting
 ;; Highlight numbers mode
