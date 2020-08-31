@@ -6,6 +6,13 @@
 ;; - Doom Themes
 ;; - Spacemacs Theme
 
+;; Solaire mode
+(use-package solaire-mode
+  :config
+  ;; (solaire-mode-swap-bg)
+  (setq solaire-mode-remap-fringe t)
+  (solaire-global-mode))
+
 (use-package kaolin-themes)
 
 ;;; Code:
@@ -183,5 +190,5 @@
 	 :config
 	 (kaolin-treemacs-theme))))
       
- (provide '1_emmacs_themes)
+(provide '1_emmacs_themes)
 ;;; 1_emmacs_themes.el ends here

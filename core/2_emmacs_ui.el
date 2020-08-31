@@ -39,13 +39,6 @@
   :custom-face
   (all-the-icons-ivy-dir-face ((t (:inherit (font-lock-doc-face bold))))))
 
-;; Solaire mode
-(use-package solaire-mode
-  :config
-  (solaire-mode-swap-bg)
-  (setq solaire-mode-remap-fringe t)
-  (solaire-global-mode +1))
-
 ;; Dired
 (use-package dired
   :straight nil
