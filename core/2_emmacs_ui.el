@@ -17,6 +17,7 @@
 ;; - Ivy Rich
 ;; - Page Break Lines
 ;; - Pretty Mode
+;; - Rainbow delimiters
 ;; - Solaire Mode
 ;; - Swiper
 ;; - Treemacs
@@ -290,7 +291,6 @@ _v_iew             │ ^ ^              │                │                 �
   (after-init . doom-modeline-mode))
 
 ;; Centaur Tabs
-;; (use-package powerline)
 (use-package centaur-tabs
   :config
   (setq centaur-tabs-style "bar"
@@ -299,6 +299,7 @@ _v_iew             │ ^ ^              │                │                 �
 	centaur-tabs-set-modified-marker t
 	centaur-tabs-show-navigation-buttons t
 	centaur-tabs-set-bar 'under
+	;; centaur-tabs-label-fixed-length 20
 	;; centaur-tabs-gray-out-icons 'buffer
 	;; centaur-tabs-plain-icons t
 	x-underline-at-descent-line t
@@ -362,6 +363,8 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   ("C-c t s" . centaur-tabs-counsel-switch-group)
   ("C-c t p" . centaur-tabs-group-by-projectile-project)
   ("C-c t g" . centaur-tabs-group-buffer-groups)
+  ("C-c t o" . centaur-tabs-kill-other-buffers-in-current-group)
+  ("C-c t k" . centaur-tabs-kill-all-buffers-in-current-group)
   (:map evil-normal-state-map
 	("g t" . centaur-tabs-forward)
 	("g T" . centaur-tabs-backward)))
@@ -524,6 +527,11 @@ Usable with `ivy-resume', `ivy-next-line-and-call' and
 ;; Pretty mode
 (use-package pretty-mode
   :defer t)
+
+;; Rainbow delimiters
+(use-package rainbow-delimiters
+  :hook
+  (prog-mode . rainbow-delimiters-mode))
 
 ;; Custom syntax highlighting
 ;; Highlight numbers mode

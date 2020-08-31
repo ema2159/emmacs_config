@@ -35,7 +35,7 @@
   :group 'emmacs
   :type 'integer)
 
-(defcustom emmacs-theme-number 37
+(defcustom emmacs-theme-number 40
   "Default theme to be loaded.
 | Doom                    | Kaolin                 | Spacemacs         |
 |-------------------------+------------------------+-------------------|
@@ -79,6 +79,8 @@
 | 37 doom-monokai-pro     |                        |                   |
 | 38 doom-monokai-spectrum|                        |                   |
 | 39 doom-zenburn         |                        |                   |
+| 40 doom-old-hope        |                        |                   |
+| 41 doom-miramare        |                        |                   |
 |-------------------------+------------------------+-------------------|"
   :group 'emmacs
   :type 'integer)
@@ -134,6 +136,8 @@
      ((eq emmacs-theme-number 37) (load-theme 'doom-monokai-pro t))
      ((eq emmacs-theme-number 38) (load-theme 'doom-monokai-spectrum t))
      ((eq emmacs-theme-number 39) (load-theme 'doom-zenburn t))
+     ((eq emmacs-theme-number 40) (load-theme 'doom-old-hope t))
+     ((eq emmacs-theme-number 41) (load-theme 'doom-miramare t))
      )))
  ((eq emmacs-theme-package 1)
   ;; Kaolin Themes
