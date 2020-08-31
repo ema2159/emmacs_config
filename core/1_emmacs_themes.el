@@ -2,9 +2,8 @@
 
 ;;; Commentary:
 ;; In this section the following packages are loaded:
-;; - Atom One Dark Theme
 ;; - Doom Themes
-;; - Spacemacs Theme
+;; - Kaolin Themes
 
 ;; Solaire mode
 (use-package solaire-mode
@@ -156,28 +155,7 @@
      ((eq emmacs-theme-number 9) (load-theme 'kaolin-light t))
      ((eq emmacs-theme-number 10) (load-theme 'kaolin-mono-dark t))
      ((eq emmacs-theme-number 11) (load-theme 'kaolin-valley-light t))
-     )))
- ((eq emmacs-theme-package 2)
-  (cond
-   ((eq emmacs-theme-number 0) (use-package spacemacs-dark-theme
-				 :config
-				 (load-theme 'spacemacs-dark t)))
-   ((eq emmacs-theme-number 1) (use-package spacemacs-light-theme
-				 :config
-				 (load-theme 'spacemacs-light t)))))
- ((eq emmacs-theme-package 3)
-  (use-package atom-one-dark-theme
-    :config
-    (load-theme 'atom-one-dark t))
-  )
- ((eq emmacs-theme-package 4)
-  (use-package zenburn-theme
-    :config
-    (load-theme 'zenburn t)))
- ((eq emmacs-theme-package 5)
-  (use-package gruvbox-theme
-    :config
-    (load-theme 'gruvbox t))))
+     ))))
 
 (cond ((eq emmacs-treemacs-theme 0)
        (use-package doom-themes

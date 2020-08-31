@@ -1,7 +1,7 @@
 #+TITLE: Emmacs Config
 #+CREATOR: Emmanuel Bustos T.
 
-Welcome! This is Emmacs (yes, Emmacs). This is my personal Emacs configuration, in which I attempt to create a fast, intuitive text editor that helps in my work as a VLSI and verification engineer.
+Welcome! This is Emmacs. This is my personal Emacs configuration, which I use and maintain to simplify a lot of my software related daily tasks.
 
 * Why Emmacs?
   My name es Emmanuel, Emma in short, and I happen to like bad puns, so there you have it, an Emacs configuration with a dumb name.
@@ -9,24 +9,28 @@ Welcome! This is Emmacs (yes, Emmacs). This is my personal Emacs configuration, 
 * What packages are featured?
   Here's a nice list with some of the most important packages installed:
 ** Themes available
-   - Atom One Dark Theme
    - Doom Themes
-   - Solarized Theme
-   - Spacemacs Theme
+   - Kaolin Themes
+   
 ** User interface tools
    - All the icons
    - All The Icons Ivy
    - Amx
+   - Centaur Tabs
    - Counsel
    - Dashboard
    - Dired Hacks
    - Dired Single
    - Doom Modeline
+   - Helpful
    - Ivy
+   - Ivy Post Frame
+   - Ivy Rich
    - Page Break Lines
+   - Pretty Mode
+   - Rainbow delimiters
    - Solaire Mode
    - Swiper
-   - Tabbar Ruler (don't like how bloated it is, might fork it and make it more minimalistic)
    - Treemacs
    - Which key
 ** Editing tools and code navigation tools
@@ -34,34 +38,51 @@ Welcome! This is Emmacs (yes, Emmacs). This is my personal Emacs configuration, 
    - Beacon
    - Column Enforce Mode
    - Company
+   - Company Anaconda
+   - Company Box
+   - Company Quick Help
    - Company C Headers
    - Company Irony
    - Company Tern
    - Drag Stuff
    - Dumb Jump
    - Evil
+   - Evil Easymotion
    - Evil Matchit
    - Evil Multiedit
    - Evil Snipe
    - Expand Region
    - Flycheck
+   - Flycheck Pycheck
+   - Format All
+   - Git Gutter
    - Hydra
    - Highlight Thing
+   - LSP Mode
    - Magit
+   - Origami
    - Projectile
    - Recentf
    - Undo Tree
    - Shell Pop
+   - Smart Jump
    - Smartparens
    - Windmove
    - Yasnippet
 ** Modes support
+   - Anaconda Mode
    - CSV Mode
    - Elpy
+   - Emmet Mode
+   - Go Mode
    - Irony
-   - Js2-mode
-   - Specman mode (not many configs have it)
-   - Tern mode
+   - Js2 Mode
+   - LSP Mode
+   - Rjsx Mode
+   - Simple HTTPD
+   - Skewer Mode
+   - Specman Mode
+   - Tern Mode
 * Some screenshots
   Dashboard interface:
   [[./Screenshots/Dashboard.png]]
