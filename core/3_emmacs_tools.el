@@ -610,6 +610,7 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
 ;;   :hook
 ;;   (prog-mode . git-gutter-mode))
 
+;; diff-hl
 (use-package diff-hl
   :hook
   (prog-mode . diff-hl-mode))

@@ -1,9 +1,0 @@
-# -*- mode: c-mode -*-
-# name: function(type1 arg1, type2 arg2...)
-# key: func
-# --
-
-${1:return-type} ${2:function-name}(${3:type1 arg1, type2 arg2...$(if-yas-empty)}) {
-    $0
-    return ;
-}

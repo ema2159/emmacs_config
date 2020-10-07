@@ -34,7 +34,7 @@
   :group 'emmacs
   :type 'integer)
 
-(defcustom emmacs-theme-number 40
+(defcustom emmacs-theme-number 37
   "Default theme to be loaded.
 | Doom                    | Kaolin                 | Spacemacs         |
 |-------------------------+------------------------+-------------------|
