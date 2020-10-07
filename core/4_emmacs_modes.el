@@ -126,5 +126,11 @@
   (setq web-mode-enable-auto-expanding t)
   (setq web-mode-enable-css-colorization t))
 
+;; Css Mode
+(use-package css-mode
+  :straight nil
+  :config
+  (setq css-indent-offset 2))
+
 (provide '4_emmacs_modes)
 ;;; 4_emmacs_modes.el ends here
