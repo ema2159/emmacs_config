@@ -1,8 +1,0 @@
-# -*- mode: specman -*-
-# name: for index from exp [down] to exp step exp do {...};
-# key: for
-# group: loops and conditionals
-# --
-for ${1:index} from ${2:exp [down]} to ${3:exp} step ${4:exp} do {
-    $0
-}; 

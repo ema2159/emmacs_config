@@ -1,8 +1,0 @@
-# -*- mode: specman -*-
-# name: on event-name {...};
-# key: on
-# group: definitions
-# --
-on ${1:event-name} {
-    $0
-};

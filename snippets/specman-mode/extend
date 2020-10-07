@@ -1,8 +1,0 @@
-# -*- mode: specman -*-
-# name: extend struct-type | unit-type {...};
-# key: extend
-# group: definitions
-# --
-extend ${1:struct-type | unit-type} {
-    $0
-}; //Extend $1

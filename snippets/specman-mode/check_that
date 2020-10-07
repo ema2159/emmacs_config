@@ -1,6 +1,0 @@
-# -*- mode: specman -*-
-# name: check that bool-expr [else dut_error];
-# key: check_that
-# group: constraints, coverage and checks
-# --
-check that ${1:bool-expr}${2: [else dut_error]$(if-yas-empty)};$0 

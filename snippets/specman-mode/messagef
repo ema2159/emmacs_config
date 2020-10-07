@@ -1,7 +1,0 @@
-# -*- mode: specman-mode -*-
-# name: messagef(verbosity, body_text, ...);
-# key: messagef
-# group: prints and messages
-# --
-
-messagef(${1:verbosity}, ${2:body_text, ...});$0

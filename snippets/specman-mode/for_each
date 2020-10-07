@@ -1,8 +1,0 @@
-# -*- mode: specman -*-
-# name: for each (list-item) using index (index-name) in list do {...};
-# key: for each
-# group: loops and conditionals
-# --
-for each (${1:list-item}) using index (${2:index-name}) in ${3:list} do {
-    $0
-}; 

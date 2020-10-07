@@ -1,8 +1,0 @@
-# -*- mode: specman -*-
-# name: else {...};
-# key: else
-# group: loops and conditionals
-# --
-else {
-    $0
-}; 

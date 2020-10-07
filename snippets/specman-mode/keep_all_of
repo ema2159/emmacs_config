@@ -1,8 +1,0 @@
-# -*- mode: specman -*-
-# name: keep all of {...};
-# key: keep all of
-# group: constraints, coverage and checks
-# --
-keep all of {
-    $0
-}; 

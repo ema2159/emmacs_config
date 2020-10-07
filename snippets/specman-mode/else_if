@@ -1,8 +1,0 @@
-# -*- mode: specman -*-
-# name: else if boolean-expression then {...} 
-# key: else if
-# group: loops and conditionals
-# --
-else if ${1:boolean-expression} then {
-    $0
-} 

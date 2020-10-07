@@ -1,8 +1,0 @@
-# -*- mode: specman -*-
-# name: tcm([arg1: type1, arg2: type2...] [:return-type] @event-name is [also|first|only] {...};
-# key: tcm extend
-# group: definitions
-# --
-${1:method-name}(${2:[arg1: type1, arg2: type2...]$(if-yas-empty)}) ${3:[:return-type] $(if-yas-empty)}@${4:event-name} is ${5:[also|first|only]$(if-yas-empty)} {
-    $0
-};

@@ -1,6 +1,0 @@
-# -*- mode: specman -*-
-# name: type enum-type: [name1, name2...];
-# key: type enum
-# group: definitions
-# --
-type ${1:enum-type}: [${2:name1, name2...}];$0

@@ -1,6 +1,0 @@
-# -*- mode: specman -*-
-# name: import e-file;
-# key: import
-# group: misc
-# --
-import ${1:e-file};$0
