@@ -100,7 +100,11 @@
   (rjsx-mode . skewer-mode)
   (js2-mode . skewer-mode)
   (css-mode . skewer-css-mode)
+  (web-mode . skewer-mode)
   (mhtml-mode . skewer-html-mode))
+
+;; Impatient mode
+(use-package impatient-mode)
 
 ;; Simple HTTPD
 (use-package simple-httpd
