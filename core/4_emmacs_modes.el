@@ -77,7 +77,7 @@
 ;; Anaconda Mode
 (use-package anaconda-mode
   :config
-  (pythonic-activate "/home/martaalexis/anaconda3/envs/env")
+  (pythonic-activate "/home/ema2159/anaconda3/envs/general")
   :hook
   (python-mode . anaconda-mode))
 

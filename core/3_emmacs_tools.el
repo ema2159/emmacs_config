@@ -335,13 +335,15 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
 (when emmacs-activate-lsp
   ;; LSP Mode
   (use-package lsp-mode
+    :init
+    (add-to-list 'exec-path "/home/ema2159/anaconda3/envs/general/bin")
     :commands lsp
     :custom
     (lsp-auto-guess-root nil)
     (lsp-prefer-flymake nil) ; Use flycheck instead of flymake
     :hook
-    ((python-mode) . lsp)
-    ((js-mode) . lsp))
+    (prog-mode . lsp)
+    (prog-mode . lsp-headerline-breadcrumb-mode))
 
   ;; LSP UI
   (use-package lsp-ui
