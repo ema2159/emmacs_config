@@ -18,6 +18,7 @@
 ;; - Evil Easymotion
 ;; - Evil Matchit
 ;; - Evil Multiedit
+;; - Evil Multiple cursors
 ;; - Evil Snipe
 ;; - Expand Region
 ;; - Flycheck
@@ -102,9 +103,11 @@
 	 ("C-p" . evil-multiedit-prev)
 	 :map evil-multiedit-insert-state-map
 	 ("C-n" . evil-multiedit-next)
-	 ("C-p" . evil-multiedit-prev))
-  :config
-  (evil-ex-define-cmd "ie[dit]" #'evil-multiedit-ex-match))
+	 ("C-p" . evil-multiedit-prev)))
+
+(use-package evil-mc
+  :hook
+  (prog-mode . evil-mc-mode))
 
 ;; Recent files
 (use-package recentf)
