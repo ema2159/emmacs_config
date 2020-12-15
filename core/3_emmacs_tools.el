@@ -316,6 +316,8 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
 (use-package column-enforce-mode
   :hook
   (prog-mode . column-enforce-mode)
+  (web-mode . (lambda()
+		(column-enforce-mode 0)))
   :config
   (setq column-enforce-column 100))
 
