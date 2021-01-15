@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: randint
+# key: randint
+# --
+Math.floor(Math.random() * $0);

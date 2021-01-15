@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: rand
+# key: rand
+# --
+Math.random() * $0;

@@ -6,4 +6,4 @@
 # group: console
 # --
 
-console.log(${1:object})
+console.log(${1:object});

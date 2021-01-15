@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: express boilerplate
+# key: express
+# --
+const express = require("express");
+const https = require("https");
+const bodyParser = require("body-parser");
+
+const app = express();
+
+app.use(bodyParser.urlencoded({extended: true}));
+
+app.get("/", function(req, res) {
+  res.send("Server Ready");
+});
+
+app.listen(3000, function() {
+  console.log("Server is runing on port 3000");
+});
