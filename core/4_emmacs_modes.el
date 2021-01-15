@@ -12,24 +12,9 @@
 ;; - Rjsx Mode
 ;; - Simple HTTPD
 ;; - Skewer Mode
-;; - Specman Mode
 ;; - Tern Mode
 
 ;;; Code:
-;; Specman Mode
-(use-package specman-mode
-  :straight nil
-  :load-path "~/.emacs.d/specman"
-  :mode "\\.e\\'"
-  "\\.ecom\\'"
-  :config
-  (put 'specman-mode 'derived-mode-parent 'prog-mode)
-  :hook
-  (specman-mode . (lambda () (use-local-map nil)))
-  (specman-mode . yas-minor-mode)
-  (specman-mode . display-line-numbers-mode)
-  :custom-face
-  (specman-punctuation-face ((t (:inherit font-lock-keyword-face)))))
 
 ;; Irony
 (use-package irony
