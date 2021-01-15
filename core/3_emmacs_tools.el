@@ -41,7 +41,7 @@
 
 ;;; Code:
 ;; Customs
-(defcustom emmacs-activate-lsp nil
+(defcustom emmacs-activate-lsp t
   "Non-nil means that LSP mode will be activated."
   :group 'emmacs
   :type 'boolean)
@@ -345,6 +345,7 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
     (add-to-list 'exec-path "/home/ema2159/anaconda3/envs/general/bin")
     :commands lsp
     :custom
+    (lsp-keymap-prefix "C-c C-l")
     (lsp-auto-guess-root nil)
     (lsp-prefer-flymake nil) ; Use flycheck instead of flymake
     :hook
@@ -356,9 +357,6 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
     :commands lsp-ui-mode
     :config
     (lsp-ui-sideline))
-
-  ;; Company LSP
-  (use-package company-lsp :commands company-lsp)
 
   ;; LSP Treemacs
   (use-package lsp-treemacs :commands lsp-treemacs-errors-list)

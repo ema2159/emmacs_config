@@ -9,7 +9,6 @@
 ;; - Go Mode
 ;; - Irony
 ;; - Js2 Mode
-;; - LSP Mode
 ;; - Rjsx Mode
 ;; - Simple HTTPD
 ;; - Skewer Mode
