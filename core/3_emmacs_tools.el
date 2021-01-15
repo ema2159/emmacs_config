@@ -49,6 +49,7 @@
 ;; Evil
 (use-package evil
   :init
+  (setq evil-undo-system 'undo-tree)
   (evil-mode)
   :config
   ;; When evil :q[uit], close buffer and window instead of Emacs
