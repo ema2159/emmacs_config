@@ -239,6 +239,8 @@ _v_iew             │ ^ ^              │                │                 �
   (setq dashboard-set-file-icons t)
   (setq dashboard-set-navigator t)
   (setq dashboard-set-footer t)
+  (setq dashboard-path-style 'truncate-middle)
+  (setq dashboard-path-max-length 70)
   (setq dashboard-navigator-buttons
 	`(((,(all-the-icons-octicon "mark-github" :height 1.5 :v-adjust 0.0)
 	    "Github"
