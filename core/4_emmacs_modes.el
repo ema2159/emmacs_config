@@ -2,7 +2,6 @@
 
 ;;; Commentary:
 ;; In this section the following packages are loaded:
-;; - Anaconda Mode
 ;; - CSV Mode
 ;; - Elpy
 ;; - Emmet Mode
@@ -11,7 +10,8 @@
 ;; - Rjsx Mode
 ;; - Simple HTTPD
 ;; - Skewer Mode
-;; - Tern Mode
+;; - Rust Mode
+;; - Typescript Mode
 
 ;;; Code:
 
@@ -55,6 +55,9 @@
 ;; Go Mode
 (use-package go-mode)
 
+;; Rust Mode
+(use-package rust-mode)
+
 ;; Skewer mode
 (use-package skewer-mode
   :hook
@@ -88,6 +91,12 @@
   (setq web-mode-enable-auto-pairing t)
   (setq web-mode-enable-auto-expanding t)
   (setq web-mode-enable-css-colorization t))
+
+;; Typescript Mode
+(use-package typescript-mode
+  :mode
+  ("\\.ts\\'" . typescript-mode)
+  ("\\.tsx\\'" . typescript-mode))
 
 ;; Css Mode
 (use-package css-mode
