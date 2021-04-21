@@ -12,6 +12,9 @@
 ;; - Skewer Mode
 ;; - Rust Mode
 ;; - Typescript Mode
+;; - GLSL Mode
+;; - CUDA Mode
+;; - CMake Mode
 
 ;;; Code:
 
@@ -103,6 +106,33 @@
   :straight nil
   :config
   (setq css-indent-offset 2))
+
+;; GLSL Mode
+(use-package glsl-mode
+  :mode
+  ("\\.glsl$" . glsl-mode)
+  ("\\.vert$" . glsl-mode)
+  ("\\.tesc$" . glsl-mode)
+  ("\\.tese$" . glsl-mode)
+  ("\\.geom$" . glsl-mode)
+  ("\\.frag$" . glsl-mode)
+  ("\\.comp$" . glsl-mode))
+
+;; CUDA Mode
+(use-package cuda-mode
+  :mode
+  ("\\.cu$" . glsl-mode)
+  :hook
+  (cuda-mode . (lambda ()
+		 ( setq c-basic-offset 4
+		   flycheck-cuda-include-path (list ".")))))
+
+;; CMake Mode
+(use-package cmake-mode
+  :mode
+  ("\\.cmake$" . cmake-mode)
+  ("CMakeLists.txt$" . cmake-mode)
+  )
 
 (provide '4_emmacs_modes)
 ;;; 4_emmacs_modes.el ends here
