@@ -347,6 +347,16 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
     (prog-mode . lsp)
     (prog-mode . lsp-headerline-breadcrumb-mode))
 
+  ;; LSP Pyright
+  (use-package lsp-pyright
+    :ensure t
+    :config
+    (setenv "NODE\_OPTIONS" "--experimental-worker")
+    (setq lsp-pyright-venv-path "/home/ema2159/anaconda3/envs/general/bin")
+    :hook (python-mode . (lambda ()
+			   (require 'lsp-pyright)
+			   (lsp))))  ; or lsp-deferred
+
   ;; LSP UI
   (use-package lsp-ui
     :commands lsp-ui-mode
