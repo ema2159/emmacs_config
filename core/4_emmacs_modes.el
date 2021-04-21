@@ -15,32 +15,10 @@
 
 ;;; Code:
 
-;; Irony
-(use-package irony
-  :hook
-  ((c-mode . irony-mode)
-   (c++-mode . irony-mode)
-   (irony-mode . irony-cdb-autosetup-compile-options)))
-
 ;; Csv Mode
 (use-package csv-mode
   :mode
   ("\\.[Cc][Ss][Vv]\\'" . csv-mode))
-
-;; Tern Mode
-(use-package tern
-  :after js-mode)
-
-;; Js2 Mode
-;; (use-package js2-mode
-;;   :mode
-;;   ("\\.js\\'" . js2-mode)
-;;   ("node" . js2-mode)
-;;   :config
-;;   (setq js-indent-level 2)
-;;   (add-hook 'js2-mode-hook (lambda ()
-;;                            (tern-mode)
-;;                            (company-mode))))
 
 ;; rjsx Mode
 (use-package rjsx-mode
