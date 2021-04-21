@@ -33,6 +33,7 @@
 ;; - Smartparens
 ;; - Windmove
 ;; - Yasnippet
+;; - Tree sitter
 
 ;;; Code:
 ;; Customs
@@ -501,14 +502,22 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
 (use-package format-all)
 
 ;; Git Gutter
-;; (use-package git-gutter
-;;   :hook
-;;   (prog-mode . git-gutter-mode))
+(use-package git-gutter
+  :hook
+  (prog-mode . git-gutter-mode))
 
 ;; diff-hl
-(use-package diff-hl
+;; (use-package diff-hl
+  ;; :hook
+  ;; (prog-mode . diff-hl-mode))
+
+;; Tree sitter
+(use-package tree-sitter
   :hook
-  (prog-mode . diff-hl-mode))
+  (prog-mode . tree-sitter-mode)
+  (prog-mode . tree-sitter-hl-mode))
+
+(use-package tree-sitter-langs)
 
 (provide '3_emmacs_tools)
 ;;; 3_emmacs_tools.el ends here
