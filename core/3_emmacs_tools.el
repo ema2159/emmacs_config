@@ -6,12 +6,7 @@
 ;; - Beacon
 ;; - Column Enforce Mode
 ;; - Company
-;; - Company Anaconda
-;; - Company Box
 ;; - Company Quick Help
-;; - Company C Headers
-;; - Company Irony
-;; - Company Tern
 ;; - Drag Stuff
 ;; - Dumb Jump
 ;; - Evil
@@ -364,31 +359,6 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
   ;; LSP Ivy
   (use-package lsp-ivy))
 
-(unless emmacs-activate-lsp
-  ;; Company Anaconda
-  (use-package company-anaconda
-    :after (company anaconda-mode)
-    :config
-    (add-to-list 'company-backends 'company-anaconda))
-
-  ;; Company Tern
-  (use-package company-tern
-    :after (company tern)
-    :config
-    (setq company-tern-property-marker " <p>")
-    (add-to-list 'company-backends 'company-tern))
-
-  ;; Company C headers
-  (use-package company-c-headers
-    :after company
-    :config
-    (add-to-list 'company-backends 'company-c-headers))
-
-  ;; Company Irony
-  (use-package company-irony
-    :after (company irony)
-    :config
-    (add-to-list 'company-backends 'company-irony)))
 
 ;; Company Quick Help
 (use-package company-quickhelp

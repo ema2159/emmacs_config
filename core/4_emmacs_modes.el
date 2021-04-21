@@ -7,7 +7,6 @@
 ;; - Elpy
 ;; - Emmet Mode
 ;; - Go Mode
-;; - Irony
 ;; - Js2 Mode
 ;; - Rjsx Mode
 ;; - Simple HTTPD
