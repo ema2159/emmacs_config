@@ -121,11 +121,12 @@
 ;; CUDA Mode
 (use-package cuda-mode
   :mode
-  ("\\.cu$" . glsl-mode)
+  ("\\.cu$" . cuda-mode)
   :hook
   (cuda-mode . (lambda ()
-		 ( setq c-basic-offset 4
-		   flycheck-cuda-include-path (list ".")))))
+		 (setq c-basic-offset 4
+		       flycheck-cuda-include-path (list "."))
+		 (run-hooks 'prog-mode-hook))))
 
 ;; CMake Mode
 (use-package cmake-mode
