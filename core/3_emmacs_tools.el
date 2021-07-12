@@ -529,10 +529,24 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
 ;; Tree sitter
 (use-package tree-sitter
   :hook
-  (prog-mode . tree-sitter-mode)
-  (prog-mode . tree-sitter-hl-mode))
+  (c-mode . tree-sitter-hl-mode)
+  (c++-mode . tree-sitter-hl-mode)
+  (python-mode . tree-sitter-hl-mode)
+  (js-mode . tree-sitter-hl-mode)
+  (ts-mode . tree-sitter-hl-mode)
+  (tsx-mode . tree-sitter-hl-mode)
+  (typescript-mode . tree-sitter-hl-mode)
+  (typescript-tsx-mode . tree-sitter-hl-mode)
+  (css-mode . tree-sitter-hl-mode)
+  (web-mode . tree-sitter-hl-mode)
+  (rust-mode . tree-sitter-hl-mode)
+  (go-mode . tree-sitter-hl-mode))
 
-(use-package tree-sitter-langs)
+(use-package tree-sitter-langs
+  :after tree-sitter
+  :config
+  (tree-sitter-require 'tsx)
+  (add-to-list 'tree-sitter-major-mode-language-alist '(typescript-tsx-mode . tsx)))
 
 (provide '3_emmacs_tools)
 ;;; 3_emmacs_tools.el ends here
