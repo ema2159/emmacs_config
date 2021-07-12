@@ -97,9 +97,14 @@
 
 ;; Typescript Mode
 (use-package typescript-mode
+  :init
+  (define-derived-mode typescript-tsx-mode typescript-mode "tsx")
+  :config
+  (setq typescript-indent-level 4)
+  (add-hook 'typescript-mode #'subword-mode)
   :mode
   ("\\.ts\\'" . typescript-mode)
-  ("\\.tsx\\'" . typescript-mode))
+  ("\\.tsx\\'" . typescript-tsx-mode))
 
 ;; Css Mode
 (use-package css-mode
