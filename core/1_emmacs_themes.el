@@ -18,11 +18,7 @@
 (defcustom emmacs-theme-package 0
   "Theme package to be loaded.
 0 - Doom Themes
-1 - Kaolin Themes
-2 - Spacemacs Theme
-3 - Atom One Dark
-4 - Zenburn
-5 - Gruvbox"
+1 - Kaolin Themes"
   :group 'emmacs
   :type 'integer)
 
@@ -34,7 +30,7 @@
   :group 'emmacs
   :type 'integer)
 
-(defcustom emmacs-theme-number 37
+(defcustom emmacs-theme-number 48
   "Default theme to be loaded.
 | Doom                    | Kaolin                 | Spacemacs         |
 |-------------------------+------------------------+-------------------|
@@ -80,6 +76,15 @@
 | 39 doom-zenburn         |                        |                   |
 | 40 doom-old-hope        |                        |                   |
 | 41 doom-miramare        |                        |                   |
+| 42 doom-shades-of-purple|                        |                   |
+| 43 doom-homage-black    |                        |                   |
+| 44 doom-homage-white    |                        |                   |
+| 45 doom-flatwhite       |                        |                   |
+| 46 doom-plain           |                        |                   |
+| 47 doom-plain-dark      |                        |                   |
+| 48 doom-xcode	          |                        |                   |
+| 49 doom-1337 	          |                        |                   |
+| 50 doom-badger          |                        |                   |
 |-------------------------+------------------------+-------------------|"
   :group 'emmacs
   :type 'integer)
@@ -137,6 +142,15 @@
      ((eq emmacs-theme-number 39) (load-theme 'doom-zenburn t))
      ((eq emmacs-theme-number 40) (load-theme 'doom-old-hope t))
      ((eq emmacs-theme-number 41) (load-theme 'doom-miramare t))
+     ((eq emmacs-theme-number 42) (load-theme 'doom-shades-of-purple-theme t))
+     ((eq emmacs-theme-number 43) (load-theme 'doom-homage-black t))
+     ((eq emmacs-theme-number 44) (load-theme 'doom-homage-white t))
+     ((eq emmacs-theme-number 45) (load-theme 'doom-flatwhite t))
+     ((eq emmacs-theme-number 46) (load-theme 'doom-plain t))
+     ((eq emmacs-theme-number 47) (load-theme 'doom-plain-dark t))
+     ((eq emmacs-theme-number 48) (load-theme 'doom-xcode t))
+     ((eq emmacs-theme-number 49) (load-theme 'doom-1337 t))
+     ((eq emmacs-theme-number 50) (load-theme 'doom-badger t))
      )))
  ((eq emmacs-theme-package 1)
   ;; Kaolin Themes
