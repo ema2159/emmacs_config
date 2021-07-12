@@ -344,9 +344,24 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
     (lsp-keymap-prefix "C-c C-l")
     (lsp-auto-guess-root nil)
     (lsp-prefer-flymake nil) ; Use flycheck instead of flymake
+    :config
+    (setq
+     lsp-signature-auto-activate nil
+     lsp-signature-render-documentation nil)
     :hook
-    (prog-mode . lsp)
-    (prog-mode . lsp-headerline-breadcrumb-mode))
+    (c-mode . lsp)
+    (c++-mode . lsp)
+    (python-mode . lsp)
+    (js-mode . lsp)
+    (typescript-mode . lsp)
+    (tsx-mode . lsp)
+    (css-mode . lsp)
+    (web-mode . lsp)
+    (rust-mode . lsp)
+    (go-mode . lsp)
+    (cmake-mode . lsp)
+    (lsp-mode . lsp-headerline-breadcrumb-mode)
+    )
 
   ;; LSP Pyright
   (use-package lsp-pyright
