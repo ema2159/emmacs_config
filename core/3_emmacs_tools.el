@@ -80,6 +80,9 @@
   (prog-mode . drag-stuff-mode))
 
 ;; Evil Multiedit
+(defvar evil-multiedit-state-map (make-sparse-keymap))
+;; preemptively fix a variable that is likely missing as well
+(defvar evil-multiedit-insert-state-map (make-sparse-keymap))
 (use-package evil-multiedit
   :bind (:map evil-normal-state-map
 	 ("C-<" . evil-multiedit-match-symbol-and-next)
