@@ -152,6 +152,10 @@
   (advice-add 'magit-status :after 'add-magit-faces)
   (advice-add 'magit-refresh-buffer :after 'add-magit-faces))
 
+;; Forge
+(use-package forge
+  :after magit)
+
 ;; Git time machine
 (use-package git-timemachine
   :straight '(git-timemachine-mode-hook
@@ -353,7 +357,10 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
     :config
     (setq
      lsp-signature-auto-activate nil
-     lsp-signature-render-documentation nil)
+     lsp-signature-render-documentation nil
+     ;; lsp-ui-doc-use-childframe nil
+     ;; lsp-ui-doc-use-webkit t
+     )
     :hook
     (c-mode . lsp)
     (c++-mode . lsp)
@@ -366,8 +373,7 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
     (rust-mode . lsp)
     (go-mode . lsp)
     (cmake-mode . lsp)
-    (lsp-mode . lsp-headerline-breadcrumb-mode)
-    )
+    (lsp-mode . lsp-headerline-breadcrumb-mode))
 
   ;; LSP Pyright
   (use-package lsp-pyright

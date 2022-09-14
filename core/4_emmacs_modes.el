@@ -26,7 +26,7 @@
 ;; rjsx Mode
 (use-package rjsx-mode
   :mode
-  ("\\.js\\'" . rjsx-mode)
+  ;; ("\\.js\\'" . rjsx-mode)
   ("node" . rjsx-mode)
   :bind
   (("C-j" . emmet-expand-line))
@@ -35,8 +35,13 @@
   :config
   (setq js-indent-level 2)
   (add-hook 'rjsx-mode-hook (lambda ()
-                           (tern-mode)
+                           ;; (tern-mode)
                            (company-mode))))
+
+;; Javascript
+(add-hook 'js-mode-hook (lambda()
+			  (setq indent-tabs-mode nil
+				js-indent-level 2)))
 
 ;; Anaconda Mode
 (use-package anaconda-mode
@@ -86,6 +91,7 @@
   :mode
   ("\\.html$" . web-mode)
   ("\\.ejs$" . web-mode)
+  ;; ("\\.js$" . web-mode)
   :init
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-code-indent-offset 2)

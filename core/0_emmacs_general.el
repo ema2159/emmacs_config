@@ -129,5 +129,11 @@
 ;; Open Emacs on fullscreen
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+;; Prevent the creation of lock files
+(setq create-lockfiles nil)
+
+;; Default indent to spaces
+(setq-default indent-tabs-mode nil)
+
 (provide '0_emmacs_general)
 ;;; 0_emmacs_general.el ends here

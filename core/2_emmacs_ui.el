@@ -271,8 +271,8 @@ _v_iew             │ ^ ^              │                │                 �
   (setq dashboard-center-content t)
   (setq dashboard-items '(
 			  (recents  . 8)
-			  (bookmarks . 5)
-			  ;; (agenda . 5)
+			  ;; (bookmarks . 5)
+			  (agenda . 5)
 			  (projects . 3)
 			  (registers . 1))))
 
@@ -298,10 +298,12 @@ _v_iew             │ ^ ^              │                │                 �
   (setq centaur-tabs-style "bar"
 	centaur-tabs-height 32
 	centaur-tabs-set-icons t
+	centaur-tabs-show-new-tab-button t
 	centaur-tabs-set-modified-marker t
 	centaur-tabs-show-navigation-buttons t
 	centaur-tabs-set-bar 'under
-	;; centaur-tabs-label-fixed-length 20
+        centaur-tabs-show-count nil
+	;; centaur-tabs-label-fixed-length 15
 	;; centaur-tabs-gray-out-icons 'buffer
 	;; centaur-tabs-plain-icons t
 	x-underline-at-descent-line t
@@ -358,7 +360,6 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   (term-mode . centaur-tabs-local-mode)
   (calendar-mode . centaur-tabs-local-mode)
   (org-agenda-mode . centaur-tabs-local-mode)
-  (helpful-mode . centaur-tabs-local-mode)
   :bind
   ("C-<prior>" . centaur-tabs-backward)
   ("C-<next>" . centaur-tabs-forward)
@@ -414,11 +415,17 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
 	(progn
 	  (mapc #'disable-theme custom-enabled-themes)
 	  (load-theme (intern x) t)
+	  (centaur-tabs-separator-reset-cache)
 	  (when (eq centaur-tabs-set-bar 'over)
 	    (set-face-attribute 'centaur-tabs-selected nil :overline (face-background 'centaur-tabs-active-bar-face))
 	    (set-face-attribute 'centaur-tabs-selected-modified nil :overline (face-background 'centaur-tabs-active-bar-face))
 	    (set-face-attribute 'centaur-tabs-unselected nil :overline nil)
 	    (set-face-attribute 'centaur-tabs-unselected-modified nil :overline nil))
+	  (when (eq centaur-tabs-set-bar 'under)
+	    (set-face-attribute 'centaur-tabs-selected nil :underline (face-background 'centaur-tabs-active-bar-face))
+	    (set-face-attribute 'centaur-tabs-selected-modified nil :underline (face-background 'centaur-tabs-active-bar-face))
+	    (set-face-attribute 'centaur-tabs-unselected nil :underline nil)
+	    (set-face-attribute 'centaur-tabs-unselected-modified nil :underline nil))
 	  (set-face-attribute 'highlight-numbers-number nil :weight 'normal)
 	  (solaire-mode-swap-bg)
 	  (setq centaur-tabs-active-bar
@@ -545,123 +552,10 @@ Usable with `ivy-resume', `ivy-next-line-and-call' and
   :hook
   (prog-mode . highlight-numbers-mode))
 
-;; Create a font lock face for punctuation signs
-(defvar font-lock-punctuation-face 'font-lock-punctuation-face)
-(defface font-lock-punctuation-face
-  '((t :inherit font-lock-keyword-face))
-  "Face for highlighting punctuation signs."
-  :group 'emmacs)
-(set-face-attribute 'font-lock-punctuation-face nil :weight 'normal)
+;; Conflicts with all-the-icons
+;; (use-package fira-code-mode
+  ;; :hook prog-mode)
 
-;; Improve python-mode syntax highlighting
-(font-lock-add-keywords 'python-mode
-			'(("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+]\\|\\]\\|\\[" . font-lock-punctuation-face)
-			  ("\\([A-Za-z][A-Za-z0-9_]*\\)[ \t\n]*\\((.*)\\)"
-			   (1 font-lock-function-name-face))))
-;; Improve js-mode syntax highlighting
-(font-lock-add-keywords 'rjsx-mode
-			'(("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+]\\|\\]\\|\\[" . font-lock-punctuation-face)))
-;; Improve c-mode syntax highlighting
-(font-lock-add-keywords 'c-mode
-			'(("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+\@]\\|\\]\\|\\[" . font-lock-punctuation-face)))
-;; Improve c++-mode syntax highlighting
-(font-lock-add-keywords 'c++-mode
-			'(("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+\@]\\|\\]\\|\\[" . font-lock-punctuation-face)))
-;; Improve verilog-mode syntax highlighting
-(font-lock-add-keywords 'verilog-mode
-			'(("[\.\,\;\:\*\|\&\!\(\)\{\}\=\$\<\>\'\#\%\-\+\@]\\|\\]\\|\\[" . font-lock-punctuation-face)))
-
-;;; Fira code
-;; Install Fira Code Symbols
-(defun emmacs-fira-install-fonts (&optional pfx)
-  "Helper function to download and install the latests fonts based on OS.
-When PFX is non-nil, ignore the prompt and just install.
-Taken from all-the-icons.el."
-  (interactive "P")
-  (when (or pfx (yes-or-no-p "This will download and install fonts, are you sure you want to do this?"))
-    (let* ((url-format "https://raw.githubusercontent.com/ema2159/emmacs_config/master/other/fonts/%s")
-           (font-dest (cl-case window-system
-                        (x  (concat (or (getenv "XDG_DATA_HOME")            ;; Default Linux install directories
-                                        (concat (getenv "HOME") "/.local/share"))
-                                    "/fonts/"))
-                        (mac (concat (getenv "HOME") "/Library/Fonts/" ))
-                        (ns (concat (getenv "HOME") "/Library/Fonts/" ))))  ;; Default MacOS install directory
-           (known-dest? (stringp font-dest))
-           (font-dest (or font-dest (read-directory-name "Font installation directory: " "~/"))))
-
-      (unless (file-directory-p font-dest) (mkdir font-dest t))
-
-      (mapc (lambda (font)
-              (url-copy-file (format url-format font) (expand-file-name font font-dest) t))
-            '("FiraCodeSymbol-Symbol-Regular.ttf"))
-      (when known-dest?
-        (message "Fonts downloaded, updating font cache... <fc-cache -f -v> ")
-        (shell-command-to-string (format "fc-cache -f -v")))
-      (message "Successfully %s `Fira Code Symbol' font to `%s'!"
-               (if known-dest? "installed" "downloaded")
-               font-dest))))
-
-;; When installed, reload
-(when (member "Fira Code Symbol" (font-family-list))
-  (defun fira-code-mode--make-alist (list)
-    "Generate prettify-symbols alist from LIST."
-    (let ((idx -1))
-      (mapcar
-       (lambda (s)
-	 (setq idx (1+ idx))
-	 (let* ((code (+ #Xf100 idx))
-		(width (string-width s))
-		(prefix ())
-		(suffix '(?\s (Br . Br)))
-		(n 1))
-	   (while (< n width)
-	     (setq prefix (append prefix '(?\s (Br . Bl))))
-	     (setq n (1+ n)))
-	   (cons s (append prefix suffix (list (decode-char 'ucs code))))))
-       list)))
-
-  (defconst fira-code-mode--ligatures
-    '("www" "**" "***" "**/" "*>" "*/" "\\\\" "\\\\\\"
-      "{-" "[]" "::" ":::" ":=" "!!" "!=" "!==" "-}"
-      "--" "---" "-->" "->" "->>" "-<" "-<<" "-~"
-      "#{" "#[" "##" "###" "####" "#(" "#?" "#_" "#_("
-      ".-" ".=" ".." "..<" "..." "?=" "??" ";;" "/*"
-      "/**" "/=" "/==" "/>" "//" "///" "&&" "||" "||="
-      "|=" "|>" "^=" "$>" "++" "+++" "+>" "=:=" "=="
-      "===" "==>" "=>" "=>>" "<=" "=<<" "=/=" ">-" ">="
-      ">=>" ">>" ">>-" ">>=" ">>>" "<*" "<*>" "<|" "<|>"
-      "<$" "<$>" "<!--" "<-" "<--" "<->" "<+" "<+>" "<="
-      "<==" "<=>" "<=<" "<>" "<<" "<<-" "<<=" "<<<" "<~"
-      "<~~" "</" "</>" "~@" "~-" "~=" "~>" "~~" "~~>" "%%"
-      "x" ":" "+" "+" "*"))
-
-  (defvar fira-code-mode--old-prettify-alist)
-
-  (defun fira-code-mode--enable ()
-    "Enable Fira Code ligatures in current buffer."
-    (fira-code-mode--setup)
-    (setq-local fira-code-mode--old-prettify-alist prettify-symbols-alist)
-    (setq-local prettify-symbols-alist (append (fira-code-mode--make-alist fira-code-mode--ligatures) fira-code-mode--old-prettify-alist))
-    (prettify-symbols-mode t))
-
-  (defun fira-code-mode--disable ()
-    "Disable Fira Code ligatures in current buffer."
-    (setq-local prettify-symbols-alist fira-code-mode--old-prettify-alist)
-    (prettify-symbols-mode -1))
-
-  (define-minor-mode fira-code-mode
-    "Fira Code ligatures minor mode"
-    :lighter " Fira Code Symbol"
-    (setq-local prettify-symbols-unprettify-at-point 'right-edge)
-    (if fira-code-mode
-	(fira-code-mode--enable)
-      (fira-code-mode--disable)))
-
-  (defun fira-code-mode--setup ()
-    "Setup Fira Code Symbols"
-    (set-fontset-font t '(#Xf100 . #Xf16f) "Fira Code Symbol"))
-
-  (add-hook 'prog-mode-hook #'fira-code-mode))
 (set-face-attribute 'default nil :height 130)
 
 (provide '2_emmacs_ui)

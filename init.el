@@ -75,21 +75,19 @@
  '(ansi-color-names-vector
    ["#343145" "#D95468" "#8BD49C" "#EBBF83" "#5EC4FF" "#E27E8D" "#70E1E8" "#A0B3C5"])
  '(custom-safe-themes
-   (quote
-    ("db10381a554231a40b7474eaac28bd58f05067faacce3b25d294bb179a3511a1" "9c27124b3a653d43b3ffa088cd092c34f3f82296cf0d5d4f719c0c0817e1afa6" "9de6237a2054e206100e42c04b3b7e72c2ec94f0fbc55f03dd28cec544940cd1" "fd944f09d4d0c4d4a3c82bd7b3360f17e3ada8adf29f28199d09308ba01cc092" default "muse-solarized-dark")))
+   '("db10381a554231a40b7474eaac28bd58f05067faacce3b25d294bb179a3511a1" "9c27124b3a653d43b3ffa088cd092c34f3f82296cf0d5d4f719c0c0817e1afa6" "9de6237a2054e206100e42c04b3b7e72c2ec94f0fbc55f03dd28cec544940cd1" "fd944f09d4d0c4d4a3c82bd7b3360f17e3ada8adf29f28199d09308ba01cc092" default "muse-solarized-dark"))
  '(fci-rule-color "#56697A")
  '(jdee-db-active-breakpoint-face-colors (cons "#10151C" "#5EC4FF"))
  '(jdee-db-requested-breakpoint-face-colors (cons "#10151C" "#8BD49C"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#10151C" "#384551"))
  '(objed-cursor-color "#D95468")
+ '(org-agenda-files nil)
  '(package-selected-packages
-   (quote
-    (smart-jump zenburn-theme package-lint go-mode kaolin-themes spacemacs-theme skewer-mode dashboard esup highlight-thing expand-region column-enforce-mode dumb-jump smartparens-config which-key use-package treemacs-magit treemacs-icons-dired treemacs-evil solarized-theme solaire-mode shell-pop org-bullets linum-relative ivy-yasnippet irony flycheck evil-multiedit drag-stuff doom-themes dired-subtree dired-single dired-filter counsel beacon)))
+   '(smart-jump zenburn-theme package-lint go-mode kaolin-themes spacemacs-theme skewer-mode dashboard esup highlight-thing expand-region column-enforce-mode dumb-jump smartparens-config which-key use-package treemacs-magit treemacs-icons-dired treemacs-evil solarized-theme solaire-mode shell-pop org-bullets linum-relative ivy-yasnippet irony flycheck evil-multiedit drag-stuff doom-themes dired-subtree dired-single dired-filter counsel beacon))
  '(shell-pop-shell-type
-   (quote
-    ("ansi-term" "*ansi-term*"
+   '("ansi-term" "*ansi-term*"
      (lambda nil
-       (ansi-term shell-pop-term-shell)))))
+       (ansi-term shell-pop-term-shell))))
  '(tramp-ssh-controlmaster-options
    "-o ControlPath=/tmp/ssh-ControlPath-%%r@%%h:%%p -o ControlMaster=auto -o ControlPersist=yes" t)
  '(vc-annotate-background "#1D252C")
