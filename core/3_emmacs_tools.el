@@ -154,6 +154,9 @@
 
 ;; Git time machine
 (use-package git-timemachine
+  :straight '(git-timemachine-mode-hook
+	      :type git
+	      :repo "https://codeberg.org/pidu/git-timemachine")
   :config
   (evil-make-overriding-map git-timemachine-mode-map 'normal)
   ;; force update evil keymaps after git-timemachine-mode loaded
