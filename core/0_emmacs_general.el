@@ -135,5 +135,7 @@
 ;; Default indent to spaces
 (setq-default indent-tabs-mode nil)
 
+(setq native-comp-async-report-warnings-errors nil)
+
 (provide '0_emmacs_general)
 ;;; 0_emmacs_general.el ends here
