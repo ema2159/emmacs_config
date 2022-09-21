@@ -249,13 +249,6 @@ _v_iew             │ ^ ^              │                │                 �
 	    font-lock-keyword-face
 	    ""
 	    "")
-	   (,(all-the-icons-faicon "linkedin" :height 1.5 :v-adjust 0.0)
-	    "LinkedIn"
-	    "Go to LinkedIn profile"
-	    (lambda (&rest _) (browse-url "https://www.linkedin.com/feed/"))
-	    font-lock-keyword-face
-	    ""
-	    "")
 	   (,(all-the-icons-material "save" :height 1.5 :v-adjust -0.2)
 	    "Previous session"
 	    "Restore previous session"
