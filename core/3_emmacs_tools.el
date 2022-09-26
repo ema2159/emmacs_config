@@ -383,7 +383,7 @@ Moving^^^^                       Slurp & Barf^^    Wrapping^^                 Se
                                    "/usr/lib/python3/dist-packages"])
     :config
     (setenv "NODE\_OPTIONS" "--experimental-worker")
-    (setq lsp-pyright-venv-path "/home/ema2159/anaconda3/envs/general")
+    (setq lsp-pyright-venv-path "~/anaconda3/envs/general")
     :hook (python-mode . (lambda ()
 			   (require 'lsp-pyright)
 			   (lsp))))  ; or lsp-deferred
