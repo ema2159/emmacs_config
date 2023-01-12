@@ -128,11 +128,13 @@
 			    ,ICON ,COLOR))))
 
   (setq pretty-magit-alist nil)
-  (pretty-magit "Add"    (all-the-icons-faicon "plus-circle") (face-foreground 'all-the-icons-blue))
-  (pretty-magit "Fix"    (all-the-icons-octicon "bug")        (face-foreground 'all-the-icons-red))
-  (pretty-magit "Doc"    (all-the-icons-octicon "file-text")  (face-foreground 'all-the-icons-green))
-  (pretty-magit "Clean"  (all-the-icons-faicon  "scissors")   (face-foreground 'all-the-icons-yellow))
-  (pretty-magit "Mod"    (all-the-icons-faicon  "wrench")     (face-foreground 'all-the-icons-purple))
+  (pretty-magit "feat"     (all-the-icons-faicon    "plus-circle")     (face-foreground 'all-the-icons-blue))
+  (pretty-magit "fix"      (all-the-icons-octicon   "bug")            (face-foreground 'all-the-icons-red))
+  (pretty-magit "docs"     (all-the-icons-octicon   "file-text")      (face-foreground 'all-the-icons-green))
+  (pretty-magit "style"    (all-the-icons-faicon    "scissors")       (face-foreground 'all-the-icons-yellow))
+  (pretty-magit "refactor" (all-the-icons-faicon    "wrench")         (face-foreground 'all-the-icons-purple))
+  (pretty-magit "test"     (all-the-icons-fileicon  "test-generic")   (face-foreground 'all-the-icons-green))
+  (pretty-magit "chore"    (all-the-icons-octicon    "clock")         (face-foreground 'all-the-icons-orange))
 
   (defun add-magit-faces ()
     "Add face properties and compose symbols for buffer from pretty-magit."
