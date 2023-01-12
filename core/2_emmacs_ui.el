@@ -287,6 +287,8 @@ _v_iew             │ ^ ^              │                │                 �
 
 ;; Centaur Tabs
 (use-package centaur-tabs
+  :init
+  (setq centaur-tabs-enable-key-bindings t)
   :config
   (setq centaur-tabs-style "bar"
 	centaur-tabs-height 32
@@ -296,7 +298,7 @@ _v_iew             │ ^ ^              │                │                 �
 	centaur-tabs-show-navigation-buttons t
 	centaur-tabs-set-bar 'under
         centaur-tabs-show-count nil
-	;; centaur-tabs-label-fixed-length 15
+        ;; centaur-tabs-label-fixed-length 15
 	;; centaur-tabs-gray-out-icons 'buffer
 	;; centaur-tabs-plain-icons t
 	x-underline-at-descent-line t
@@ -358,11 +360,6 @@ Other buffer group by `centaur-tabs-get-group-name' with project name."
   ("C-<next>" . centaur-tabs-forward)
   ("C-S-<prior>" . centaur-tabs-move-current-tab-to-left)
   ("C-S-<next>" . centaur-tabs-move-current-tab-to-right)
-  ("C-c t s" . centaur-tabs-counsel-switch-group)
-  ("C-c t p" . centaur-tabs-group-by-projectile-project)
-  ("C-c t g" . centaur-tabs-group-buffer-groups)
-  ("C-c t o" . centaur-tabs-kill-other-buffers-in-current-group)
-  ("C-c t k" . centaur-tabs-kill-all-buffers-in-current-group)
   (:map evil-normal-state-map
 	("g t" . centaur-tabs-forward)
 	("g T" . centaur-tabs-backward)))
