@@ -146,5 +146,9 @@
   ("CMakeLists.txt$" . cmake-mode)
   )
 
+(use-package dockerfile-mode
+  :mode
+  ("Dockerfile" . dockerfile-mode))
+
 (provide '4_emmacs_modes)
 ;;; 4_emmacs_modes.el ends here
