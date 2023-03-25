@@ -148,7 +148,11 @@
 
 (use-package dockerfile-mode
   :mode
-  ("Dockerfile" . dockerfile-mode))
+  ("Dockerfile$" . dockerfile-mode))
+
+(use-package yaml-mode
+  :mode
+  ("\\.yml" . yaml-mode))
 
 (provide '4_emmacs_modes)
 ;;; 4_emmacs_modes.el ends here
