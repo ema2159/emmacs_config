@@ -154,5 +154,9 @@
   :mode
   ("\\.yml" . yaml-mode))
 
+(use-package lua-mode
+  :mode
+  ("\\.lua" . lua-mode))
+
 (provide '4_emmacs_modes)
 ;;; 4_emmacs_modes.el ends here
